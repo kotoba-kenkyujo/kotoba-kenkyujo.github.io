@@ -8,11 +8,11 @@
   "companies_csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRSjOpR91C9DGaSFoA2zVrejeKQMiPY-MnjnqLwoqmmhzW4flDy6anejGDqvACaRTxt0f-fR8HpSnh1/pub?gid=9&single=true&output=csv",
   "operator": "黒田悠介",
   "operator_url": "https://linktr.ee/chlorine0528",
-  "contact_url": "",
+  "contact_url": "https://docs.google.com/forms/d/e/1FAIpQLScL7HqxTlO88WtZC9KTn8_KQacYATaIip2Y6OmEseioLOa3pA/viewform",
   "goatcounter": "kotobakenkyujo",
   "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs",
   "_contact_の説明": "訂正・ご意見の Google フォーム。contact_url は回答用のURL（viewform）、contact_target_entry は「対象」の欄の事前入力の番号（entry.〜）",
-  "contact_target_entry": "",
+  "contact_target_entry": "entry.1712230729",
   "_searched_words_の説明": "ことばを探すの「検索の例」に混ぜる、実際に検索された語（毎週の数字を見て足す）",
   "searched_words": []
 }

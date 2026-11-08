@@ -24,7 +24,7 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 - 呼び名は、4字までの漢字なら落款（.seal）、それ以外は朱の縦書き1行（.seal-line）。英字が主の言葉は縦にせず横書き（.yoko）。
 - 外へのテキストリンクは ext() で作る（新しいタブ・↗・GoatCounter のクリック記録）。
 - 言語史は公開中の改定が HISTORY_MIN（5）件になるまで、メニュー・フッター・サイトマップに出さない（ページはある）。
-- 明るい／暗い表示：最初は端末の設定、フッターのボタンで切り替え、localStorage の kotoba-theme に覚える。色は :root[data-theme="dark"] で上書き。
+- 明るい／暗い表示：最初は明るい表示（2026/11/08 黒田さん）、フッターのボタンで切り替え、localStorage の kotoba-theme に覚える。色は :root[data-theme="dark"] で上書き。
 - robots.txt で AI の学習用クローラー（AI_TRAINING）を断る。検索エンジンは通す。
 
 ## ファイル
@@ -41,6 +41,7 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 | data/ | 最後に読んだ公開データの写し（Actions が更新する） |
 | testdata/ | 手元で試すデータ（未確認の言葉も入っている。公開しない） |
 | _design/ | 見本（2026/11/08。トップは案B「所報」、会社のページは案A「掛け軸と年表」を、補足の文を削った版 top-b2・company-a2 で採用） |
+| 訂正フォーム | Googleフォーム「会社のことば研究所 訂正・ご意見」（1ySU7B6It0A-HuQojPAhQY0rmVr9ZVHFNUCGqvOv25tY）。回答はデータベースの `連絡フォーム` タブに入る |
 | docs/collection-design.md | 情報収集の設計メモ |
 | tools/skill/ | データ収集スキルの写し（本体は黒田さんのアカウントのスキル） |
 

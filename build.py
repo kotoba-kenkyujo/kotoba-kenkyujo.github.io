@@ -262,7 +262,7 @@ def page(path, title, body, desc=None, current=None, og=None, jsonld=None, noind
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{{var t=localStorage.getItem('kotoba-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}}catch(e){{}}</script>
+<script>try{{var t=localStorage.getItem('kotoba-theme');if(t!=='dark')t='light';document.documentElement.dataset.theme=t}}catch(e){{}}</script>
 <title>{esc(full_title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{esc(canon)}">
