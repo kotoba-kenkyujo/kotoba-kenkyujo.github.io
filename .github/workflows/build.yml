@@ -1,0 +1,58 @@
+name: サイトを更新
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "50 20 * * *"   # 毎日 5:50（日本時間）
+  workflow_dispatch:
+    inputs:
+      allow_shrink:
+        description: "言葉の数が急に減っても公開する"
+        type: boolean
+        default: false
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: サイトを作る
+        env:
+          ALLOW_SHRINK: ${{ inputs.allow_shrink && '1' || '0' }}
+        run: python build.py
+      - name: データの写しを残す
+        run: |
+          if [ -n "$(git status --porcelain data)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+            git add data
+            git commit -m "データの写しを更新"
+            git pull --rebase origin main
+            git push
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

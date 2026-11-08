@@ -1,0 +1,13 @@
+{
+  "name": "会社のことば研究所",
+  "subtitle": "会社が掲げる言葉と、その移り変わりの記録",
+  "description": "日本の会社が掲げるミッション・パーパス・社是・行動指針などの言葉を、有価証券報告書や公式サイトで一字一句確かめて収蔵しています。改められた言葉も消さずに残し、言葉の移り変わりを記録します。",
+  "base_url": "https://kotoba-kenkyujo.github.io/",
+  "_csv_の説明": "スプレッドシートの「公開用」と「公開用_会社」をウェブに公開したCSVのURL。空のときは data/ にある前回の写しで作る",
+  "words_csv_url": "",
+  "companies_csv_url": "",
+  "operator": "黒田悠介",
+  "operator_url": "https://linktr.ee/chlorine0528",
+  "contact_url": "",
+  "goatcounter": ""
+}
