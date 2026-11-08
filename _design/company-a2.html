@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 会社ページ案A（削った版）｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案A 掛け軸と年表：補足の文をなくし、会社が使う呼び名を見出しにする */
+.crumbs { font-size: 13px; color: var(--text-sub); padding-top: var(--space-6); }
+.crumbs a { color: var(--text-sub); }
+.head { text-align: center; padding: var(--space-6) 0 0; }
+.head h1 { font-family: var(--font-mincho); font-weight: 800; font-size: clamp(26px, 4vw, 36px); letter-spacing: .12em; margin: 0; }
+.chips { display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-2); }
+.chip { font-size: 12px; color: var(--text-body); border: 1px solid var(--line); background: var(--card); border-radius: var(--radius-pill); padding: 1px 10px; }
+.scroll { position: relative; margin: var(--space-8) auto; max-width: 420px; background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6) var(--space-6); box-shadow: var(--shadow-lift); display: grid; justify-items: center; gap: var(--space-4); }
+.scroll::before, .scroll::after { content: ""; position: absolute; left: -10px; right: -10px; height: 12px; background: #2a2d33; border-radius: 6px; }
+.scroll::before { top: -6px; } .scroll::after { bottom: -6px; }
+.scroll .tate { font-size: 30px; line-height: 1.75; letter-spacing: .12em; height: 13em; margin: 0; }
+.scroll .foot { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.ok { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--sky-on-tint); background: var(--chip-bg); border-radius: var(--radius-pill); padding: 2px 10px; text-decoration: none; }
+.fn { font-family: var(--font-sans); font-size: .5em; color: var(--sky); text-decoration: none; }
+.tate .fn { writing-mode: horizontal-tb; }
+
+.sec { max-width: 760px; margin: var(--space-12) auto 0; }
+.label { font-family: var(--font-mincho); font-weight: 800; font-size: 15px; letter-spacing: .3em; color: var(--text-sub); text-align: center; margin: 0 0 var(--space-3); }
+.vision { text-align: center; font-family: var(--font-mincho); font-weight: 700; font-size: clamp(20px, 3vw, 26px); line-height: 1.6; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-8) var(--space-6); margin: 0; }
+.vals { display: grid; gap: var(--space-4); }
+@media (min-width: 640px) { .vals { grid-template-columns: 1fr 1fr; } }
+.valgroup { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
+.valgroup h2 { font-family: var(--font-mincho); font-size: 15px; margin: 0 0 var(--space-3); letter-spacing: .3em; color: var(--text-sub); }
+.valgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: v; }
+.valgroup li { counter-increment: v; display: grid; grid-template-columns: 2em 1fr; font-family: var(--font-mincho); font-weight: 700; font-size: 18px; padding: 6px 0; border-bottom: 1px dotted var(--line); }
+.valgroup li::before { content: counter(v, cjk-ideographic); color: var(--text-sub); font-weight: 500; }
+.valgroup li:last-child { border-bottom: 0; }
+
+.timeline { list-style: none; margin: 0 auto; padding: 0 0 0 var(--space-6); border-left: 2px solid var(--line); max-width: 640px; }
+.timeline li { position: relative; padding: 0 0 var(--space-6) var(--space-4); }
+.timeline li::before { content: ""; position: absolute; left: calc(-1 * var(--space-6) - 7px); top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2px solid var(--ink); }
+.timeline li.now::before { background: var(--ink); }
+.timeline .when { font-size: 13px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.timeline .w { font-family: var(--font-mincho); font-weight: 700; font-size: 18px; }
+.timeline .old .w { color: var(--text-sub); text-decoration: line-through; text-decoration-color: rgba(94,99,107,.4); }
+
+.srcs { list-style: none; margin: 0; padding: 0; font-size: 13px; border-top: 1px solid var(--line); }
+.srcs li { display: grid; grid-template-columns: 1.5em 1fr auto; gap: var(--space-2); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+.srcs .n { color: var(--sky); }
+.srcs .d { color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.related { display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
+.related a { display: grid; justify-items: center; font-family: var(--font-mincho); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); text-decoration: none; color: var(--ink); min-width: 9em; }
+.related mark { background: none; color: var(--sky); font-weight: 800; font-size: 20px; }
+.actions { display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12); }
+.icon-btn.sm { width: 40px; height: 40px; }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+<main class="wrap">
+  <nav class="crumbs"><a href="#">会社のことば研究所</a> › <a href="#">会社</a> › ゼット株式会社</nav>
+  <div class="head">
+    <h1>ゼット株式会社</h1>
+    <div class="chips"><span class="chip">8135</span><span class="chip">10語</span></div>
+  </div>
+
+  <figure class="scroll">
+    <p class="tate">スポチュニティ(スポーツを通じて、地域社会に喜びと健康やふれあいの機会を提供し、調和をもたらす)<a class="fn" href="#src">1</a></p>
+    <div class="foot"><span class="seal">企業<br>理念</span><a class="ok" href="#src" title="2026年11月8日に有価証券報告書で原文どおりと確かめた">✓ 2026.11.8</a></div>
+  </figure>
+
+  <section class="sec">
+    <p class="label">ビジョン</p>
+    <p class="vision">社会に新しい価値を創造する<br>スポーツ＆ライフスタイル企業<a class="fn" href="#src">1</a></p>
+  </section>
+
+  <section class="sec">
+    <div class="vals">
+      <div class="valgroup"><h2>社是</h2><ol><li>企業の永続と繁栄</li><li>個人の幸福と人格の向上</li><li>業を通じて社会に奉仕する</li></ol></div>
+      <div class="valgroup"><h2>社訓</h2><ol><li>サービス精神に徹する</li><li>機を尊ぶ</li><li>計画して行う</li><li>自己啓発</li><li>困難に挑戦する</li></ol></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="label">言語史</p>
+    <ol class="timeline">
+      <li class="old"><div class="when">〜2026.3　企業理念</div><div class="w">『価値ある時間』の創造と提供を通して、常に期待される企業集団を目指す</div></li>
+      <li class="now"><div class="when">2026.4〜　パーパス</div><div class="w">『価値ある時間』をともに</div></li>
+    </ol>
+  </section>
+
+  <section class="sec" id="src">
+    <p class="label">出典</p>
+    <ol class="srcs">
+      <li><span class="n">1</span><a href="#">有価証券報告書　2026年6月26日提出（EDINET S100YJPU）</a><span class="d">✓ 2026.11.8</span></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <p class="label">近い言葉</p>
+    <div class="related">
+      <a href="#"><mark>社是</mark>ＴＥＩＫＯＫＵ</a>
+      <a href="#"><mark>社会</mark>横田製作所</a>
+      <a href="#"><mark>挑戦</mark>中日本鋳工</a>
+    </div>
+  </section>
+
+  <div class="actions">
+    <a class="icon-btn" href="#" aria-label="この会社の札を共有"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></a>
+    <a class="icon-btn" href="#" aria-label="訂正を知らせる"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></a>
+    <a class="icon-btn" href="#" aria-label="ことばくじ">🎲</a>
+  </div>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong></div></footer>
+<div class="sample-tag">会社ページ 案A（削った版。言語史はコナミの記録で見本）｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>

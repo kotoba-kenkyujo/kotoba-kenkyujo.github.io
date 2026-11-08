@@ -1,0 +1,9 @@
+_site/
+_local/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+og-items/
+tools/emoji/cache/
+.claude/

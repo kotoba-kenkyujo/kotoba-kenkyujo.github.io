@@ -1,0 +1,58 @@
+/* 見本の共通の土台：デザインシステム「黒田悠介」（図鑑・観測所と同じ値）に、明朝と朱色を足す */
+:root {
+  --base: #f7f9fb; --bg-top: #ffffff; --bg-bottom: #eef2f6; --card: #ffffff;
+  --ink: #1a1d23; --text-body: #4a4f57; --text-sub: #5e636b; --line: #e3e6ea;
+  --sky: #1874b8; --sky-on-tint: #1568a6; --chip-bg: #e8eef5; --on-sky: #ffffff;
+  --base-yellow: #fff3c4; --yellow: #f5c518;
+  --footer-bg: #1a1d23; --footer-text: #d6d9de; --footer-sub: #9aa0a8;
+  /* ことば研究所で足すもの */
+  --paper: #fbfaf6;        /* 言葉を掲げる紙の地（ごく薄い生成り） */
+  --paper-line: #e6e1d4;   /* 紙の縁 */
+  --shu: #b7352d;          /* 朱色（落款・印だけに使う。1画面に1〜2か所まで） */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
+  --font-display: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  --font-mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px; --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(26, 29, 35, .06);
+  --shadow-lift: 0 10px 24px rgba(26, 29, 35, .10);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.8;
+  background-color: var(--base);
+  background-image: linear-gradient(180deg, var(--bg-top) 0, var(--base) 420px, var(--bg-bottom) 100%);
+  font-feature-settings: "palt" 1; letter-spacing: .02em; overflow-wrap: anywhere;
+}
+a { color: var(--sky); text-underline-offset: .2em; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.45; letter-spacing: .03em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 768px) { .wrap { padding: 0 var(--space-8); } }
+
+/* 見本の札（どの案かを示す。本番にはない） */
+.sample-tag { position: fixed; right: 12px; bottom: 12px; z-index: 50; background: var(--ink); color: #fff; font-size: 12px; padding: 6px 12px; border-radius: var(--radius-pill); }
+.sample-tag a { color: #fff; }
+
+/* ヘッダー（図鑑と同じ形） */
+.site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--bg-top) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); }
+.header-inner { display: flex; align-items: center; gap: var(--space-3); padding-top: var(--space-3); padding-bottom: var(--space-3); }
+.logo { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-mincho); font-weight: 800; font-size: 20px; letter-spacing: .1em; color: var(--ink); text-decoration: none; margin-right: auto; }
+.logo-mark { font-size: 24px; line-height: 1; }
+.nav { display: none; gap: var(--space-6); font-size: 14px; }
+.nav a { color: var(--ink); text-decoration: none; }
+@media (min-width: 760px) { .nav { display: flex; } }
+.icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--text-body); }
+.icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* 縦書きの言葉 */
+.tate { writing-mode: vertical-rl; text-orientation: mixed; font-family: var(--font-mincho); font-weight: 700; line-break: strict; font-feature-settings: "vpal" 1; }
+/* 落款（朱色の四角い印） */
+.seal { display: inline-grid; place-items: center; width: 40px; height: 40px; border: 2px solid var(--shu); color: var(--shu); border-radius: 3px; font-family: var(--font-mincho); font-weight: 800; font-size: 13px; line-height: 1.1; text-align: center; letter-spacing: 0; }
+
+/* 出典の小さな注記（どの案でも必ず言葉に添える） */
+.src { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+.src a { color: var(--text-sub); }
+.badge-ok { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--sky-on-tint); background: var(--chip-bg); border-radius: var(--radius-pill); padding: 1px 10px; }
+
+.footer { margin-top: var(--space-16); background: var(--footer-bg); color: var(--footer-text); padding: var(--space-12) 0; font-size: 14px; border-top: 4px solid var(--yellow); }
+.footer strong { font-family: var(--font-mincho); font-size: 18px; color: #fbfaf5; letter-spacing: .1em; }

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 トップ案B 所報（削った版）｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案B 所報：補足の文をなくし、罫線・番号・注・札で語る */
+.masthead { text-align: center; padding: var(--space-12) 0 var(--space-6); border-bottom: 3px double var(--ink); }
+.masthead .vol { font-family: var(--font-mincho); font-size: 13px; letter-spacing: .3em; color: var(--text-sub); }
+.masthead h1 { font-family: var(--font-mincho); font-weight: 800; font-size: clamp(36px, 7vw, 64px); letter-spacing: .2em; margin: var(--space-2) 0 0; }
+.ledger { display: flex; justify-content: center; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--ink); }
+.ledger li { padding: var(--space-3) var(--space-8); text-align: center; border-right: 1px solid var(--line); }
+.ledger li:last-child { border-right: 0; }
+.ledger b { font-family: var(--font-mincho); font-weight: 800; font-size: 32px; font-variant-numeric: tabular-nums; }
+.ledger small { font-family: var(--font-mincho); font-size: 15px; color: var(--text-sub); margin-left: 2px; }
+
+.cols { display: grid; gap: var(--space-8); margin-top: var(--space-8); }
+@media (min-width: 900px) { .cols { grid-template-columns: 1.1fr 1fr; } }
+
+/* 今日のことば：縦書きの言葉と、落款・社名・注番号だけ */
+.today { position: relative; background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6); display: flex; flex-direction: row-reverse; justify-content: center; align-items: flex-end; gap: var(--space-6); text-decoration: none; color: var(--ink); transition: box-shadow .2s; }
+.today:hover { box-shadow: var(--shadow-lift); }
+.today .day { position: absolute; top: var(--space-4); right: var(--space-4); writing-mode: vertical-rl; font-family: var(--font-mincho); font-size: 13px; letter-spacing: .3em; color: var(--text-sub); }
+.today .tate { font-size: 30px; line-height: 1.75; letter-spacing: .12em; height: 13em; margin: 0; }
+.today .sig { writing-mode: vertical-rl; display: flex; align-items: center; gap: var(--space-3); }
+.today .who { font-family: var(--font-mincho); font-weight: 800; font-size: 18px; letter-spacing: .1em; }
+.fn { font-family: var(--font-sans); font-size: .55em; color: var(--sky); vertical-align: super; text-decoration: none; }
+.tate .fn { writing-mode: horizontal-tb; }
+
+.sec-h { font-family: var(--font-mincho); font-weight: 800; font-size: 20px; letter-spacing: .12em; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0; display: flex; justify-content: space-between; align-items: baseline; }
+.sec-h a { font-size: 22px; text-decoration: none; line-height: 1; }
+.index { list-style: none; margin: 0; padding: 0; }
+.index a { display: grid; grid-template-columns: 3em 1fr auto; gap: var(--space-3); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px dotted var(--line); text-decoration: none; color: var(--ink); }
+.index a:hover .w { color: var(--sky); }
+.index .no { font-family: var(--font-mincho); color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.index .w { font-family: var(--font-mincho); font-weight: 700; font-size: 17px; line-height: 1.6; }
+.index .who { display: block; font-size: 12px; color: var(--text-sub); }
+.chip { font-size: 11px; color: var(--sky-on-tint); background: var(--chip-bg); border-radius: var(--radius-pill); padding: 1px 8px; white-space: nowrap; }
+.chip.kai { color: #fff; background: var(--shu); }
+
+.topics { display: grid; gap: var(--space-6); margin-top: var(--space-12); }
+@media (min-width: 760px) { .topics { grid-template-columns: repeat(3, 1fr); } }
+.topic { border-top: 3px solid var(--ink); padding-top: var(--space-3); text-decoration: none; color: var(--ink); display: block; }
+.topic h3 { font-family: var(--font-mincho); font-weight: 800; font-size: 18px; margin: 0 0 var(--space-3); display: flex; gap: var(--space-2); align-items: baseline; }
+.topic h3 span { font-size: 13px; color: var(--text-sub); font-weight: 500; }
+.bars { display: grid; gap: 6px; font-size: 13px; }
+.bar { display: grid; grid-template-columns: 5em 1fr 1.6em; gap: var(--space-2); align-items: center; font-family: var(--font-mincho); }
+.bar i { display: block; height: 8px; background: var(--sky); border-radius: 4px; transform-origin: left; animation: grow .8s ease-out both; }
+.bar b { font-family: var(--font-sans); font-size: 12px; color: var(--text-sub); text-align: right; font-weight: 400; }
+@keyframes grow { from { transform: scaleX(0); } }
+.hist { display: flex; align-items: flex-end; gap: 4px; height: 72px; }
+.hist i { flex: 1; background: var(--chip-bg); border-radius: 2px 2px 0 0; }
+.hist i.hi { background: var(--sky); }
+.hist-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-sub); }
+.big { font-family: var(--font-mincho); font-weight: 800; font-size: 34px; }
+.big small { font-size: 14px; color: var(--text-sub); margin-left: 2px; }
+
+.notes { font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--line); margin-top: var(--space-12); padding-top: var(--space-3); }
+.notes ol { padding-left: 1.5em; margin: 0; columns: 2; }
+.notes a { color: var(--text-sub); }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn" aria-label="探す"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+
+<main class="wrap">
+  <div class="masthead">
+    <div class="vol">二〇二六年十一月八日</div>
+    <h1>会社のことば研究所</h1>
+  </div>
+  <ul class="ledger" aria-label="収蔵の数">
+    <li><b>15</b><small>社</small></li>
+    <li><b>55</b><small>語</small></li>
+    <li><b>1</b><small>改定</small></li>
+  </ul>
+
+  <div class="cols">
+    <a class="today" href="#" aria-label="今日のことば　中日本鋳工株式会社">
+      <span class="day">今日のことば</span>
+      <p class="tate">ものづくりを通し社会に貢献し、未来を見つめて挑戦し、お客様に満足を提供する。<span class="fn">1</span></p>
+      <span class="sig"><span class="who">中日本鋳工株式会社</span><span class="seal">経営<br>理念</span></span>
+    </a>
+    <section>
+      <h2 class="sec-h">新収蔵<a href="#" aria-label="すべて見る">→</a></h2>
+      <ol class="index">
+        <li><a href="#"><span class="no">055</span><span><span class="w">肌心地から、感動を生み出す フィールウェアのアツギへ。<sup class="fn">2</sup></span><span class="who">アツギ</span></span><span class="chip">ビジョン</span></a></li>
+        <li><a href="#"><span class="no">054</span><span><span class="w">肌と心がよろこぶ、今と未来へ。<sup class="fn">2</sup></span><span class="who">アツギ</span></span><span class="chip">パーパス</span></a></li>
+        <li><a href="#"><span class="no">053</span><span><span class="w">人の生活を大切にする<sup class="fn">3</sup></span><span class="who">第一交通産業</span></span><span class="chip">基本理念</span></a></li>
+        <li><a href="#"><span class="no">052</span><span><span class="w">Original Value Creation（オリジナルな「価値」の創造）<sup class="fn">4</sup></span><span class="who">バッファロー</span></span><span class="chip">経営コンセプト</span></a></li>
+        <li><a href="#"><span class="no">051</span><span><span class="w">『価値ある時間』をともに<sup class="fn">5</sup></span><span class="who">コナミグループ</span></span><span class="chip kai">改定</span></a></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="topics">
+    <a class="topic" href="#"><h3>呼び名</h3>
+      <div class="bars">
+        <div class="bar"><span>経営理念</span><i style="width:90%"></i><b>5</b></div>
+        <div class="bar"><span>企業理念</span><i style="width:72%"></i><b>4</b></div>
+        <div class="bar"><span>パーパス</span><i style="width:36%"></i><b>2</b></div>
+        <div class="bar"><span>経営信条</span><i style="width:18%"></i><b>1</b></div>
+      </div></a>
+    <a class="topic" href="#"><h3>よく使われる語</h3>
+      <div class="bars">
+        <div class="bar"><span>社会</span><i style="width:90%"></i><b>9</b></div>
+        <div class="bar"><span>貢献</span><i style="width:70%"></i><b>7</b></div>
+        <div class="bar"><span>価値</span><i style="width:50%"></i><b>5</b></div>
+        <div class="bar"><span>挑戦</span><i style="width:30%"></i><b>3</b></div>
+      </div></a>
+    <a class="topic" href="#"><h3>言葉の長さ<span>平均</span><span class="big" style="margin-left:auto">41<small>字</small></span></h3>
+      <div class="hist"><i style="height:30%"></i><i style="height:55%"></i><i class="hi" style="height:100%"></i><i style="height:70%"></i><i style="height:40%"></i><i style="height:20%"></i><i style="height:10%"></i></div>
+      <div class="hist-axis"><span>10字</span><span>90字</span></div></a>
+  </div>
+
+  <div class="notes"><ol>
+    <li><a href="#">EDINET S100YIME</a></li><li><a href="#">EDINET S100YKV3</a></li><li><a href="#">EDINET S100Y9O5</a></li><li><a href="#">EDINET S100YGR6</a></li><li><a href="#">EDINET S100YKX5</a></li>
+  </ol></div>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong></div></footer>
+<div class="sample-tag">トップ 案B 所報（削った版。数字は見本用）｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>

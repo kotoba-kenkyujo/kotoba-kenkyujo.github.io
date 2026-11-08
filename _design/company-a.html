@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 会社ページ案A 掛け軸と年表｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案A：いちばん上の言葉を掛け軸で掲げ、下へ ビジョン → 価値観 → 言語史 → 出典 と読み進める */
+.crumbs { font-size: 13px; color: var(--text-sub); padding-top: var(--space-6); }
+.head { text-align: center; padding: var(--space-6) 0; }
+.head h1 { font-family: var(--font-mincho); font-weight: 800; font-size: clamp(26px, 4vw, 36px); letter-spacing: .12em; margin: 0; }
+.head .meta { font-size: 13px; color: var(--text-sub); }
+.scroll { position: relative; margin: var(--space-6) auto; max-width: 420px; background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6) var(--space-6); box-shadow: var(--shadow-lift); display: grid; justify-items: center; gap: var(--space-4); }
+.scroll::before, .scroll::after { content: ""; position: absolute; left: -10px; right: -10px; height: 12px; background: #2a2d33; border-radius: 6px; }
+.scroll::before { top: -6px; } .scroll::after { bottom: -6px; }
+.scroll .tate { font-size: 30px; line-height: 1.75; letter-spacing: .12em; height: 13em; margin: 0; }
+.scroll .foot { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; }
+.sec { max-width: 760px; margin: var(--space-12) auto 0; }
+.sec h2 { font-family: var(--font-mincho); font-weight: 800; font-size: 22px; letter-spacing: .12em; margin: 0 0 var(--space-4); text-align: center; }
+.sec h2 small { display: block; font-family: var(--font-sans); font-size: 12px; font-weight: 400; color: var(--text-sub); letter-spacing: .1em; }
+.vision { text-align: center; font-family: var(--font-mincho); font-weight: 700; font-size: clamp(20px, 3vw, 26px); line-height: 1.6; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-8) var(--space-6); margin: 0; }
+.vals { display: grid; gap: var(--space-4); }
+@media (min-width: 640px) { .vals { grid-template-columns: 1fr 1fr; } }
+.valgroup { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
+.valgroup h3 { font-family: var(--font-mincho); font-size: 16px; margin: 0 0 var(--space-3); letter-spacing: .2em; }
+.valgroup ol { margin: 0; padding: 0; list-style: none; counter-reset: v; }
+.valgroup li { counter-increment: v; display: grid; grid-template-columns: 2em 1fr; font-family: var(--font-mincho); font-weight: 700; font-size: 18px; padding: 6px 0; border-bottom: 1px dotted var(--line); }
+.valgroup li::before { content: counter(v, cjk-ideographic); color: var(--text-sub); font-weight: 500; }
+.valgroup li:last-child { border-bottom: 0; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 var(--space-6); border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 var(--space-6) var(--space-4); }
+.timeline li::before { content: ""; position: absolute; left: calc(-1 * var(--space-6) - 7px); top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2px solid var(--ink); }
+.timeline li.now::before { background: var(--ink); }
+.timeline .when { font-size: 13px; color: var(--text-sub); }
+.timeline .w { font-family: var(--font-mincho); font-weight: 700; font-size: 18px; }
+.timeline .old .w { color: var(--text-sub); }
+.note { font-size: 13px; color: var(--text-sub); background: var(--chip-bg); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); }
+.srcs { width: 100%; border-collapse: collapse; font-size: 13px; }
+.srcs th, .srcs td { text-align: left; padding: var(--space-2); border-bottom: 1px solid var(--line); vertical-align: top; }
+.srcs th { color: var(--text-sub); font-weight: 400; }
+.related { display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
+.related a { font-family: var(--font-mincho); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 16px; text-decoration: none; color: var(--ink); }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+<main class="wrap">
+  <div class="crumbs">会社のことば研究所 › 会社 › ゼット株式会社</div>
+  <div class="head">
+    <h1>ゼット株式会社</h1>
+    <div class="meta">証券コード 8135　収蔵した言葉 10</div>
+  </div>
+
+  <figure class="scroll">
+    <p class="tate">スポチュニティ(スポーツを通じて、地域社会に喜びと健康やふれあいの機会を提供し、調和をもたらす)</p>
+    <div class="foot"><span class="seal">企業<br>理念</span><span class="src">有価証券報告書 2026年6月¹<br>確認 2026年11月8日　原文どおり</span></div>
+  </figure>
+
+  <section class="sec">
+    <h2>目指す姿<small>ビジョン</small></h2>
+    <p class="vision">社会に新しい価値を創造する<br>スポーツ＆ライフスタイル企業</p>
+  </section>
+
+  <section class="sec">
+    <h2>大切にすること<small>価値観</small></h2>
+    <div class="vals">
+      <div class="valgroup"><h3>社是</h3><ol><li>企業の永続と繁栄</li><li>個人の幸福と人格の向上</li><li>業を通じて社会に奉仕する</li></ol></div>
+      <div class="valgroup"><h3>社訓</h3><ol><li>サービス精神に徹する</li><li>機を尊ぶ</li><li>計画して行う</li><li>自己啓発</li><li>困難に挑戦する</li></ol></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>言語史<small>この会社の言葉の移り変わり</small></h2>
+    <p class="note">ゼットでは、まだ改定の記録はありません。下は表示の見本として、コナミグループの記録を入れています。</p>
+    <ol class="timeline">
+      <li class="old"><div class="when">〜2026年3月　企業理念</div><div class="w">『価値ある時間』の創造と提供を通して、常に期待される企業集団を目指す</div><div class="src">有価証券報告書 2025年6月</div></li>
+      <li class="now"><div class="when">2026年4月〜　パーパス</div><div class="w">『価値ある時間』をともに</div><div class="src">有価証券報告書 2026年6月</div></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <h2>出典<small>どこで確かめたか</small></h2>
+    <table class="srcs">
+      <tr><th>¹</th><td>有価証券報告書（2026年3月期）　2026年6月26日提出　EDINET 書類番号 S100YJPU<br>「経営方針、経営環境及び対処すべき課題等」の欄</td><td>確認 2026/11/08</td></tr>
+    </table>
+  </section>
+
+  <section class="sec">
+    <h2>似た言葉を掲げる会社</h2>
+    <div class="related"><a href="#">ＴＥＩＫＯＫＵ（社是を掲げる）</a><a href="#">横田製作所（「社会」）</a><a href="#">中日本鋳工（「挑戦」）</a></div>
+  </section>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong></div></footer>
+<div class="sample-tag">会社ページ 案A 掛け軸と年表｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 トップ案B 所報｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案B：研究所の所報（紀要）のように。罫線と番号、注で信頼性を前に出す */
+.masthead { text-align: center; padding: var(--space-12) 0 var(--space-6); border-bottom: 3px double var(--ink); }
+.masthead .vol { font-size: 12px; letter-spacing: .3em; color: var(--text-sub); }
+.masthead h1 { font-family: var(--font-mincho); font-weight: 800; font-size: clamp(36px, 7vw, 64px); letter-spacing: .2em; margin: var(--space-2) 0; }
+.masthead p { font-family: var(--font-mincho); color: var(--text-body); margin: 0; letter-spacing: .1em; }
+.ledger { display: flex; justify-content: center; gap: 0; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--ink); }
+.ledger li { padding: var(--space-3) var(--space-8); text-align: center; border-right: 1px solid var(--line); }
+.ledger li:last-child { border-right: 0; }
+.ledger b { font-family: var(--font-mincho); font-weight: 800; font-size: 30px; font-variant-numeric: tabular-nums; }
+.ledger span { display: block; font-size: 12px; color: var(--text-sub); }
+
+.cols { display: grid; gap: var(--space-8); margin-top: var(--space-8); }
+@media (min-width: 900px) { .cols { grid-template-columns: 1.1fr 1fr; } }
+.today { background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6); display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: start; }
+.today .tate { font-size: 28px; line-height: 1.75; letter-spacing: .12em; height: 13em; margin: 0; }
+.today h2 { font-family: var(--font-mincho); font-size: 14px; letter-spacing: .3em; color: var(--text-sub); margin: 0 0 var(--space-4); font-weight: 700; }
+.today .who { font-family: var(--font-mincho); font-weight: 800; font-size: 20px; }
+.today dl { margin: var(--space-4) 0 0; font-size: 13px; color: var(--text-body); display: grid; grid-template-columns: auto 1fr; gap: 2px var(--space-3); }
+.today dt { color: var(--text-sub); }
+.today dd { margin: 0; }
+
+.sec-h { font-family: var(--font-mincho); font-weight: 800; font-size: 20px; letter-spacing: .12em; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0 0 var(--space-4); display: flex; justify-content: space-between; align-items: baseline; }
+.sec-h a { font-family: var(--font-sans); font-size: 13px; font-weight: 400; letter-spacing: 0; }
+.index { list-style: none; margin: 0; padding: 0; }
+.index li { display: grid; grid-template-columns: 3em 1fr; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px dotted var(--line); }
+.index .no { font-family: var(--font-mincho); color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.index .w { font-family: var(--font-mincho); font-weight: 700; font-size: 17px; line-height: 1.6; }
+.index .meta { font-size: 12px; color: var(--text-sub); }
+.index .meta sup { color: var(--sky); }
+
+.topics { display: grid; gap: var(--space-4); margin-top: var(--space-12); }
+@media (min-width: 760px) { .topics { grid-template-columns: repeat(3, 1fr); } }
+.topic { border-top: 3px solid var(--ink); padding-top: var(--space-3); }
+.topic .k { font-size: 12px; color: var(--text-sub); letter-spacing: .2em; }
+.topic h3 { font-family: var(--font-mincho); font-weight: 800; font-size: 20px; margin: var(--space-1) 0 var(--space-2); }
+.bars { display: grid; gap: 6px; font-size: 13px; }
+.bar { display: grid; grid-template-columns: 6em 1fr 2em; gap: var(--space-2); align-items: center; }
+.bar i { display: block; height: 8px; background: var(--sky); border-radius: 4px; }
+.notes { font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--line); margin-top: var(--space-12); padding-top: var(--space-3); }
+.notes ol { padding-left: 1.5em; margin: 0; }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn" aria-label="探す"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+
+<main class="wrap">
+  <div class="masthead">
+    <div class="vol">所報　二〇二六年十一月八日号</div>
+    <h1>会社のことば研究所</h1>
+    <p>会社が掲げる言葉と、その移り変わりの記録</p>
+  </div>
+  <ul class="ledger">
+    <li><b>15</b><span>収蔵した会社</span></li>
+    <li><b>55</b><span>収蔵した言葉</span></li>
+    <li><b>1</b><span>記録した改定</span></li>
+    <li><b>11/8</b><span>最終確認日</span></li>
+  </ul>
+
+  <div class="cols">
+    <section class="today">
+      <p class="tate">ものづくりを通し社会に貢献し、未来を見つめて挑戦し、お客様に満足を提供する。</p>
+      <div>
+        <h2>今日のことば</h2>
+        <div class="who">中日本鋳工株式会社</div>
+        <dl>
+          <dt>呼び名</dt><dd>経営理念</dd>
+          <dt>層</dt><dd>いちばん上</dd>
+          <dt>出典</dt><dd>有価証券報告書（2026年6月26日提出）<sup>1</sup></dd>
+          <dt>確認</dt><dd>2026年11月8日　原文どおり</dd>
+        </dl>
+      </div>
+    </section>
+    <section>
+      <h2 class="sec-h">新収蔵　<a href="#">すべて見る</a></h2>
+      <ol class="index">
+        <li><span class="no">055</span><div><div class="w">肌心地から、感動を生み出す フィールウェアのアツギへ。</div><div class="meta">アツギ株式会社　ビジョン　有価証券報告書<sup>2</sup></div></div></li>
+        <li><span class="no">054</span><div><div class="w">肌と心がよろこぶ、今と未来へ。</div><div class="meta">アツギ株式会社　パーパス　有価証券報告書<sup>2</sup></div></div></li>
+        <li><span class="no">053</span><div><div class="w">人の生活を大切にする</div><div class="meta">第一交通産業株式会社　基本理念　有価証券報告書<sup>3</sup></div></div></li>
+        <li><span class="no">052</span><div><div class="w">Original Value Creation（オリジナルな「価値」の創造）</div><div class="meta">株式会社バッファロー　経営コンセプト　有価証券報告書<sup>4</sup></div></div></li>
+        <li><span class="no">051</span><div><div class="w">『価値ある時間』をともに</div><div class="meta">コナミグループ株式会社　パーパス　有価証券報告書<sup>5</sup>　<b style="color:var(--shu)">改定</b></div></div></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="topics">
+    <section class="topic"><div class="k">研究テーマ 一</div><h3>呼び名の分布</h3>
+      <div class="bars">
+        <div class="bar"><span>経営理念</span><i style="width:90%"></i><span>5</span></div>
+        <div class="bar"><span>企業理念</span><i style="width:72%"></i><span>4</span></div>
+        <div class="bar"><span>パーパス</span><i style="width:36%"></i><span>2</span></div>
+        <div class="bar"><span>経営信条</span><i style="width:18%"></i><span>1</span></div>
+      </div></section>
+    <section class="topic"><div class="k">研究テーマ 二</div><h3>よく使われる語</h3>
+      <div class="bars">
+        <div class="bar"><span>社会</span><i style="width:90%"></i><span>9</span></div>
+        <div class="bar"><span>貢献</span><i style="width:70%"></i><span>7</span></div>
+        <div class="bar"><span>価値</span><i style="width:50%"></i><span>5</span></div>
+        <div class="bar"><span>挑戦</span><i style="width:30%"></i><span>3</span></div>
+      </div></section>
+    <section class="topic"><div class="k">研究テーマ 三</div><h3>言葉の長さ</h3>
+      <p style="margin:0;font-size:14px;color:var(--text-body)">いちばん上の言葉は平均 <b style="font-family:var(--font-mincho);font-size:22px">41</b> 字。最短は「人の生活を大切にする」の10字。</p></section>
+  </div>
+
+  <div class="notes"><ol>
+    <li>EDINET 書類番号 S100YIME</li><li>EDINET 書類番号 S100YKV3</li><li>EDINET 書類番号 S100Y9O5</li><li>EDINET 書類番号 S100YGR6</li><li>EDINET 書類番号 S100YKX5</li>
+  </ol></div>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong><p>運営：黒田悠介（コミュニティ研究家・キャリア研究家）</p></div></footer>
+<div class="sample-tag">トップ 案B 所報（数字は見本用）｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>

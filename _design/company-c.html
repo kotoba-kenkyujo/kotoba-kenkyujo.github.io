@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 会社ページ案C 見開き｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案C：和書の見開き。右のページに言葉を縦書きで右から左へ組み、左のページに出典と記録を置く */
+.book { display: grid; margin: var(--space-12) 0; background: var(--paper); border: 1px solid var(--paper-line); box-shadow: var(--shadow-lift); }
+@media (min-width: 900px) { .book { grid-template-columns: 1fr 1.4fr; } .book .right { order: 2; border-left: 1px solid var(--paper-line); } }
+.right { padding: var(--space-8); overflow-x: auto; direction: rtl; }  /* 縦書きを右から読み始められるように、横のすべらせを右端から始める */
+.page { direction: ltr; writing-mode: vertical-rl; font-family: var(--font-mincho); height: 30em; margin: 0 auto; line-height: 2; }
+.page h1 { font-size: 30px; font-weight: 800; letter-spacing: .2em; margin: 0 0 0 var(--space-6); }
+.page .lbl { font-size: 13px; color: var(--text-sub); letter-spacing: .3em; margin: 0 0 0 var(--space-2); font-weight: 500; }
+.page .big { font-size: 22px; font-weight: 700; letter-spacing: .1em; margin: 0 0 0 var(--space-6); }
+.page .item { font-size: 18px; font-weight: 700; margin: 0; letter-spacing: .08em; }
+.page .item span { color: var(--text-sub); font-weight: 500; margin-bottom: .5em; display: inline-block; }
+.page .gap { margin-left: var(--space-6); }
+.left { padding: var(--space-8); font-size: 14px; color: var(--text-body); display: grid; gap: var(--space-6); align-content: start; background: var(--card); }
+.left h2 { font-family: var(--font-mincho); font-size: 16px; letter-spacing: .2em; margin: 0 0 var(--space-2); color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+.left dl { display: grid; grid-template-columns: auto 1fr; gap: 4px var(--space-4); margin: 0; }
+.left dt { color: var(--text-sub); }
+.left dd { margin: 0; }
+.pager { display: flex; justify-content: space-between; font-family: var(--font-mincho); }
+.pager a { text-decoration: none; }
+.hint { text-align: center; font-size: 12px; color: var(--text-sub); }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+<main class="wrap">
+  <div class="book">
+    <div class="right">
+      <div class="page">
+        <h1>ゼット株式会社</h1>
+        <p class="lbl">企業理念</p>
+        <p class="big">スポチュニティ(スポーツを通じて、地域社会に喜びと健康やふれあいの機会を提供し、調和をもたらす)</p>
+        <p class="lbl">ビジョン</p>
+        <p class="big">社会に新しい価値を創造するスポーツ＆ライフスタイル企業</p>
+        <p class="lbl">社是</p>
+        <p class="item"><span>一、</span>企業の永続と繁栄</p>
+        <p class="item"><span>二、</span>個人の幸福と人格の向上</p>
+        <p class="item gap"><span>三、</span>業を通じて社会に奉仕する</p>
+        <p class="lbl">社訓</p>
+        <p class="item"><span>一、</span>サービス精神に徹する</p>
+        <p class="item"><span>二、</span>機を尊ぶ</p>
+        <p class="item"><span>三、</span>計画して行う</p>
+        <p class="item"><span>四、</span>自己啓発</p>
+        <p class="item"><span>五、</span>困難に挑戦する</p>
+      </div>
+    </div>
+    <div class="left">
+      <section><h2>この記録について</h2>
+        <dl><dt>証券コード</dt><dd>8135</dd><dt>収蔵</dt><dd>10の言葉（呼び名4種）</dd><dt>確認</dt><dd>2026年11月8日　原文どおり</dd></dl></section>
+      <section><h2>出典</h2><p style="margin:0">有価証券報告書（2026年3月期）2026年6月26日提出<br>EDINET 書類番号 S100YJPU「経営方針、経営環境及び対処すべき課題等」</p></section>
+      <section><h2>言語史</h2><p style="margin:0">改定の記録はまだありません。</p></section>
+      <section><h2>この言葉を見た人へ</h2><p style="margin:0">誤りや新しい言葉に気づいたら、<a href="#">訂正の連絡</a>からお知らせください。</p></section>
+      <div class="pager"><a href="#">← 前の会社　中日本鋳工</a><a href="#">次の会社　日本精密 →</a></div>
+    </div>
+  </div>
+  <p class="hint">スマホでは右のページを横にすべらせて読みます</p>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong></div></footer>
+<div class="sample-tag">会社ページ 案C 見開き｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>

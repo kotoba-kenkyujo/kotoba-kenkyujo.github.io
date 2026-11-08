@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>見本 会社ページ案B 言葉の系図｜会社のことば研究所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 案B：会社の言葉の体系を、上から下へ枝分かれする系図で見せる。縦書きの札が並ぶ */
+.head { display: grid; gap: var(--space-2); padding: var(--space-12) 0 var(--space-6); border-bottom: 1px solid var(--ink); }
+.head h1 { font-family: var(--font-mincho); font-weight: 800; font-size: clamp(28px, 4.5vw, 40px); letter-spacing: .1em; margin: 0; }
+.head .meta { font-size: 13px; color: var(--text-sub); }
+.tree { display: grid; justify-items: center; padding: var(--space-8) 0; }
+.lvl-label { font-size: 12px; letter-spacing: .3em; color: var(--text-sub); margin: 0 0 var(--space-2); }
+.node { background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-4) var(--space-3); display: grid; justify-items: center; gap: var(--space-2); }
+.node .tate { margin: 0; letter-spacing: .1em; line-height: 1.7; }
+.node .name { font-size: 11px; color: var(--text-sub); }
+.top .tate { font-size: 26px; height: 14em; }
+.mid .tate { font-size: 20px; height: 11em; }
+.stem { width: 2px; height: 32px; background: var(--ink); }
+.branches { display: flex; gap: var(--space-8); justify-content: center; flex-wrap: wrap; position: relative; padding-top: 24px; }
+.branches::before { content: ""; position: absolute; top: 0; left: 18%; right: 18%; height: 2px; background: var(--ink); }
+.group { display: grid; justify-items: center; gap: var(--space-2); position: relative; }
+.group::before { content: ""; position: absolute; top: -24px; left: 50%; width: 2px; height: 24px; background: var(--ink); }
+.group h3 { font-family: var(--font-mincho); font-weight: 800; font-size: 15px; letter-spacing: .3em; margin: 0; }
+.leaves { display: flex; flex-direction: row-reverse; gap: var(--space-2); }
+.leaf { background: var(--card); border: 1px solid var(--line); padding: var(--space-3) var(--space-2); display: grid; justify-items: center; gap: 4px; }
+.leaf .no { font-family: var(--font-mincho); font-size: 12px; color: var(--text-sub); }
+.leaf .tate { font-size: 17px; height: 8.5em; margin: 0; letter-spacing: .06em; }
+.facts { display: grid; gap: var(--space-6); border-top: 1px solid var(--ink); padding-top: var(--space-6); margin-top: var(--space-8); }
+@media (min-width: 760px) { .facts { grid-template-columns: 1fr 1fr; } }
+.facts h2 { font-family: var(--font-mincho); font-size: 18px; letter-spacing: .12em; margin: 0 0 var(--space-3); }
+.facts p, .facts li { font-size: 14px; color: var(--text-body); }
+.stat { display: flex; gap: var(--space-6); }
+.stat b { display: block; font-family: var(--font-mincho); font-size: 28px; }
+.stat span { font-size: 12px; color: var(--text-sub); }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a class="logo" href="#"><span class="logo-mark">📢</span>会社のことば研究所</a>
+  <nav class="nav"><a href="#">ことばを探す</a><a href="#">研究テーマ</a><a href="#">言語史</a><a href="#">研究ノート</a><a href="#">この研究所について</a></nav>
+  <span class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+</div></header>
+<main class="wrap">
+  <div class="head">
+    <h1>ゼット株式会社</h1>
+    <div class="meta">証券コード 8135　出典：有価証券報告書（2026年6月26日提出、EDINET S100YJPU）　確認 2026年11月8日</div>
+  </div>
+
+  <div class="tree">
+    <p class="lvl-label">いちばん上　企業理念</p>
+    <div class="node top"><p class="tate">スポチュニティ(スポーツを通じて、地域社会に喜びと健康やふれあいの機会を提供し、調和をもたらす)</p></div>
+    <div class="stem"></div>
+    <p class="lvl-label">目指す姿　ビジョン</p>
+    <div class="node mid"><p class="tate">社会に新しい価値を創造するスポーツ＆ライフスタイル企業</p></div>
+    <div class="stem"></div>
+    <p class="lvl-label">大切にすること　価値観</p>
+    <div class="branches">
+      <div class="group"><h3>社是</h3><div class="leaves">
+        <div class="leaf"><span class="no">一</span><p class="tate">企業の永続と繁栄</p></div>
+        <div class="leaf"><span class="no">二</span><p class="tate">個人の幸福と人格の向上</p></div>
+        <div class="leaf"><span class="no">三</span><p class="tate">業を通じて社会に奉仕する</p></div>
+      </div></div>
+      <div class="group"><h3>社訓</h3><div class="leaves">
+        <div class="leaf"><span class="no">一</span><p class="tate">サービス精神に徹する</p></div>
+        <div class="leaf"><span class="no">二</span><p class="tate">機を尊ぶ</p></div>
+        <div class="leaf"><span class="no">三</span><p class="tate">計画して行う</p></div>
+        <div class="leaf"><span class="no">四</span><p class="tate">自己啓発</p></div>
+        <div class="leaf"><span class="no">五</span><p class="tate">困難に挑戦する</p></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <section><h2>この会社の言葉を数えると</h2>
+      <div class="stat"><div><b>10</b><span>収蔵した言葉</span></div><div><b>4</b><span>呼び名の種類</span></div><div><b>0</b><span>改定の記録</span></div></div>
+      <p>「社会」を3回使っています。全社では「社会」を使う会社は 9社（収蔵した15社のうち）。</p></section>
+    <section><h2>言語史</h2><p>まだ改定の記録はありません。言葉が改められたら、ここに古い言葉と新しい言葉を並べて残します。</p></section>
+  </div>
+</main>
+<footer class="footer"><div class="wrap"><strong>📢 会社のことば研究所</strong></div></footer>
+<div class="sample-tag">会社ページ 案B 言葉の系図（数字は見本用）｜<a href="index.html">見本の一覧</a></div>
+</body>
+</html>
