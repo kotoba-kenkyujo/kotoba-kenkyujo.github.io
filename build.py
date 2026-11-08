@@ -466,8 +466,7 @@ def build_top(C, W, stats):
   <li><a href="words/"><b>{len(C)}</b><small>社</small></a></li>
   <li><a href="words/"><b>{sum(1 for w in W if not w['old'])}</b><small>語</small></a></li>
 </ul>
-<section class="layers" aria-labelledby="layers-h">
-  <h2 id="layers-h">ことばの層</h2>
+<section class="layers" aria-label="ことばの層">
   <dl>{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
 </section>
 <div class="cols">
