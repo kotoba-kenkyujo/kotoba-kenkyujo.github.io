@@ -422,12 +422,13 @@ def build_top(C, W, stats):
     ld = length_data(stats)
     length_html = ""
     if ld:
-        length_html = f"""<section class="topic">
-    <h2><a href="topics/#length">{label('いちばん上')}の長さ</a></h2>
+        # トップは数と、1社1本の細い線だけ。くわしく見るときは統計のページへ（2026-11-08 黒田さん：シンプルに）
+        ticks = "".join(f'<i style="left:{pos(w["len"], ld["min"], ld["max"])}%"></i>' for w in ld["words"])
+        length_html = f"""<a class="topic" href="topics/#length">
+    <h2>{label('いちばん上')}の長さ</h2>
     <div class="len-sum"><span>最短<b>{ld['min']}</b>字</span><span>平均<b>{round(ld['avg'])}</b>字</span><span>最長<b>{ld['max']}</b>字</span></div>
-    {strip_html(ld, '')}
-    <p class="dot-pick" aria-live="polite" hidden></p>
-  </section>"""
+    <div class="len-ticks" aria-hidden="true">{ticks}</div>
+  </a>"""
     notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
     body = f"""
