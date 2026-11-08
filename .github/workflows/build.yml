@@ -37,13 +37,13 @@ jobs:
             tools/fonts
             ~/.cache/pip
           key: og-fonts-v1
-      # 共有画像を作る Pillow と、ひらがな検索の読みを作る pykakasi を入れる。失敗しても、共通の共有画像・ひらがな検索なしで更新は続ける
+      # 共有画像を作る Pillow、ひらがな検索の読みを作る pykakasi、言葉を文節で改行する BudouX を入れる。失敗しても、共通の共有画像・ひらがな検索なしで更新は続ける
       - name: Python のパッケージを入れる
         continue-on-error: true
         timeout-minutes: 5
         run: |
           python3 -m venv .venv
-          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0"
+          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0" "budoux==0.7.0"
       - name: サイトを作る
         env:
           ALLOW_SHRINK: ${{ inputs.allow_shrink && '1' || '0' }}

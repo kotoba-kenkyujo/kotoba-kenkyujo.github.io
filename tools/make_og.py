@@ -19,6 +19,12 @@ PAPER, LINE, INK, SUB, ROD, SHU, SKY = (251, 250, 246), (230, 225, 212), (26, 29
 # 縦書きで向きを変える文字（句読点・括弧・長音）
 VERT = {"、": "︑", "。": "︒", "，": "︐", "「": "﹁", "」": "﹂", "『": "﹃", "』": "﹄", "（": "︵", "）": "︶", "(": "︵", ")": "︶",
         "ー": "丨", "－": "丨", "-": "丨", "―": "丨", "〜": "≀", "～": "≀", "…": "︙", "：": "︓", "［": "﹇", "］": "﹈", "【": "︻", "】": "︼"}
+try:  # 文節の途中で列を変えない（サイトと同じ BudouX）
+    import budoux
+    BUDOUX = budoux.load_default_japanese_parser()
+except Exception:
+    BUDOUX = None
+HANG = "︑︒︐﹂﹄︶"
 SMALL = set("ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ")
 
 
@@ -74,29 +80,50 @@ def wrap_words(d, text, f, width):
     return lines
 
 
+def columns(text, per_col):
+    """縦書きの列に分ける。文節の途中では列を変えず、句読点・閉じ括弧は前の列の下にぶら下げる"""
+    parts = BUDOUX.parse(text) if BUDOUX else list(text)
+    cols, cur = [], []
+    for part in parts:
+        chars = [VERT.get(ch, ch) for ch in part]
+        while chars:
+            room = per_col - len(cur)
+            body = [c for c in chars if c not in HANG]
+            if len(body) <= room or (not cur and len(chars) > per_col):
+                take = chars if len(body) <= room else chars[:per_col]
+                cur += take
+                chars = chars[len(take):]
+            else:
+                cols.append(cur)
+                cur = []
+        if len(cur) >= per_col and not (chars and chars[0] in HANG):
+            cols.append(cur)
+            cur = []
+    if cur:
+        cols.append(cur)
+    return cols
+
+
 def draw_vertical(d, text, right, left, top, bottom, size_max=72, size_min=26):
     """縦書き：右上から下へ、列は右から左へ。left より左にはみ出さない大きさを探す"""
-    chars = [VERT.get(ch, ch) for ch in text]
     for size in range(size_max, size_min - 1, -2):
         step = int(size * 1.08)
         col_gap = int(size * 1.55)
         per_col = max(1, (bottom - top) // step)
-        cols = -(-len(chars) // per_col)
-        if right - size - (cols - 1) * col_gap >= left:
+        cols = columns(text, per_col)
+        if right - size - (len(cols) - 1) * col_gap >= left:
             break
     f = font("ExtraBold", size)
     x = right - size
-    y = top
-    n = 0
-    for ch in chars:
-        # 句読点・閉じ括弧で列を始めない（前の列の下にぶら下げる）
-        if n == per_col and ch not in "︑︒︐﹂﹄︶":
-            x -= col_gap; y = top; n = 0
-        # 小さい「っ」などは、縦書きでは右上に寄せる。句読点は縦書き用の字（︑︒）がその位置に描かれる
-        dx = int(size * 0.12) if ch in SMALL else 0
-        dy = -int(size * 0.12) if ch in SMALL else 0
-        d.text((x + dx, y + dy), ch, font=f, fill=INK)
-        y += step; n += 1
+    for col in cols:
+        y = top
+        for ch in col:
+            # 小さい「っ」などは、縦書きでは右上に寄せる
+            dx = int(size * 0.12) if ch in SMALL else 0
+            dy = -int(size * 0.12) if ch in SMALL else 0
+            d.text((x + dx, y + dy), ch, font=f, fill=INK)
+            y += step
+        x -= col_gap
     return x
 
 

@@ -37,6 +37,11 @@ try:
     KKS = pykakasi.kakasi()
 except Exception:
     KKS = None
+try:  # 言葉を文節で区切り、文節の途中で改行しないようにする（BudouX。なければ字のどこでも改行する）
+    import budoux
+    BUDOUX = budoux.load_default_japanese_parser()
+except Exception:
+    BUDOUX = None
 
 
 def label(layer):
@@ -322,12 +327,19 @@ def seal(text):
     return f'<span class="seal-line">{esc(t)}</span>'
 
 
+def phrases(text):
+    """文節の切れ目に <wbr> を入れる。CSS の word-break: keep-all と組で、文節の途中では改行しない（2026-11-08 黒田さん：改行位置をうまく）"""
+    if not BUDOUX:
+        return esc(text)
+    return "<wbr>".join(esc(p) for p in BUDOUX.parse(text))
+
+
 def word_block(w, fn_html):
     """掛け軸・今日のことばの言葉。英字が主の言葉は横書き（2026-11-08）"""
     if w["latin"]:
         return f'<p class="yoko">{esc(w["言葉"])}{fn_html}</p>'
     cls = "tate long" if w["len"] > 36 else "tate"
-    return f'<p class="{cls}">{esc(w["言葉"])}{fn_html}</p>'
+    return f'<p class="{cls}">{phrases(w["言葉"])}{fn_html}</p>'
 
 
 SHARE_ICONS = {
@@ -423,12 +435,10 @@ def build_top(C, W, stats):
     ld = length_data(stats)
     length_html = ""
     if ld:
-        # トップは数と、1社1本の細い線だけ。くわしく見るときは統計のページへ（2026-11-08 黒田さん：シンプルに）
-        ticks = "".join(f'<i style="left:{pos(w["len"], ld["min"], ld["max"])}%"></i>' for w in ld["words"])
+        # トップは数だけ。くわしく見るときは統計のページへ（2026-11-08 黒田さん：グラフはいらない、数字は大事）
         length_html = f"""<a class="topic" href="topics/#length">
     <h2>{label('いちばん上')}の長さ</h2>
     <div class="len-sum"><span>最短<b>{ld['min']}</b>字</span><span>平均<b>{round(ld['avg'])}</b>字</span><span>最長<b>{ld['max']}</b>字</span></div>
-    <div class="len-ticks" aria-hidden="true">{ticks}</div>
   </a>"""
     notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
@@ -909,7 +919,7 @@ def main():
     build_notes(notes, W, og_jobs)
     build_about()
     build_misc(C, W, token_pages, notes, og_jobs)
-    print(f"会社 {len(C)}　言葉 {len(W)}　改定 {stats['changes']}（言語史をメニューに出す: {SITE['show_history']}）　語のページ {len(token_pages)}　研究ノート {len(notes)}　ひらがな検索: {'あり' if KKS else 'なし'}")
+    print(f"会社 {len(C)}　言葉 {len(W)}　改定 {stats['changes']}（言語史をメニューに出す: {SITE['show_history']}）　語のページ {len(token_pages)}　研究ノート {len(notes)}　ひらがな検索: {'あり' if KKS else 'なし'}　文節の改行: {'あり' if BUDOUX else 'なし'}")
     print("よく使われる語:", ", ".join(f"{t}({n})" for t, n in stats["tokens"][:12]))
 
 
