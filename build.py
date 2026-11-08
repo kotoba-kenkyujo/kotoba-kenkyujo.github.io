@@ -44,7 +44,7 @@ AUDIENCE = [("お客様", ["お客様", "お客さま", "顧客", "ユーザー"
             ("地球・環境", ["地球", "環境", "自然"])]
 # 統計のページとトップに出す項目と順番（2026-11-08 黒田さん：この3つだけ）。
 # 隠している項目：names（北極星の呼び名）、length（北極星の長さ）、name-kinds（呼び名の漢字とカタカナ）。ここに足せばまた出る
-TOPICS_SHOWN = ["tokens", "voice", "audience", "promise", "action", "time"]
+TOPICS_SHOWN = ["tokens", "voice", "audience", "promise", "action"]
 TOP_TOPICS = ["tokens", "voice", "audience"]   # トップの小さな枠は3つまで
 # 統計「何を約束するか」「どう関わるか」「時間の向き」（2026-11-08）。数え方は VOICE・AUDIENCE と同じ
 PROMISE = [("豊かさ", ["豊か"]),
@@ -752,7 +752,7 @@ def build_topics(C, W, stats, token_pages):
 <div class="study">
 {chr(10).join(secs[k] for k in TOPICS_SHOWN if secs.get(k))}
 </div>"""
-    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語り誰に向けた言葉か、何を約束しどう関わるか、時間の向き。"))
+    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語り誰に向けた言葉か、何を約束しどう関わるか。"))
 
 
 def share_bars(stats, key, rel, limit=None):
