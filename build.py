@@ -462,7 +462,7 @@ def build_top(C, W, stats):
   </section>
 </div>
 <div class="topics">
-  <a class="topic" href="topics/#names"><h2>呼び名</h2><div class="bars">{name_bars}</div></a>
+  <a class="topic" href="topics/#names"><h2>{label('いちばん上')}の呼び名</h2><div class="bars">{name_bars}</div></a>
   <a class="topic" href="topics/#tokens"><h2>よく使われる語</h2><div class="bars">{tok_bars}</div></a>
   {length_html}
 </div>
@@ -652,7 +652,7 @@ def build_topics(C, W, stats, token_pages):
             rows.append(f'<li data-id="{w["ID"]}" data-len="{w["len"]}"><a href="../{w["co"]["url"]}#{w["ID"]}"><span class="n">{w["len"]}<small>字</small></span><span class="w">{esc(w["言葉"])}</span><span class="who">{esc(w["co"]["short"])}</span></a></li>')
         for w in latin:
             rows.append(f'<li data-id="{w["ID"]}" data-latin="1" hidden><a href="../{w["co"]["url"]}#{w["ID"]}"><span class="n">{latin_words(w["言葉"])}<small>語</small></span><span class="w">{esc(w["言葉"])}</span><span class="who">{esc(w["co"]["short"])}</span></a></li>')
-        length_sec = f"""<section id="length" class="len-study"><h2>{label('いちばん上')}の長さ<small>{len(ld['words'])}社</small></h2>
+        length_sec = f"""<section id="length" class="len-study"><h2>{label('いちばん上')}の長さ</h2>
   <div class="len-sum"><span>最短<b>{lo}</b>字</span><span>中央値<b>{round(ld['med'])}</b>字</span><span>平均<b>{round(ld['avg'])}</b>字</span><span>最長<b>{hi}</b>字</span></div>
   {strip_html(ld, '../', big=True)}
   <div class="filters len-bins">{bin_btns}</div>
@@ -661,7 +661,7 @@ def build_topics(C, W, stats, token_pages):
 </section>"""
     body = f"""<div class="page-head"><h1>統計</h1></div>
 <div class="study">
-<section id="names"><h2>呼び名<small>{label('いちばん上')}の呼び名　{len(stats['tops'])}社</small></h2>
+<section id="names"><h2>{label('いちばん上')}の呼び名</h2>
   <div class="bars">{name_bars}</div></section>
 <section id="tokens"><h2>よく使われる語<small>使っている会社の数</small></h2>
   <div class="bars">{tok_bars}</div>
