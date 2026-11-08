@@ -1,0 +1,72 @@
+{
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9CI": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YETX": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIME": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ3Q": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJPU": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKSP": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLCK": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLN8": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.papy.co.jp/recruit/sc/index/top_message.html": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.sumitomoseika.co.jp/company/policy/": {
+"date": "2026-11-08",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+}
+}
