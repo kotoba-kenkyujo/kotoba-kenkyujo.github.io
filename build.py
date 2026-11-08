@@ -121,7 +121,6 @@ def dot(d):
 
 
 STOP = {"当社", "弊社", "我等", "我々", "私達", "以下", "全て", "一人", "一人ひとり", "目指", "通じ", "提供", "実現"}
-PUNCT = set("、。，．,.・「」『』（）()［］[]【】〈〉《》！？!?：:；;“”\"'’‘–—-―…～〜/／")
 
 
 def tokens(text):
@@ -145,8 +144,8 @@ def mostly_latin(text):
 
 
 def char_len(text):
-    """字数：空白・句読点・括弧・記号は数えない（2026-11-08。「言葉の長さ」の数え方）"""
-    return sum(1 for ch in unicodedata.normalize("NFKC", text) if not ch.isspace() and ch not in PUNCT)
+    """字数：句読点・括弧・記号も1字と数え、空白だけ数えない（2026-11-08 黒田さんの決定）"""
+    return sum(1 for ch in text if not ch.isspace())
 
 
 def latin_words(text):
