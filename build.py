@@ -123,6 +123,14 @@ def short_name(name):
     return s or name
 
 
+def generic_name(name, company):
+    """統計で数える呼び名：呼び名に入っている社名を外す（「NSW Way」→「Way」。2026-11-08）。外すと空になるときはそのまま"""
+    n = unicodedata.normalize("NFKC", name)
+    short = unicodedata.normalize("NFKC", short_name(company))
+    rest = n.replace(short, "").strip(" 　・-") if short else n
+    return rest or name
+
+
 def pdate(s):
     for f in ("%Y/%m/%d", "%Y-%m-%d"):
         try:
@@ -891,7 +899,7 @@ def compute_stats(C, W):
     tops = [w for w in W if w["層"] == "いちばん上" and not w["old"]]
     names = Counter()
     for c in C.values():
-        for n in {w["会社での呼び名"] for w in c["words"] if w["層"] == "いちばん上" and not w["old"]}:
+        for n in {generic_name(w["会社での呼び名"], c["会社名"]) for w in c["words"] if w["層"] == "いちばん上" and not w["old"]}:
             names[n] += 1
     token_map = defaultdict(list)
     for w in W:
@@ -921,7 +929,7 @@ def compute_stats(C, W):
     kinds = OrderedDict((l, OrderedDict((k, []) for k in ("漢字", "カタカナ", "英字"))) for l in LAYERS)
     for c in cos:
         for l in LAYERS:
-            for n in sorted({w["会社での呼び名"] for w in c["words"] if w["層"] == l and not w["old"] and w["会社での呼び名"]}):
+            for n in sorted({generic_name(w["会社での呼び名"], c["会社名"]) for w in c["words"] if w["層"] == l and not w["old"] and w["会社での呼び名"]}):
                 k = "英字" if re.search(r"[A-Za-zＡ-Ｚａ-ｚ]", n) else "カタカナ" if re.search(r"[ァ-ヺ]", n) else "漢字"
                 kinds[l][k].append(n)
     return {"tops": tops, "names": names, "tokens": ranked, "n_cos": len(cos),
