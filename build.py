@@ -246,6 +246,7 @@ def model(words, comps):
         c["srcs"] = srcs
         c["tokens"] = set().union(*(w["tokens"] for w in c["words"] if not w["old"]))
         reading = c.get("読み") or yomi(c["short"])
+        c["reading"] = unicodedata.normalize("NFKC", reading or c["short"])
         c["search"] = unicodedata.normalize("NFKC", f"{c['会社名']} {c['short']} {reading}").lower()
     return C
 
@@ -270,7 +271,7 @@ def contact_url(target=""):
 
 # ---------- ページの枠 ----------
 def nav_items(show_history, notes_exist):
-    items = [("words/", "ことばを探す"), ("topics/", "統計")]
+    items = [("words/", "ことばを探す"), ("c/", "会社"), ("topics/", "統計")]
     if show_history:
         items.append(("history/", "言語史"))
     if notes_exist:
@@ -454,6 +455,13 @@ def strip_html(ld, rel, big=False):
             f'<div class="strip-axis"><span>{lo}字</span>{ticks}<span>{hi}字</span></div>')
 
 
+def lead_word(c):
+    """その会社の代表の言葉：いま使っている北極星（なければ、いま使っている最初の言葉）"""
+    cur = [w for w in c["words"] if not w["old"]]
+    tops = [w for w in cur if w["層"] == "いちばん上"]
+    return (tops or cur or c["words"])[0]
+
+
 # ---------- トップ ----------
 def build_top(C, W, stats):
     current_top = [w for w in W if w["層"] == "いちばん上" and not w["old"]]
@@ -468,12 +476,32 @@ def build_top(C, W, stats):
         return fns.index(u) + 1
 
     tn = fn(today)
-    recent = sorted(W, key=lambda w: (w["checked"] or datetime.date.min, w["no"]), reverse=True)[:6]
+    # 新収蔵：1社を1行に。いちばん新しく収蔵した言葉の順（2026-11-09）
+    newest = sorted(C.values(), key=lambda c: max(w["no"] for w in c["words"]), reverse=True)[:6]
     rows = []
-    for w in recent:
+    for c in newest:
+        w = lead_word(c)
         n = fn(w)
-        chip = '<span class="chip kai">改定</span>' if w["前の言葉のID"] else f'<span class="chip">{esc(w["会社での呼び名"])}</span>'
-        rows.append(f'<li><a href="{w["co"]["url"]}#{w["ID"]}"><span><span class="w">{esc(w["言葉"])}<sup class="fn">{n}</sup></span><span class="who">{esc(w["co"]["short"])}</span></span>{chip}</a></li>')
+        more = sum(1 for x in c["words"] if not x["old"]) - 1
+        more_html = f'<small>ほか{more}語</small>' if more > 0 else ""
+        rows.append(f'<li><a href="{c["url"]}"><span><span class="w">{esc(w["言葉"])}<sup class="fn">{n}</sup></span><span class="who">{esc(c["short"])}{more_html}</span></span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>')
+    # 最近の改定：いま使っている言葉のうち、前の言葉があるもの（新しい順に2件）
+    kais = sorted((w for w in W if w["前の言葉のID"] and not w["old"]), key=lambda w: (w["使い始め"], w["no"]), reverse=True)[:2]
+    byid = {w["ID"]: w for w in W}
+    kai_rows = ""
+    for w in kais:
+        old_w = byid.get(w["前の言葉のID"])
+        old_name = esc(old_w["会社での呼び名"]) if old_w else ""
+        when = ym(w["使い始め"])
+        kai_rows += (f'<li><a href="{w["co"]["url"]}#history"><span class="chip kai">改定</span><span class="kai-co">{esc(w["co"]["short"])}</span>'
+                     f'<span class="kai-names">{old_name}{" → " if old_name else ""}{esc(w["会社での呼び名"])}</span><span class="kai-when">{esc(when)}</span></a></li>')
+    kai_html = f'<section class="kai-recent"><h2 class="sec-h">最近の改定</h2><ol>{kai_rows}</ol></section>' if kai_rows else ""
+    # 今日のことばのくじ：ほかの北極星を、文節の区切りまで作っておく
+    pool_json = json.dumps([{"html": phrases(w["言葉"]) if not w["latin"] else esc(w["言葉"]), "latin": w["latin"], "long": w["len"] > 36,
+                             "co": w["co"]["会社名"], "url": f'{w["co"]["url"]}#{w["ID"]}', "seal": seal(w["会社での呼び名"])}
+                            for w in pool], ensure_ascii=False).replace("</", "<\\/")
+    # 収蔵した会社の入口：新しく収蔵した順に12社
+    co_names = "".join(f'<a href="{c["url"]}">{esc(c["short"])}</a>' for c in sorted(C.values(), key=lambda c: max(w["no"] for w in c["words"]), reverse=True)[:12])
     names = stats["names"].most_common(4)
     nmax = names[0][1] if names else 1
     toks = stats["tokens"][:4]
@@ -502,23 +530,32 @@ def build_top(C, W, stats):
     body = f"""
 <div class="masthead rise">
   <h1>{esc(CFG['name'])}</h1>
+  <p class="tagline">{esc(CFG['subtitle'])}</p>
 </div>
 <ul class="ledger" aria-label="収蔵の数">
-  <li><a href="words/"><b data-count="{len(C)}">{len(C)}</b><small>社</small></a></li>
+  <li><a href="c/"><b data-count="{len(C)}">{len(C)}</b><small>社</small></a></li>
   <li><a href="words/"><b data-count="{n_cur}">{n_cur}</b><small>語</small></a></li>
 </ul>
 <form class="searchbox top-search" role="search" action="words/" method="get"><input name="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉や会社名で探す" autocomplete="off"><button type="submit">探す</button></form>
 <div class="cols">
+  <div class="today-wrap">
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
     {word_block(today, f'<span class="fn">{tn}</span>')}
     <span class="foot">{seal(today['会社での呼び名'])}<span class="who">{esc(today_co)}</span></span>
   </a>
+  <button class="dice today-dice" type="button" data-goatcounter-click="today-pick">🎲 ほかのことば</button>
+  <script type="application/json" id="today-pool">{pool_json}</script>
+  </div>
+  <div class="side-col">
   <section>
-    <h2 class="sec-h">新収蔵<a href="words/" aria-label="すべての言葉">→</a></h2>
+    <h2 class="sec-h">新収蔵<a href="c/" aria-label="すべての会社">→</a></h2>
     <ol class="index">{''.join(rows)}</ol>
   </section>
+  {kai_html}
+  </div>
 </div>
+<section class="co-strip"><h2 class="sec-h">収蔵した会社<a href="c/" aria-label="すべての会社">→</a></h2><div class="co-names">{co_names}<a class="all" href="c/">すべての会社（{len(C)}社）</a></div></section>
 <div class="topics">
   {top_cards}
 </div>
@@ -652,7 +689,7 @@ def build_company(c, C, ids, stats, og_jobs):
     # 回遊（2026-11-09）：PCは画面の両端に縦書きの社名つきの矢印、スマホは読み進めると下に小さな帯が出る（ページ下の前後の帯が見えたら隠す）
     parts.append(f"""<nav class="side-nav" aria-label="前後の会社（画面の両端）"><a class="side prev" href="../../{prev_c['url']}" data-goatcounter-click="side/prev"><span class="arr">←</span><span class="nm">{esc(prev_c['short'])}</span></a><a class="side next" href="../../{next_c['url']}" data-goatcounter-click="side/next"><span class="arr">→</span><span class="nm">{esc(next_c['short'])}</span></a></nav>
 <nav class="mini-nav" aria-label="前後の会社（下の帯）" hidden><a href="../../{prev_c['url']}" data-goatcounter-click="mini/prev">← <span>{esc(prev_c['short'])}</span></a><button class="dice" type="button" data-goatcounter-click="mini/pick">🎲</button><a href="../../{next_c['url']}" data-goatcounter-click="mini/next"><span>{esc(next_c['short'])}</span> →</a></nav>""")
-    head = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../words/">ことば</a> › {esc(c['会社名'])}</nav>
+    head = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../c/">会社</a> › {esc(c['会社名'])}</nav>
 <div class="co-head"><h1>{esc(c['会社名'])}</h1></div>"""
     desc = f"{c['会社名']}が掲げる言葉。{lead_w['言葉'][:80]}"
     jsonld = {"@context": "https://schema.org", "@type": "ItemList", "name": f"{c['会社名']}が掲げる言葉", "url": BASE + c["url"],
@@ -667,6 +704,46 @@ def build_company(c, C, ids, stats, og_jobs):
 
 def fn_link(n):
     return f'<a class="fn" href="#src{n}">{n}</a>'
+
+
+# ---------- 会社の一覧 ----------
+GOJUON = [("あ", "あいうえおぁぃぅぇぉゔ"), ("か", "かきくけこがぎぐげご"), ("さ", "さしすせそざじずぜぞ"), ("た", "たちつてとだぢづでどっ"),
+          ("な", "なにぬねの"), ("は", "はひふへほばびぶべぼぱぴぷぺぽ"), ("ま", "まみむめも"), ("や", "やゆよゃゅょ"),
+          ("ら", "らりるれろ"), ("わ", "わをんゎ")]
+
+
+def gojuon_row(reading):
+    ch = (reading or " ")[0]
+    if "ァ" <= ch <= "ヶ":
+        ch = chr(ord(ch) - 0x60)
+    for row, chars in GOJUON:
+        if ch in chars:
+            return row
+    return "英字" if re.match(r"[A-Za-z0-9]", ch) else "ほか"
+
+
+def build_companies(C):
+    """会社の一覧（2026-11-09）：読みの五十音順。行ごとに分け、各社の代表の言葉を1行添える"""
+    cos = sorted(C.values(), key=lambda c: (c["reading"], c["short"]))
+    groups = OrderedDict((r, []) for r, _ in GOJUON)
+    groups["英字"], groups["ほか"] = [], []
+    for c in cos:
+        groups[gojuon_row(c["reading"])].append(c)
+    jump = "".join(f'<a href="#g-{r}">{r}</a>' if g else f'<span>{r}</span>' for r, g in groups.items() if g or r in dict(GOJUON))
+    secs = []
+    for r, g in groups.items():
+        if not g:
+            continue
+        lis = ""
+        for c in g:
+            w = lead_word(c)
+            snip = w["言葉"] if len(w["言葉"]) <= 44 else w["言葉"][:44] + "…"
+            lis += f'<li><a href="../{c["url"]}"><span class="nm">{esc(c["会社名"])}</span><span class="w">{esc(snip)}</span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>'
+        secs.append(f'<section class="co-group" id="g-{r}"><h2>{r}</h2><ul class="co-list">{lis}</ul></section>')
+    body = f"""<div class="page-head"><h1>会社</h1><div class="count"><b>{len(C)}</b>社</div></div>
+<nav class="kana-jump" aria-label="五十音">{jump}</nav>
+<div class="co-index">{''.join(secs)}</div>"""
+    write("c/", page("c/", "会社", body, current="c/", desc="会社のことば研究所に収蔵した会社の一覧。五十音順に、各社が掲げる言葉を添えています。"))
 
 
 # ---------- ことばを探す ----------
@@ -1092,7 +1169,7 @@ def compute_stats(C, W):
 
 
 def build_misc(C, W, token_pages, notes, og_jobs):
-    urls = ["", "words/", "topics/", "about/"] + [c["url"] for c in C.values()] + list(token_pages.values())
+    urls = ["", "words/", "c/", "topics/", "about/"] + [c["url"] for c in C.values()] + list(token_pages.values())
     if SITE["show_history"]:
         urls.append("history/")
     if SITE["notes_exist"]:
@@ -1130,6 +1207,7 @@ def main():
     SITE["show_history"] = stats["changes"] >= HISTORY_MIN
     og_jobs = []
     build_top(C, W, stats)
+    build_companies(C)
     ids = list(C.keys())
     for c in C.values():
         build_company(c, C, ids, stats, og_jobs)

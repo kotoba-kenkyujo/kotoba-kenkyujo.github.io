@@ -133,4 +133,30 @@
     new IntersectionObserver(es => { es.forEach(e => { pastTop = !e.isIntersecting && e.boundingClientRect.top < 0; }); sync(); }).observe(firstScroll);
     new IntersectionObserver(es => { es.forEach(e => { endSeen = e.isIntersecting; }); sync(); }).observe(pagerEnd);
   }
+  // トップ：今日のことばのくじ（その場で、ほかの会社の北極星に入れ替える。2026-11-09）
+  const todayBtn = document.querySelector('.today-dice');
+  const poolEl = document.getElementById('today-pool');
+  const todayEl = document.querySelector('.today');
+  if (todayBtn && poolEl && todayEl) {
+    let pool = [];
+    try { pool = JSON.parse(poolEl.textContent); } catch (e) { /* くじが使えなくても今日のことばは出ている */ }
+    let last = todayEl.getAttribute('href');
+    todayBtn.addEventListener('click', () => {
+      const cands = pool.filter(p => p.url !== last);
+      if (!cands.length) return;
+      const p = cands[Math.floor(Math.random() * cands.length)];
+      last = p.url;
+      todayEl.setAttribute('href', p.url);
+      todayEl.setAttribute('aria-label', '今日のことば　' + p.co);
+      todayEl.classList.toggle('latin', p.latin);
+      const word = todayEl.querySelector('.tate, .yoko');
+      const neo = document.createElement('p');
+      neo.className = p.latin ? 'yoko' : (p.long ? 'tate long' : 'tate');
+      neo.innerHTML = p.html;
+      word.replaceWith(neo);
+      todayEl.querySelector('.foot').innerHTML = p.seal + '<span class="who"></span>';
+      todayEl.querySelector('.foot .who').textContent = p.co;
+      todayEl.querySelector('.day').textContent = 'ことばくじ';
+    });
+  }
 })();
