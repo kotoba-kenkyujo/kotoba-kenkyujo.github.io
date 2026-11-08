@@ -1,0 +1,76 @@
+name: リンク切れの点検
+
+# 毎週、公開中の言葉の出典URLを開いて「正常・移転・拒否・要確認」に分け、/linkcheck.json に出す。
+# サイトの掲載は自動では変えない（データ側の定期実行が linkcheck.json を読んで直す）。
+# 1回ですべては開かず、新しいものと前回問題があったものは毎週、残りは4週で一巡する（図鑑・観測所と同じ）。
+on:
+  schedule:
+    - cron: "50 21 * * 0"   # 毎週月曜 6:50（日本時間）。図鑑・観測所の点検とずらしている
+  workflow_dispatch:
+
+permissions:
+  contents: write   # 結果（data/linkcheck.json）を保存するため
+  issues: write     # 要確認があったときに Issue で知らせるため
+  actions: write    # 結果を公開するために「サイトを更新」を動かすため
+
+concurrency:
+  group: linkcheck
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    # 新しく開くのは20分で打ち切り（tools/check_links.py の BUDGET）、そのあと取り直しの待ち時間がある
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      # 出典URLを開いて確かめ、data/linkcheck.json に書く。要確認があれば report.md もできる
+      - name: 出典URLを開いて確かめる
+        run: python3 tools/check_links.py report.md
+
+      - name: 結果を保存する
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/linkcheck.json data/linkcheck_seen.json
+          git diff --cached --quiet || git commit -m "リンク点検の結果 $(TZ=Asia/Tokyo date +%F)"
+          # GitHub が一時的なエラーを返すことがあるので、30秒おきに3回まで試し直す
+          for i in 1 2 3; do
+            git pull --rebase -q && git push && exit 0
+            echo "保存に失敗しました（${i}回目）。30秒後に試し直します"
+            sleep 30
+          done
+          exit 1
+
+      # サイトを作り直して linkcheck.json を公開する（掲載内容や見た目は変わらない）。
+      # ここで失敗しても翌朝の「サイトを更新」で公開されるので、Issue の作成には進む
+      - name: 結果を公開する
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in 1 2 3; do
+            gh workflow run build.yml --repo "${{ github.repository }}" --ref main && exit 0
+            echo "公開の依頼に失敗しました（${i}回目）。30秒後に試し直します"
+            sleep 30
+          done
+          exit 1
+
+      # 要確認があったときだけ Issue を作る。Issue ができるとアカウントのメールに通知が届く
+      - name: 要確認があれば Issue で知らせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f report.md ]; then
+            for i in 1 2 3; do
+              gh issue create --repo "${{ github.repository }}" \
+                --title "リンク点検で要確認のURLがありました $(TZ=Asia/Tokyo date +%Y-%m-%d)" \
+                --body-file report.md && exit 0
+              echo "Issue の作成に失敗しました（${i}回目）。30秒後に試し直します"
+              sleep 30
+            done
+            exit 1
+          else
+            echo "要確認のURLはありませんでした"
+          fi

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "50 20 * * *"   # 毎日 5:50（日本時間）
+    - cron: "50 20 * * *"   # 毎日 5:50（日本時間）。図鑑・観測所の更新とずらしている
   workflow_dispatch:
     inputs:
       allow_shrink:
@@ -12,35 +12,81 @@ on:
         type: boolean
         default: false
 
+# 権限は作業ごとに分ける（作る側はデータの記録と Issue、公開する側は Pages への公開だけ。図鑑・観測所と同じ）
+permissions: {}
+
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
   build:
+    # 使う部品（actions）の版は固定する。GitHub 側の入れ替えで急に動きが変わらないように
     runs-on: ubuntu-24.04
     permissions:
-      contents: write
+      contents: write   # data/ の写しを保存するため
+      pages: read       # 公開先の設定を読むため（configure-pages）
+      issues: write     # サイトの点検で直したほうがよいところがあったとき Issue で知らせるため
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+      # 共有画像に使う明朝体は、一度取ってきたらキャッシュに残す
+      - name: 書体のキャッシュを戻す
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
-          python-version: "3.12"
+          path: |
+            tools/fonts
+            ~/.cache/pip
+          key: og-fonts-v1
+      # 共有画像を作る Pillow と、ひらがな検索の読みを作る pykakasi を入れる。失敗しても、共通の共有画像・ひらがな検索なしで更新は続ける
+      - name: Python のパッケージを入れる
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0"
       - name: サイトを作る
         env:
           ALLOW_SHRINK: ${{ inputs.allow_shrink && '1' || '0' }}
-        run: python build.py
+        run: |
+          PY=python3
+          if [ -x .venv/bin/python ]; then PY=.venv/bin/python; fi
+          $PY build.py
+      # 会社のページ・研究ノートごとの共有画像（1200×630）を作る。失敗してもサイト共通の画像のまま続ける
+      - name: 共有画像を作る
+        continue-on-error: true
+        timeout-minutes: 10
+        run: .venv/bin/python tools/make_og.py
+      # 公開の前に点検する。壊れたリンクや title の抜けがあればここで止まり、公開もデータの記録もしない。
+      # 公開を止めるほどではないもの（見出しの段の飛びなど）は site-report.md に書いて Issue で知らせる（直ると自動で閉じる）
+      - name: サイトを点検する
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/check_site.py --report site-report.md
+          TITLE="サイトの自動点検で直したほうがよいところが見つかりました"
+          OPEN=$(gh issue list --repo "${{ github.repository }}" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number' || true)
+          if [ -f site-report.md ]; then
+            if [ -n "$OPEN" ]; then gh issue edit "$OPEN" --repo "${{ github.repository }}" --body-file site-report.md || true
+            else gh issue create --repo "${{ github.repository }}" --title "$TITLE" --body-file site-report.md || true; fi
+          elif [ -n "$OPEN" ]; then
+            gh issue close "$OPEN" --repo "${{ github.repository }}" --comment "$(TZ=Asia/Tokyo date +%F) の点検では問題がなくなりました。" || true
+          fi
+      # 保存の前に最新を取り込む。作っているあいだに別の変更が入っても押し返されないように
       - name: データの写しを残す
         run: |
-          if [ -n "$(git status --porcelain data)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-            git add data
-            git commit -m "データの写しを更新"
-            git pull --rebase origin main
-            git push
-          fi
-      - uses: actions/upload-pages-artifact@v3
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/words.csv data/companies.csv
+          git diff --cached --quiet && exit 0
+          git commit -m "データの写しを更新"
+          for i in 1 2 3; do
+            git pull --rebase -q && git push && exit 0
+            echo "保存に失敗しました（${i}回目）。20秒後に試し直します"
+            sleep 20
+          done
+          echo "::warning::data/ の写しを保存できませんでした"
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d  # v6
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9  # v5
         with:
           path: _site
 
@@ -52,7 +98,15 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.first.outputs.page_url || steps.retry.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      # GitHub 側の一時的な不具合で公開に失敗したら、1分おいて1回だけ試し直す
+      - id: first
+        continue-on-error: true
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5
+      - name: 公開に失敗したので1分待つ
+        if: steps.first.outcome == 'failure'
+        run: sleep 60
+      - id: retry
+        if: steps.first.outcome == 'failure'
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5

@@ -1,0 +1,51 @@
+name: 週次の数字
+
+# 毎週、GoatCounter の API で直近7日と前の7日の数字を読み、data/stats.json に書く（サイトでは /stats.json）。
+# 週次レポート（kotoba-kenkyujo-weekly-report、月曜 9:40ごろ）がこれを読む。図鑑の「週次の数字」を写したもの（2026-11-08）。
+# API キーはリポジトリの Secrets の GOATCOUNTER_API_KEY（GoatCounter の権限は Read statistics）。キーがないときは何もしない
+on:
+  schedule:
+    - cron: "10 23 * * 0"   # 毎週月曜 日本時間の朝8:10（図鑑・観測所とずらしている）
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write   # data/stats.json を保存するため
+      actions: write    # 結果を公開するために「サイトを更新」を動かすため
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: GoatCounter の数字を読む
+        env:
+          GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
+        run: python3 tools/fetch_stats.py
+
+      - name: 結果を保存する
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          [ -f data/stats.json ] || exit 0
+          git add data/stats.json
+          git diff --cached --quiet && exit 0
+          git commit -m "週次の数字 $(TZ=Asia/Tokyo date +%F)"
+          for i in 1 2 3; do
+            git pull --rebase -q && git push && exit 0
+            sleep 20
+          done
+          exit 1
+
+      # サイトを作り直して、stats.json を公開する
+      - name: 結果を公開する
+        if: hashFiles('data/stats.json') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build.yml --repo "${{ github.repository }}" --ref main

@@ -9,6 +9,10 @@
   "operator": "黒田悠介",
   "operator_url": "https://linktr.ee/chlorine0528",
   "contact_url": "",
-  "goatcounter": "",
-  "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs"
+  "goatcounter": "kotobakenkyujo",
+  "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs",
+  "_contact_の説明": "訂正・ご意見の Google フォーム。contact_url は回答用のURL（viewform）、contact_target_entry は「対象」の欄の事前入力の番号（entry.〜）",
+  "contact_target_entry": "",
+  "_searched_words_の説明": "ことばを探すの「検索の例」に混ぜる、実際に検索された語（毎週の数字を見て足す）",
+  "searched_words": []
 }
