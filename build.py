@@ -190,6 +190,9 @@ def page(path, title, body, desc=None, current=None, notes_exist=True, extra_hea
     )
     gc = CFG.get("goatcounter")
     gc_tag = f'<script data-goatcounter="https://{esc(gc)}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>' if gc else ""
+    gsv = CFG.get("google_site_verification")
+    if gsv and path == "":  # Search Console の確認（トップにだけ置けば足りる。消すと確認が外れる）
+        gc_tag = f'<meta name="google-site-verification" content="{esc(gsv)}">\n' + gc_tag
     return f"""<!doctype html>
 <html lang="ja">
 <head>
