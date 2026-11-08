@@ -109,17 +109,11 @@ sup .fn { font-size: 12px; margin-left: 2px; }
 .cols { display: grid; gap: var(--space-8); margin-top: var(--space-8); }
 @media (min-width: 900px) { .cols { grid-template-columns: 1.1fr 1fr; } }
 /* 今日のことば：右から「今日のことば」→ 言葉 → 社名と落款。言葉の上端を「今日のことば」の上端にそろえる（2026-11-08） */
-.today { background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-6); display: flex; flex-direction: row-reverse; justify-content: center; align-items: flex-start; gap: var(--space-6); text-decoration: none; color: var(--ink); transition: box-shadow .2s, transform .2s; min-height: 440px; }
-.today:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
-.today .day { writing-mode: vertical-rl; font-family: var(--font-mincho); font-size: 13px; letter-spacing: .3em; color: var(--text-sub); margin-right: auto; line-height: 1; }
-.today .tate { font-size: clamp(22px, 3vw, 30px); line-height: 1.75; letter-spacing: .12em; max-height: 13em; }
-.today .tate.long { font-size: clamp(18px, 2.2vw, 22px); max-height: 17em; }
-.today .sig { writing-mode: vertical-rl; display: flex; align-items: center; gap: var(--space-3); align-self: flex-end; margin-left: auto; }
-.today .who { font-family: var(--font-mincho); font-weight: 800; font-size: 17px; letter-spacing: .1em; }
-.today.latin { flex-direction: column; align-items: stretch; }
-.today.latin .day { writing-mode: horizontal-tb; margin: 0; letter-spacing: .3em; }
-.today.latin .yoko { font-size: clamp(26px, 3.4vw, 36px); margin: auto 0; }
-.today.latin .sig { writing-mode: horizontal-tb; align-self: flex-end; margin: 0; }
+.today.scroll { margin: 6px 10px; max-width: none; color: var(--ink); text-decoration: none; transition: box-shadow .2s, transform .2s; align-content: space-between; min-height: 440px; }
+.today.scroll:hover { box-shadow: var(--shadow-lift), 0 0 0 1px var(--paper-line); transform: translateY(-2px); }
+.today .day { position: absolute; top: var(--space-6); right: var(--space-6); writing-mode: vertical-rl; font-family: var(--font-mincho); font-size: 13px; letter-spacing: .3em; color: var(--text-sub); line-height: 1; }
+.today.latin .day { writing-mode: horizontal-tb; }
+.today .who { font-family: var(--font-mincho); font-weight: 800; font-size: 15px; letter-spacing: .1em; }
 .sec-h { font-size: 20px; letter-spacing: .12em; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0; display: flex; justify-content: space-between; align-items: baseline; }
 .sec-h a { font-size: 22px; text-decoration: none; line-height: 1; }
 .index { list-style: none; margin: 0; padding: 0; }

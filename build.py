@@ -509,10 +509,10 @@ def build_top(C, W, stats):
   <dl>{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
 </section>
 <div class="cols">
-  <a class="today{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
+  <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
     {word_block(today, f'<span class="fn">{tn}</span>')}
-    <span class="sig"><span class="who">{esc(today_co)}</span>{seal(today['会社での呼び名'])}</span>
+    <span class="foot">{seal(today['会社での呼び名'])}<span class="who">{esc(today_co)}</span></span>
   </a>
   <section>
     <h2 class="sec-h">新収蔵<a href="words/" aria-label="すべての言葉">→</a></h2>
