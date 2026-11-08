@@ -27,7 +27,7 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 | build.py | サイトを作る（標準ライブラリだけ）。`python3 build.py --words testdata/words.csv --companies testdata/companies.csv` で手元のCSVから作る（data/ は書き換えない） |
 | config/site.json | サイト名、CSVのURL、運営者 |
 | assets/ | style.css、site.js（メニュー・共有・ことばくじ）、find.js（ことばを探す）、ファビコン（Noto Emoji の 📢。tools/emoji/） |
-| notes/ | 研究ノートの原稿（<スラッグ>.md。先頭に `---` で 題・日付・説明・公開）。1本もなければメニューに出さない |
+| notes/ | 研究ノートの原稿（<スラッグ>.md。先頭に `---` で 題・日付・説明・公開。本文に `:::word ID` で言葉の札）。書き方は notes/_guide.md、テーマは notes/_themes.md。毎日 10:30 ごろ、このMacの scheduled task `kotoba-kenkyujo-notes` が1本書いて公開する |
 | data/ | 最後に読んだ公開データの写し（Actions が更新する） |
 | testdata/ | 手元で試すデータ（未確認の言葉も入っている。公開しない） |
 | _design/ | 見本（2026/11/08。トップは案B「所報」、会社のページは案A「掛け軸と年表」を、補足の文を削った版 top-b2・company-a2 で採用） |
