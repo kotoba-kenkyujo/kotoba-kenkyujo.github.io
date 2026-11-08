@@ -44,7 +44,27 @@ AUDIENCE = [("お客様", ["お客様", "お客さま", "顧客", "ユーザー"
             ("地球・環境", ["地球", "環境", "自然"])]
 # 統計のページとトップに出す項目と順番（2026-11-08 黒田さん：この3つだけ）。
 # 隠している項目：names（北極星の呼び名）、length（北極星の長さ）、name-kinds（呼び名の漢字とカタカナ）。ここに足せばまた出る
-TOPICS_SHOWN = ["tokens", "voice", "audience"]
+TOPICS_SHOWN = ["tokens", "voice", "audience", "promise", "action", "time"]
+TOP_TOPICS = ["tokens", "voice", "audience"]   # トップの小さな枠は3つまで
+# 統計「何を約束するか」「どう関わるか」「時間の向き」（2026-11-08）。数え方は VOICE・AUDIENCE と同じ
+PROMISE = [("豊かさ", ["豊か"]),
+           ("幸せ", ["幸せ", "幸福", "しあわせ"]),
+           ("喜び・笑顔", ["喜び", "よろこ", "笑顔"]),
+           ("安心・安全", ["安心", "安全"]),
+           ("健康", ["健康"]),
+           ("感動・楽しさ", ["感動", "楽し"]),
+           ("夢", ["夢"]),
+           ("持続可能", ["持続可能", "サステナ"])]
+ACTION = [("貢献する", ["貢献"]),
+          ("創る", ["創造", "創る", "創り", "つくる", "つくり"]),
+          ("届ける", ["提供", "届け"]),
+          ("実現する", ["実現"]),
+          ("目指す", ["目指", "めざ"]),
+          ("挑む", ["挑戦", "チャレンジ", "挑む"]),
+          ("変える", ["変え", "変革", "改革"]),
+          ("発展させる", ["発展"])]
+TIME = [("未来を向く", ["未来", "将来", "次世代", "次の時代", "明日", "これから", "100年", "百年"]),
+        ("受け継ぐ", ["伝統", "創業", "受け継", "継承", "歴史", "原点"])]
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
@@ -474,7 +494,7 @@ def build_top(C, W, stats):
         "voice": f'<a class="topic" href="topics/#voice"><h2>誰が語っているか</h2><div class="bars">{share_bars(stats, "voice", None, 4)}</div></a>',
         "audience": f'<a class="topic" href="topics/#audience"><h2>誰に向けた言葉か</h2><div class="bars">{share_bars(stats, "audience", None, 4)}</div></a>',
     }
-    top_cards = "\n  ".join(cards[k] for k in TOPICS_SHOWN if cards.get(k))
+    top_cards = "\n  ".join(cards[k] for k in TOP_TOPICS if cards.get(k))
     notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
     body = f"""
@@ -696,6 +716,9 @@ def build_topics(C, W, stats, token_pages):
 </section>"""
     voice_bars = share_bars(stats, "voice", "../")
     aud_bars = share_bars(stats, "audience", "../")
+    promise_bars = share_bars(stats, "promise", "../")
+    action_bars = share_bars(stats, "action", "../")
+    time_bars = share_bars(stats, "time", "../")
     kind_rows = ""
     for l, ks in stats["name_kinds"].items():
         total = sum(len(v) for v in ks.values())
@@ -716,6 +739,12 @@ def build_topics(C, W, stats, token_pages):
   <div class="bars">{voice_bars}</div></section>""",
         "audience": f"""<section id="audience"><h2>誰に向けた言葉か</h2>
   <div class="bars">{aud_bars}</div></section>""",
+        "promise": f"""<section id="promise"><h2>何を約束するか</h2>
+  <div class="bars">{promise_bars}</div></section>""",
+        "action": f"""<section id="action"><h2>どう関わるか</h2>
+  <div class="bars">{action_bars}</div></section>""",
+        "time": f"""<section id="time"><h2>時間の向き</h2>
+  <div class="bars">{time_bars}</div></section>""",
         "name-kinds": f"""<section id="name-kinds"><h2>呼び名の漢字とカタカナ</h2>
   {kind_rows}</section>""",
     }
@@ -723,20 +752,23 @@ def build_topics(C, W, stats, token_pages):
 <div class="study">
 {chr(10).join(secs[k] for k in TOPICS_SHOWN if secs.get(k))}
 </div>"""
-    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語っているか、誰に向けた言葉か。"))
+    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語り誰に向けた言葉か、何を約束しどう関わるか、時間の向き。"))
 
 
 def share_bars(stats, key, rel, limit=None):
     """会社の数の棒。長さは公開中の会社全体に対する割合。押すと、その語で「ことばを探す」を開く"""
     n_cos = stats["n_cos"] or 1
-    rows = sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
+    if key == "time":   # 2つを比べるので、0社でも出し、どちらもない会社も数える
+        rows = list(stats["time"]) + [("どちらもない", [], stats["no_time"])]
+    else:
+        rows = sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
     if key == "voice":
         rows.append(("主語なし", [], stats["no_voice"]))
         rows.sort(key=lambda r: -r[2])
     out = ""
     for name, terms, n in rows[:limit]:
         inner = f'<span>{esc(name)}</span><i style="width:{round(n / n_cos * 100)}%"></i><b>{n}</b>'
-        out += f'<a class="bar" href="{rel}words/?q={q(terms[0])}">{inner}</a>' if terms and rel is not None else f'<div class="bar">{inner}</div>'
+        out += f'<a class="bar" href="{rel}words/?q={q(terms[0])}">{inner}</a>' if terms and n and rel is not None else f'<div class="bar">{inner}</div>'
     return out
 
 
@@ -951,7 +983,9 @@ def compute_stats(C, W):
                 k = "英字" if re.search(r"[A-Za-zＡ-Ｚａ-ｚ]", n) else "カタカナ" if re.search(r"[ァ-ヺ]", n) else "漢字"
                 kinds[l][k].append(n)
     return {"tops": tops, "names": names, "tokens": ranked, "n_cos": len(cos),
-            "voice": voice, "no_voice": no_voice, "audience": hits(AUDIENCE), "name_kinds": kinds, "token_map": token_map, "token_df": token_df,
+            "voice": voice, "no_voice": no_voice, "audience": hits(AUDIENCE),
+            "promise": hits(PROMISE), "action": hits(ACTION), "time": hits(TIME),
+            "no_time": sum(1 for t in text_of.values() if not any(x in t for _, terms in TIME for x in terms)), "name_kinds": kinds, "token_map": token_map, "token_df": token_df,
             "length_words": length_words, "latin_tops": latin_tops,
             "changes": sum(1 for w in W if w["前の言葉のID"])}
 
