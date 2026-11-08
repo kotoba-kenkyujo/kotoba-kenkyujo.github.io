@@ -577,7 +577,7 @@ def build_company(c, C, ids, token_df, og_jobs):
                 items.append(f'<li class="{"old" if w["old"] else "now"}"{wid}><div class="when">{esc(when)}　{esc(w["会社での呼び名"])}<sup>{fn_link(fn[w["出典URL"]])}</sup></div><div class="w">{esc(w["言葉"])}</div></li>')
         for w in ended:
             items.append(f'<li class="old" id="{w["ID"]}"><div class="when">〜{esc(ym(w["使い終わり"]))}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
-        parts.append(f'<section class="sec"><p class="label">言語史</p><ol class="timeline">{"".join(items)}</ol></section>')
+        parts.append(f'<section class="sec" id="history"><p class="label">言語史</p><ol class="timeline">{"".join(items)}</ol></section>')
     # 出典と訂正
     srcs = []
     for u, n in fn.items():
@@ -624,13 +624,21 @@ def fn_link(n):
 
 # ---------- ことばを探す ----------
 def build_words(C, W, stats, token_pages):
+    """ことばを探す（2026-11-09 見直し）：検索窓と検索の例 → 層の札と並べ替え → 件数と選んだ層の説明 → 一覧。
+    並べ替えは新しい順（最初）・会社順・短い順。改定された言葉には朱の「改定」札を付け、会社のページの言語史へ"""
     cur = [w for w in W if not w["old"]]
     layer_n = Counter(w["層"] for w in cur)
+    co_order = {cid: i for i, cid in enumerate(C)}
     items = []
-    for w in sorted(cur, key=lambda w: (LAYERS.index(w["層"]) if w["層"] in LAYERS else 9, w["co"]["ID"], w["order"])):
+    for w in sorted(cur, key=lambda w: -w["no"]):
         hay = unicodedata.normalize("NFKC", f"{w['言葉']} {w['会社での呼び名']} {yomi(w['言葉'])}").lower() + " " + w["co"]["search"]
-        items.append(f'<li data-layer="{esc(w["層"])}" data-s="{esc(hay)}"><a href="../{w["co"]["url"]}#{w["ID"]}"><span class="w">{esc(w["言葉"])}</span><span class="chip">{esc(w["会社での呼び名"])}</span><span class="who">{esc(w["co"]["会社名"])}</span></a></li>')
-    btns = "".join(f'<button type="button" data-layer="{esc(l)}" aria-pressed="false">{esc(label(l))}<small>{layer_n[l]}</small></button>' for l in LAYERS if layer_n[l])
+        kai = bool(w["前の言葉のID"])
+        href = f'../{w["co"]["url"]}#history' if kai else f'../{w["co"]["url"]}#{w["ID"]}'
+        chip = '<span class="chip kai">改定</span>' if kai else f'<span class="chip">{esc(w["会社での呼び名"])}</span>'
+        co_key = co_order.get(w["co"]["ID"], 0) * 1000 + LAYERS.index(w["層"]) * 100 + (w["order"] if isinstance(w["order"], int) else 0)
+        items.append(f'<li data-layer="{esc(w["層"])}" data-s="{esc(hay)}" data-no="{w["no"]}" data-co="{co_key}" data-len="{w["len"]}">'
+                     f'<a href="{href}"><span class="w">{esc(w["言葉"])}</span>{chip}<span class="who">{esc(w["co"]["会社名"])}</span></a></li>')
+    btns = "".join(f'<button type="button" data-layer="{esc(l)}" data-desc="{esc(LAYER_DESC[l])}" aria-pressed="false">{esc(label(l))}<small>{layer_n[l]}</small></button>' for l in LAYERS if layer_n[l])
     examples = [t for t, n in stats["tokens"] if t in token_pages][:12]
     searched = [s for s in CFG.get("searched_words", []) if s]
     ex_json = esc(json.dumps({"tokens": examples, "searched": searched}, ensure_ascii=False))
@@ -638,11 +646,17 @@ def build_words(C, W, stats, token_pages):
 <div class="finder">
   <form class="searchbox" role="search" onsubmit="return false"><input id="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉の中の語や社名で探す" autocomplete="off"></form>
   <p class="examples-row" id="ex" data-ex="{ex_json}" hidden></p>
-  <div class="filters" id="layers">{btns}</div>
-  <dl class="layers" aria-label="ことばの層">{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
-  <p class="hits" aria-live="polite"><b id="n">{len(cur)}</b>語</p>
+  <div class="finder-bar">
+    <div class="filters" id="layers" role="group" aria-label="ことばの層">{btns}</div>
+    <div class="sorter" id="sort" role="group" aria-label="並べ替え"><button type="button" data-sort="new" aria-pressed="true">新しい順</button><button type="button" data-sort="co" aria-pressed="false">会社順</button><button type="button" data-sort="len" aria-pressed="false">短い順</button></div>
+  </div>
+  <p class="hits" aria-live="polite"><span><b id="n">{len(cur)}</b>語</span><span class="layer-desc" id="layer-desc" hidden></span></p>
   <ul class="wordlist" id="list">{''.join(items)}</ul>
-  <p class="empty" id="empty" hidden>見つかりません</p>
+  <div class="empty" id="empty" hidden>
+    <p>見つかりません</p>
+    <p class="empty-ex" id="empty-ex"></p>
+    <p>{ext(contact_url(), 'この言葉を研究所に知らせる', 'contact/words-empty')}</p>
+  </div>
 </div>
 <script>window.KOTOBA_SYN = {json.dumps(SYN, ensure_ascii=False)};</script>
 <script src="../assets/find.js?v={VER}" defer></script>"""
