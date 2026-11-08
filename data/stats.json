@@ -1,44 +1,202 @@
 {
- "updated": "2026-11-08T23:12:14+09:00",
+ "updated": "2026-11-09T08:41:11+09:00",
  "note": "GoatCounter の訪問数（同じ人の同じページは1日1回）。期間は日本時間の日付で、両端を含む。visits はページの訪問数（クリックの記録を除く）。key_numbers は会社のページの訪問数・検索の数・ことばくじの数。GoatCounter の画面の Totals はクリックの記録も含む数で、visits_including_events と同じ。",
  "this_week": {
-  "start": "2026-11-01",
-  "end": "2026-11-07",
-  "visits": 0,
-  "visits_including_events": 0,
+  "start": "2026-11-02",
+  "end": "2026-11-08",
+  "visits": 22,
+  "visits_including_events": 45,
   "key_numbers": {
-   "company_page_visits": 0,
-   "searches": 0,
+   "company_page_visits": 9,
+   "searches": 5,
    "picks": 0
   },
   "section_visits": {
    "ことばを探す": 0,
-   "語のページ": 0,
+   "語のページ": 2,
    "統計": 0,
    "言語史": 0,
-   "研究ノート": 0,
+   "研究ノート": 1,
    "この研究所について": 0
   },
-  "top_pages": [],
-  "top_companies": [],
-  "notes_visits": [],
-  "search_words": [],
+  "top_pages": [
+   {
+    "path": "/",
+    "title": "会社のことば研究所｜会社が掲げる言葉と、その移り変わりの記録",
+    "count": 5
+   },
+   {
+    "path": "/topics",
+    "title": "統計｜会社のことば研究所",
+    "count": 2
+   },
+   {
+    "path": "/c/C0016",
+    "title": "株式会社広済堂ホールディングス｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0001",
+    "title": "株式会社横田製作所｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0006",
+    "title": "ゼット株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/w/%E7%99%BA%E5%B1%95",
+    "title": "「発展」を含む言葉｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/w/%E7%A4%BE%E4%BC%9A",
+    "title": "「社会」を含む言葉｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/notes/what-companies-call-their-words",
+    "title": "会社は自分の言葉を何と呼ぶか。経営理念・企業理念・経営信条・パーパス｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/notes",
+    "title": "研究ノート｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0018",
+    "title": "大栄環境株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0015",
+    "title": "アツギ株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0005",
+    "title": "中日本鋳工株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/about",
+    "title": "この研究所について｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/words",
+    "title": "ことばを探す｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0017",
+    "title": "株式会社アカツキ｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0009",
+    "title": "ＮＳＷ株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "path": "/c/C0010",
+    "title": "児玉化学工業株式会社｜会社のことば研究所",
+    "count": 1
+   }
+  ],
+  "top_companies": [
+   {
+    "id": "C0016",
+    "title": "株式会社広済堂ホールディングス｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0001",
+    "title": "株式会社横田製作所｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0006",
+    "title": "ゼット株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0018",
+    "title": "大栄環境株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0015",
+    "title": "アツギ株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0005",
+    "title": "中日本鋳工株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0017",
+    "title": "株式会社アカツキ｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0009",
+    "title": "ＮＳＷ株式会社｜会社のことば研究所",
+    "count": 1
+   },
+   {
+    "id": "C0010",
+    "title": "児玉化学工業株式会社｜会社のことば研究所",
+    "count": 1
+   }
+  ],
+  "notes_visits": [
+   {
+    "path": "/notes/what-companies-call-their-words",
+    "count": 1
+   }
+  ],
+  "search_words": [
+   {
+    "word": "可能性",
+    "count": 1
+   },
+   {
+    "word": "社会",
+    "count": 1
+   },
+   {
+    "word": "われわれ",
+    "count": 1
+   },
+   {
+    "word": "NSW",
+    "count": 1
+   },
+   {
+    "word": "発展",
+    "count": 1
+   }
+  ],
   "search_zero_words": [],
   "clicks": {
    "共有": 0,
    "ことばくじ": 0,
    "訂正・ご意見のフォーム": 0,
    "出典を開く": 0,
-   "長さの図の点": 0,
-   "長さの幅": 0,
-   "表示の切り替え": 0,
+   "長さの図の点": 13,
+   "長さの幅": 2,
+   "表示の切り替え": 3,
    "姉妹サイト": 0,
    "運営者": 0
   }
  },
  "previous_week": {
-  "start": "2026-10-25",
-  "end": "2026-10-31",
+  "start": "2026-10-26",
+  "end": "2026-11-01",
   "visits": 0,
   "visits_including_events": 0,
   "key_numbers": {
