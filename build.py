@@ -26,6 +26,9 @@ COMPANY_COLS = ["ID", "会社名", "読み", "証券コード", "EDINETコード
 LAYERS = ["いちばん上", "目指す姿", "価値観"]
 # シートの「層」の値はそのまま、サイトでは次の名前で見せる（2026-11-08 黒田さんの決定）
 LAYER_LABEL = {"いちばん上": "北極星", "目指す姿": "理想像", "価値観": "価値観"}
+LAYER_DESC = {"いちばん上": "ミッション、パーパス、経営理念、綱領など、会社の言葉の頂点にあるもの",
+              "目指す姿": "ビジョン",
+              "価値観": "バリュー、行動指針、社是・社訓など、短い項目が並ぶもの"}
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
@@ -450,6 +453,10 @@ def build_top(C, W, stats):
   <li><a href="words/"><b>{len(C)}</b><small>社</small></a></li>
   <li><a href="words/"><b>{sum(1 for w in W if not w['old'])}</b><small>語</small></a></li>
 </ul>
+<section class="layers" aria-labelledby="layers-h">
+  <h2 id="layers-h">ことばの層</h2>
+  <dl>{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
+</section>
 <div class="cols">
   <a class="today{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
@@ -463,7 +470,7 @@ def build_top(C, W, stats):
 </div>
 <div class="topics">
   <a class="topic" href="topics/#names"><h2>{label('いちばん上')}の呼び名</h2><div class="bars">{name_bars}</div></a>
-  <a class="topic" href="topics/#tokens"><h2>よく使われる語</h2><div class="bars">{tok_bars}</div></a>
+  <a class="topic" href="topics/#tokens"><h2>よく使われることば</h2><div class="bars">{tok_bars}</div></a>
   {length_html}
 </div>
 <div class="notes-fn"><ol>{notes}</ol></div>
@@ -663,12 +670,12 @@ def build_topics(C, W, stats, token_pages):
 <div class="study">
 <section id="names"><h2>{label('いちばん上')}の呼び名</h2>
   <div class="bars">{name_bars}</div></section>
-<section id="tokens"><h2>よく使われる語<small>使っている会社の数</small></h2>
+<section id="tokens"><h2>よく使われることば</h2>
   <div class="bars">{tok_bars}</div>
   <div class="cloud">{cloud}</div></section>
 {length_sec}
 </div>"""
-    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。呼び名、よく使われる語、言葉の長さ。"))
+    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。呼び名、よく使われることば、言葉の長さ。"))
 
 
 # ---------- 言語史 ----------
@@ -834,9 +841,7 @@ def build_about():
 </ol>
 <p>集めて照らす作業は AI（Claude）が行い、方針を決めて見直すのは運営者です。</p>
 <h2>ことばの層</h2>
-<p><strong>{label('いちばん上')}</strong>　ミッション、パーパス、経営理念、綱領など、会社の言葉の頂点にあるもの<br>
-<strong>{label('目指す姿')}</strong>　ビジョン<br>
-<strong>{label('価値観')}</strong>　バリュー、行動指針、社是・社訓など、短い項目が並ぶもの</p>
+<p>{'<br>'.join(f'<strong>{label(l)}</strong>　{LAYER_DESC[l]}' for l in LAYERS)}</p>
 <h2>訂正・取り下げ</h2>
 <p>誤りや新しい言葉に気づいたら、{ext(contact_url(), '訂正・ご意見のフォーム', 'contact/about')}からお知らせください。出典で確かめたうえで直します。</p>
 <h2>運営</h2>
