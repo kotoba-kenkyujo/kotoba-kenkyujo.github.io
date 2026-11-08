@@ -113,6 +113,8 @@ sup .fn { font-size: 12px; margin-left: 2px; }
 .today.scroll:hover { box-shadow: var(--shadow-lift), 0 0 0 1px var(--paper-line); transform: translateY(-2px); }
 .today .day { position: absolute; top: var(--space-6); right: var(--space-6); writing-mode: vertical-rl; font-family: var(--font-mincho); font-size: 13px; letter-spacing: .3em; color: var(--text-sub); line-height: 1; }
 .today.latin .day { writing-mode: horizontal-tb; }
+.today.scroll .tate { font-size: clamp(28px, 3.6vw, 40px); max-height: 15em; }
+.today.scroll .tate.long { font-size: clamp(20px, 2.6vw, 30px); max-height: 17em; }
 .today .who { font-family: var(--font-mincho); font-weight: 800; font-size: 15px; letter-spacing: .1em; }
 .sec-h { font-size: 20px; letter-spacing: .12em; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0; display: flex; justify-content: space-between; align-items: baseline; }
 .sec-h a { font-size: 22px; text-decoration: none; line-height: 1; }
