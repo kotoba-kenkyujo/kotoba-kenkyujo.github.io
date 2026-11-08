@@ -507,6 +507,7 @@ def build_top(C, W, stats):
   <li><a href="words/"><b data-count="{len(C)}">{len(C)}</b><small>社</small></a></li>
   <li><a href="words/"><b data-count="{n_cur}">{n_cur}</b><small>語</small></a></li>
 </ul>
+<form class="searchbox top-search" role="search" action="words/" method="get"><input name="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉や会社名で探す" autocomplete="off"><button type="submit">探す</button></form>
 <div class="cols">
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
@@ -530,7 +531,8 @@ def build_top(C, W, stats):
 
 
 # ---------- 会社のページ ----------
-def build_company(c, C, ids, token_df, og_jobs):
+def build_company(c, C, ids, stats, og_jobs):
+    token_df = stats["token_df"]
     ws = c["words"]
     fn = {u: i + 1 for i, u in enumerate(c["srcs"])}
     cur = [w for w in ws if not w["old"]]
@@ -557,6 +559,37 @@ def build_company(c, C, ids, token_df, og_jobs):
             lis = "".join('<li id="%s">%s</li>' % (w["ID"], esc(w["言葉"])) for w in g)
             gl.append(f'<div class="valgroup"><h2>{esc(name)}<sup>{fn_link(n)}</sup></h2><ol>{lis}</ol></div>')
         parts.append(f'<section class="sec"><div class="vals{" two" if len(vals) == 2 else ""}">{"".join(gl)}</div></section>')
+    # 数えると：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
+    text = " ".join(w["言葉"] for w in cur)
+    lw = next((w for w in stats["length_words"] if w["co"]["ID"] == c["ID"]), None)
+    facts = []
+    if lw:
+        lens = sorted(x["len"] for x in stats["length_words"])
+        rank = 1 + sum(1 for x in lens if x < lw["len"])
+        facts.append(("長さ", f'<span class="fact">{label("いちばん上")} <b>{lw["len"]}</b>字<small>{len(lens)}社中 短いほうから{rank}番目</small></span>'))
+
+    def fact_links(groups, none_label=None, none_href=None):
+        hit = [(name, terms) for name, terms in groups if any(x in text for x in terms)]
+        if not hit:
+            return f'<a class="fact" href="{none_href}">{none_label}</a>' if none_label else ""
+        return "".join(f'<a class="fact" href="../../words/?q={q(terms[0])}">{esc(name)}</a>' for name, terms in hit)
+    for lab, groups, extra in (("主語", VOICE, ("主語なし", "../../topics/#voice")), ("向けた相手", AUDIENCE, None),
+                               ("約束", PROMISE, None), ("関わり方", ACTION, None)):
+        h = fact_links(groups, *(extra or ()))
+        if h:
+            facts.append((lab, h))
+    if facts:
+        rows = "".join(f'<div><dt>{lab}</dt><dd>{h}</dd></div>' for lab, h in facts)
+        parts.append(f'<section class="sec"><p class="label">数えると</p><dl class="facts">{rows}</dl></section>')
+    # 語：ほかの会社も使う語（語のページへ）と、この会社だけの語
+    toks = sorted(c["tokens"], key=lambda t: (-token_df.get(t, 1), t))
+    shared = [t for t in toks if token_df.get(t, 1) >= 2][:10]
+    only = [t for t in toks if token_df.get(t, 1) == 1][:8]
+    if shared or only:
+        sh = "".join(f'<a class="tok" href="../../w/{q(t, safe="")}/">{esc(t)}<small>ほか{token_df[t] - 1}社</small></a>' for t in shared)
+        on = "".join(f'<span class="tok only">{esc(t)}</span>' for t in only)
+        rows = (f'<div><dt>ほかの会社も</dt><dd>{sh}</dd></div>' if sh else "") + (f'<div><dt>この会社だけ</dt><dd>{on}</dd></div>' if on else "")
+        parts.append(f'<section class="sec"><p class="label">語</p><dl class="facts toks">{rows}</dl></section>')
     # 言語史
     byid = {w["ID"]: w for w in ws}
     chains = []
@@ -579,14 +612,6 @@ def build_company(c, C, ids, token_df, og_jobs):
         for w in ended:
             items.append(f'<li class="old" id="{w["ID"]}"><div class="when">〜{esc(ym(w["使い終わり"]))}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
         parts.append(f'<section class="sec" id="history"><p class="label">言語史</p><ol class="timeline">{"".join(items)}</ol></section>')
-    # 出典と訂正
-    srcs = []
-    for u, n in fn.items():
-        w = next(x for x in ws if x["出典URL"] == u)
-        d = max((x["checked"] for x in ws if x["出典URL"] == u and x["checked"]), default=None)
-        srcs.append(f'<li id="src{n}"><span class="n">{n}</span>{ext(u, esc(src_label(w)), "source/" + c["ID"])}<span class="d">{"✓ " + dot(d) if d else ""}</span></li>')
-    fix = ext(contact_url(f"{c['会社名']} {BASE}{c['url']}"), "この会社の言葉の訂正を送る", "contact/" + c["ID"])
-    parts.append(f'<section class="sec"><p class="label">出典</p><ol class="srcs">{"".join(srcs)}</ol><p class="fix">{fix}</p></section>')
     # 近い言葉：共通する語のうち、使っている会社が少ない（＝特徴的な）語で結ぶ
     near = []
     for o in C.values():
@@ -598,14 +623,35 @@ def build_company(c, C, ids, token_df, og_jobs):
             near.append((len(shared), -token_df[best], o, best))
     near.sort(key=lambda x: (-x[0], x[1], x[2]["ID"]))
     if near:
-        cards = "".join(f'<a href="../../{o["url"]}"><mark>{esc(t)}</mark>{esc(o["short"])}</a>' for _, _, o, t in near[:4])
+        def quote(o, t):
+            ows = [w for w in o["words"] if not w["old"] and t in w["tokens"]]
+            w = sorted(ows, key=lambda w: (LAYERS.index(w["層"]) if w["層"] in LAYERS else 9, w["order"]))[0] if ows else None
+            if not w:
+                return ""
+            txt = w["言葉"]
+            i = txt.find(t)
+            a = max(0, i - 12)
+            snip = ("…" if a else "") + txt[a:a + 30] + ("…" if len(txt) > a + 30 else "")
+            return '<span class="q">' + esc(snip).replace(esc(t), f"<mark>{esc(t)}</mark>") + '</span>'
+        cards = "".join(f'<a href="../../{o["url"]}">{quote(o, t)}<span class="who">{esc(o["short"])}</span></a>' for _, _, o, t in near[:4])
         parts.append(f'<section class="sec"><p class="label">近い言葉</p><div class="related">{cards}</div></section>')
+    # 出典と訂正
+    srcs = []
+    for u, n in fn.items():
+        w = next(x for x in ws if x["出典URL"] == u)
+        d = max((x["checked"] for x in ws if x["出典URL"] == u and x["checked"]), default=None)
+        srcs.append(f'<li id="src{n}"><span class="n">{n}</span>{ext(u, esc(src_label(w)), "source/" + c["ID"])}<span class="d">{"✓ " + dot(d) if d else ""}</span></li>')
+    fix = ext(contact_url(f"{c['会社名']} {BASE}{c['url']}"), "この会社の言葉の訂正を送る", "contact/" + c["ID"])
+    parts.append(f'<section class="sec"><p class="label">出典</p><ol class="srcs">{"".join(srcs)}</ol><p class="fix">{fix}</p></section>')
     lead_w = tops[0] if tops else (cur[0] if cur else ws[0])
     share_text = f"{c['会社名']}の{lead_w['会社での呼び名']}「{lead_w['言葉'][:60]}{'…' if len(lead_w['言葉']) > 60 else ''}」"
     parts.append(f'<section class="sec">{share_row(c["url"], share_text, c["ID"])}</section>')
     i = ids.index(c["ID"])
     prev_c, next_c = C[ids[i - 1]], C[ids[(i + 1) % len(ids)]]
-    parts.append(f"""<nav class="pager" aria-label="前後の会社"><a href="../../{prev_c['url']}">← {esc(prev_c['short'])}</a><button class="dice" type="button" data-goatcounter-click="pick/{c['ID']}">🎲 ほかの会社</button><a href="../../{next_c['url']}">{esc(next_c['short'])} →</a></nav>""")
+    parts.append(f"""<nav class="pager" aria-label="前後の会社"><a href="../../{prev_c['url']}" data-goatcounter-click="pager/prev">← {esc(prev_c['short'])}</a><button class="dice" type="button" data-goatcounter-click="pick/{c['ID']}">🎲 ほかの会社</button><a href="../../{next_c['url']}" data-goatcounter-click="pager/next">{esc(next_c['short'])} →</a></nav>""")
+    # 回遊（2026-11-09）：PCは画面の両端に縦書きの社名つきの矢印、スマホは読み進めると下に小さな帯が出る（ページ下の前後の帯が見えたら隠す）
+    parts.append(f"""<nav class="side-nav" aria-label="前後の会社（画面の両端）"><a class="side prev" href="../../{prev_c['url']}" data-goatcounter-click="side/prev"><span class="arr">←</span><span class="nm">{esc(prev_c['short'])}</span></a><a class="side next" href="../../{next_c['url']}" data-goatcounter-click="side/next"><span class="arr">→</span><span class="nm">{esc(next_c['short'])}</span></a></nav>
+<nav class="mini-nav" aria-label="前後の会社（下の帯）" hidden><a href="../../{prev_c['url']}" data-goatcounter-click="mini/prev">← <span>{esc(prev_c['short'])}</span></a><button class="dice" type="button" data-goatcounter-click="mini/pick">🎲</button><a href="../../{next_c['url']}" data-goatcounter-click="mini/next"><span>{esc(next_c['short'])}</span> →</a></nav>""")
     head = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../words/">ことば</a> › {esc(c['会社名'])}</nav>
 <div class="co-head"><h1>{esc(c['会社名'])}</h1></div>"""
     desc = f"{c['会社名']}が掲げる言葉。{lead_w['言葉'][:80]}"
@@ -1086,7 +1132,7 @@ def main():
     build_top(C, W, stats)
     ids = list(C.keys())
     for c in C.values():
-        build_company(c, C, ids, stats["token_df"], og_jobs)
+        build_company(c, C, ids, stats, og_jobs)
     token_pages = build_token_pages(C, W, stats["token_map"])
     build_words(C, W, stats, token_pages)
     build_topics(C, W, stats, token_pages)

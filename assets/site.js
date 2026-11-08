@@ -123,4 +123,14 @@
     Promise.all([whenLoaded, whenFonts]).then(() => requestAnimationFrame(() => requestAnimationFrame(startCount)));
     setTimeout(startCount, 2500);  // 読み込みに時間がかかっても、2.5秒たったら始める
   }
+  // 会社のページ：読み進めたら下に前後の会社の帯を出し、ページ下の前後の帯が見えたら隠す（2026-11-09）
+  const mini = document.querySelector('.mini-nav');
+  const pagerEnd = document.querySelector('.pager');
+  const firstScroll = document.querySelector('.scroll');
+  if (mini && pagerEnd && firstScroll && 'IntersectionObserver' in window) {
+    let pastTop = false, endSeen = false;
+    const sync = () => { mini.hidden = !(pastTop && !endSeen); };
+    new IntersectionObserver(es => { es.forEach(e => { pastTop = !e.isIntersecting && e.boundingClientRect.top < 0; }); sync(); }).observe(firstScroll);
+    new IntersectionObserver(es => { es.forEach(e => { endSeen = e.isIntersecting; }); sync(); }).observe(pagerEnd);
+  }
 })();
