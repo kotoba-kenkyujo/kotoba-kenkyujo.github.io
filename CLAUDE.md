@@ -38,7 +38,7 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 | config/synonyms.json | 検索の言い換え表（同じ仲間の語を1行に） |
 | tools/make_og.py | 共有画像（1200×630）。build.py が書く _site/og/jobs.json を読む。Pillow と明朝体（tools/fonts/ に取ってくる）。手元では `.venv/bin/python tools/make_og.py`（.venv に pillow・pykakasi・budoux を入れてある。gitignore 済み） |
 | tools/check_site.py・check_links.py・fetch_stats.py | 公開前の点検・出典URLの点検・GoatCounter の数字 |
-| notes/ | 研究ノートの原稿（<スラッグ>.md。先頭に `---` で 題・日付・説明・公開。本文に `:::word ID` で言葉の札）。書き方は notes/_guide.md、テーマは notes/_themes.md。毎日 10:30 ごろ、このMacの scheduled task `kotoba-kenkyujo-notes` が1本書いて公開する |
+| notes/ | 研究ノートの原稿（<スラッグ>.md。先頭に `---` で 題・日付・説明・公開。本文に `:::word ID` で言葉の札）。書き方は notes/_guide.md、テーマは notes/_themes.md。2026/11/08 に停止（scheduled task `kotoba-kenkyujo-notes` は無効、build.py の NOTES_SHOWN=False でメニュー・サイトマップから外した。書いたページは残っている） |
 | data/ | 最後に読んだ公開データの写し（Actions が更新する） |
 | testdata/ | 手元で試すデータ（未確認の言葉も入っている。公開しない） |
 | _design/ | 見本（2026/11/08。トップは案B「所報」、会社のページは案A「掛け軸と年表」を、補足の文を削った版 top-b2・company-a2 で採用） |
@@ -56,5 +56,5 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 | /w/{語}/ | その語を含む言葉（2社以上が使う語だけ）。フォルダ名は日本語のまま |
 | /topics/ | 統計：よく使われることば、誰が語っているか、誰に向けた言葉か、何を約束するか、どう関わるか（build.py の TOPICS_SHOWN と VOICE・AUDIENCE・PROMISE・ACTION・TIME。いま使っている言葉にその語がある会社を数える。北極星の呼び名・長さ・呼び名の漢字とカタカナ・時間の向きはコードに残して隠している。トップの枠は TOP_TOPICS の3つ） |
 | /history/ | 言語史（前の言葉のIDでつながった改定） |
-| /notes/ | 研究ノート |
+| /notes/ | 研究ノート（停止中。メニューに出さない） |
 | /about/ | 集め方（AIが集めて確かめ、運営が方針を決めて見直す）・ことばの層・訂正・取り下げ・運営（姉妹サイト3つ） |

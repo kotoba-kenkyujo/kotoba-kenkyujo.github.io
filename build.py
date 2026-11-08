@@ -66,6 +66,7 @@ ACTION = [("貢献する", ["貢献"]),
 TIME = [("未来を向く", ["未来", "将来", "次世代", "次の時代", "明日", "これから", "100年", "百年"]),
         ("受け継ぐ", ["伝統", "創業", "受け継", "継承", "歴史", "原点"])]
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
+NOTES_SHOWN = False   # 研究ノートは停止（2026-11-08 黒田さん）。メニュー・サイトマップに出さない。書いたページは残す
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
            ("あしたの転機観測所", "https://ashitano-tenki.github.io/", "kansoku"),
@@ -994,7 +995,7 @@ def build_misc(C, W, token_pages, notes, og_jobs):
     urls = ["", "words/", "topics/", "about/"] + [c["url"] for c in C.values()] + list(token_pages.values())
     if SITE["show_history"]:
         urls.append("history/")
-    if notes:
+    if SITE["notes_exist"]:
         urls += ["notes/"] + [f"notes/{n['slug']}/" for n in notes]
     sm = "".join(f"<url><loc>{esc(BASE + u)}</loc></url>" for u in urls)
     open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>')
@@ -1025,7 +1026,7 @@ def main():
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(OUT, "assets"))
     notes = load_notes()
     stats = compute_stats(C, W)
-    SITE["notes_exist"] = bool(notes)
+    SITE["notes_exist"] = NOTES_SHOWN and bool(notes)
     SITE["show_history"] = stats["changes"] >= HISTORY_MIN
     og_jobs = []
     build_top(C, W, stats)
