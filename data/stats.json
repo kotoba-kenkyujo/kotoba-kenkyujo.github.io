@@ -1,0 +1,74 @@
+{
+ "updated": "2026-11-08T23:12:14+09:00",
+ "note": "GoatCounter の訪問数（同じ人の同じページは1日1回）。期間は日本時間の日付で、両端を含む。visits はページの訪問数（クリックの記録を除く）。key_numbers は会社のページの訪問数・検索の数・ことばくじの数。GoatCounter の画面の Totals はクリックの記録も含む数で、visits_including_events と同じ。",
+ "this_week": {
+  "start": "2026-11-01",
+  "end": "2026-11-07",
+  "visits": 0,
+  "visits_including_events": 0,
+  "key_numbers": {
+   "company_page_visits": 0,
+   "searches": 0,
+   "picks": 0
+  },
+  "section_visits": {
+   "ことばを探す": 0,
+   "語のページ": 0,
+   "統計": 0,
+   "言語史": 0,
+   "研究ノート": 0,
+   "この研究所について": 0
+  },
+  "top_pages": [],
+  "top_companies": [],
+  "notes_visits": [],
+  "search_words": [],
+  "search_zero_words": [],
+  "clicks": {
+   "共有": 0,
+   "ことばくじ": 0,
+   "訂正・ご意見のフォーム": 0,
+   "出典を開く": 0,
+   "長さの図の点": 0,
+   "長さの幅": 0,
+   "表示の切り替え": 0,
+   "姉妹サイト": 0,
+   "運営者": 0
+  }
+ },
+ "previous_week": {
+  "start": "2026-10-25",
+  "end": "2026-10-31",
+  "visits": 0,
+  "visits_including_events": 0,
+  "key_numbers": {
+   "company_page_visits": 0,
+   "searches": 0,
+   "picks": 0
+  },
+  "section_visits": {
+   "ことばを探す": 0,
+   "語のページ": 0,
+   "統計": 0,
+   "言語史": 0,
+   "研究ノート": 0,
+   "この研究所について": 0
+  },
+  "top_pages": [],
+  "top_companies": [],
+  "notes_visits": [],
+  "search_words": [],
+  "search_zero_words": [],
+  "clicks": {
+   "共有": 0,
+   "ことばくじ": 0,
+   "訂正・ご意見のフォーム": 0,
+   "出典を開く": 0,
+   "長さの図の点": 0,
+   "長さの幅": 0,
+   "表示の切り替え": 0,
+   "姉妹サイト": 0,
+   "運営者": 0
+  }
+ }
+}
