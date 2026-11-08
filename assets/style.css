@@ -119,9 +119,8 @@ sup .fn { font-size: 12px; margin-left: 2px; }
 .sec-h { font-size: 20px; letter-spacing: .12em; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0; display: flex; justify-content: space-between; align-items: baseline; }
 .sec-h a { font-size: 22px; text-decoration: none; line-height: 1; }
 .index { list-style: none; margin: 0; padding: 0; }
-.index a { display: grid; grid-template-columns: 3em 1fr auto; gap: var(--space-3); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px dotted var(--line); text-decoration: none; color: var(--ink); }
+.index a { display: grid; grid-template-columns: 1fr auto; gap: var(--space-3); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px dotted var(--line); text-decoration: none; color: var(--ink); }
 .index a:hover .w { color: var(--sky); }
-.index .no { font-family: var(--font-mincho); color: var(--text-sub); font-variant-numeric: tabular-nums; }
 .index .w { font-family: var(--font-mincho); font-weight: 700; font-size: 17px; line-height: 1.6; }
 .index .who { display: block; font-size: 12px; color: var(--text-sub); }
 .layers { margin: var(--space-4) 0 0; }

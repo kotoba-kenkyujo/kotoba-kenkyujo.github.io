@@ -473,7 +473,7 @@ def build_top(C, W, stats):
     for w in recent:
         n = fn(w)
         chip = '<span class="chip kai">改定</span>' if w["前の言葉のID"] else f'<span class="chip">{esc(w["会社での呼び名"])}</span>'
-        rows.append(f'<li><a href="{w["co"]["url"]}#{w["ID"]}"><span class="no">{w["no"]:03d}</span><span><span class="w">{esc(w["言葉"])}<sup class="fn">{n}</sup></span><span class="who">{esc(w["co"]["short"])}</span></span>{chip}</a></li>')
+        rows.append(f'<li><a href="{w["co"]["url"]}#{w["ID"]}"><span><span class="w">{esc(w["言葉"])}<sup class="fn">{n}</sup></span><span class="who">{esc(w["co"]["short"])}</span></span>{chip}</a></li>')
     names = stats["names"].most_common(4)
     nmax = names[0][1] if names else 1
     toks = stats["tokens"][:4]
