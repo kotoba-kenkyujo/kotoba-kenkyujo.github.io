@@ -221,6 +221,7 @@ a.bar:hover span { color: var(--sky); }
 .share-btn { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 13px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 8px 16px; text-decoration: none; cursor: pointer; }
 .share-btn:hover { border-color: var(--sky); color: var(--sky); }
 .share-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.share-btn svg.fill { width: 14px; height: 14px; fill: currentColor; stroke: none; }
 .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-3); margin-top: var(--space-12); font-family: var(--font-mincho); font-size: 14px; }
 .pager a { text-decoration: none; }
 .pager a:last-child { text-align: right; }

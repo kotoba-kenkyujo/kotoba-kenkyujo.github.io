@@ -331,7 +331,8 @@ def word_block(w, fn_html):
 
 
 SHARE_ICONS = {
-    "x": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20" /></svg>',
+    # X のロゴ（塗りの形）
+    "x": '<svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>',
     "facebook": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg>',
     "threads": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 11.5c-.4-3-2.4-4.5-5-4.5-3 0-5 2.2-5 5.3 0 3.4 2.2 5.7 5.5 5.7 2.6 0 4.6-1.4 4.6-3.6 0-2-1.8-3.2-4.2-3.2-1.8 0-3 .9-3 2.1 0 1 .9 1.7 2.1 1.7 2 0 3-1.5 3-4.5"/></svg>',
     "copy": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
