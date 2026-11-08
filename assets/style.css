@@ -242,3 +242,13 @@ mark { background: linear-gradient(transparent 60%, var(--base-yellow) 60%); col
 .rise { animation: rise .6s ease-out; }  /* 止まっていても見えるように、始まりの状態を前に持ち越さない */
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
+
+/* 研究ノートの言葉の札（:::word） */
+.wordcard { margin: var(--space-8) 0; }
+.wc-body { display: grid; gap: var(--space-3); background: var(--paper); border: 1px solid var(--paper-line); border-left: 3px solid var(--ink); padding: var(--space-6); text-decoration: none; color: var(--ink); transition: box-shadow .2s; }
+.wc-body:hover { box-shadow: var(--shadow-lift); }
+.wc-w { font-family: var(--font-mincho); font-weight: 800; font-size: 21px; line-height: 1.6; letter-spacing: .04em; }
+.wc-who { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); font-size: 13px; color: var(--text-sub); }
+.wc-note { margin: var(--space-3) 0 0; font-size: 15px; color: var(--text-body); padding-left: var(--space-4); border-left: 2px solid var(--line); }
+.note-list .desc { display: block; font-size: 14px; color: var(--text-body); margin-top: 2px; }
+@supports (word-break: auto-phrase) { h1, h2, h3, .note-list .t, .wc-w { word-break: auto-phrase; text-wrap: balance; } }

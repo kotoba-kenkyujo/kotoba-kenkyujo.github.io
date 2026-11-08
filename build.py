@@ -527,8 +527,22 @@ def build_history(C, W, notes_exist):
 
 
 # ---------- 研究ノート ----------
-def md_to_html(md):
+def word_card(w, comment, rel):
+    """研究ノートの :::word ID の札。言葉を紙の地に明朝で掲げ、社名・呼び名・出典を添える"""
+    if not w:
+        return ""
+    c = w["co"]
+    note = f'<p class="wc-note">{esc(comment)}</p>' if comment else ""
+    return (f'<figure class="wordcard"><a class="wc-body" href="{rel}{c["url"]}#{w["ID"]}">'
+            f'<span class="wc-w">{esc(w["言葉"])}</span>'
+            f'<span class="wc-who">{esc(c["会社名"])}<span class="chip">{esc(w["会社での呼び名"])}</span></span></a>'
+            f'{note}</figure>')
+
+
+def md_to_html(md, byid=None, rel="../../"):
     out, para, lst = [], [], None
+    byid = byid or {}
+    block = None  # :::word の中
 
     def inline(s):
         s = esc(s)
@@ -547,6 +561,21 @@ def md_to_html(md):
 
     for line in md.splitlines():
         s = line.rstrip()
+        m = re.match(r"^:::word\s+(W\d+)\s*$", s)
+        if m:
+            flush()
+            block = [m.group(1), []]
+            continue
+        if block is not None:
+            if s == ":::":
+                w = byid.get(block[0])
+                if not w:
+                    print(f"注意: 研究ノートの :::word {block[0]} が公開データにない")
+                out.append(word_card(w, " ".join(block[1]).strip(), rel))
+                block = None
+            else:
+                block[1].append(s.strip())
+            continue
         if not s:
             flush()
         elif s.startswith("### "):
@@ -597,15 +626,20 @@ def load_notes():
     return notes
 
 
-def build_notes(notes):
+def build_notes(notes, W):
     if not notes:
         return
-    lis = "".join(f'<li><a href="{n["slug"]}/"><span class="t">{esc(n.get("題", n["slug"]))}</span><span class="d">{esc(n.get("日付", ""))}</span></a></li>' for n in notes)
-    write("notes/", page("notes/", "研究ノート", f'<div class="page-head"><h1>研究ノート</h1></div><ul class="note-list">{lis}</ul>', current="notes/"))
-    for n in notes:
+    byid = {w["ID"]: w for w in W}
+    lis = "".join(f'<li><a href="{n["slug"]}/"><span class="t">{esc(n.get("題", n["slug"]))}</span><span class="d">{esc(n.get("日付", ""))}</span><span class="desc">{esc(n.get("説明", ""))}</span></a></li>' for n in notes)
+    write("notes/", page("notes/", "研究ノート", f'<div class="page-head"><h1>研究ノート</h1><div class="count"><b>{len(notes)}</b>本</div></div><ul class="note-list">{lis}</ul>', current="notes/", desc="会社が掲げる言葉を読み比べる、会社のことば研究所の研究ノート。"))
+    for i, n in enumerate(notes):
+        others = [x for x in notes if x is not n][:3]
+        more = "".join(f'<li><a href="../{x["slug"]}/"><span class="t">{esc(x.get("題", ""))}</span><span class="d">{esc(x.get("日付", ""))}</span></a></li>' for x in others)
+        more_html = f'<section class="sec"><p class="label">ほかの研究ノート</p><ul class="note-list">{more}</ul></section>' if more else ""
         body = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../">研究ノート</a></nav>
 <div class="page-head"><h1>{esc(n.get('題', ''))}</h1><p class="byline">{esc(n.get('日付', ''))}　{esc(CFG['operator'])}</p></div>
-<article class="prose">{md_to_html(n['body'])}</article>"""
+<article class="prose">{md_to_html(n['body'], byid)}</article>
+{more_html}"""
         write(f"notes/{n['slug']}/", page(f"notes/{n['slug']}/", n.get("題", ""), body, current="notes/", desc=n.get("説明")))
 
 
@@ -702,7 +736,7 @@ def main():
     token_pages = build_token_pages(C, W, stats["token_map"], ne)
     build_topics(C, W, stats, token_pages, ne)
     build_history(C, W, ne)
-    build_notes(notes)
+    build_notes(notes, W)
     build_about(C, W, ne)
     build_misc(C, W, token_pages, notes)
     print(f"会社 {len(C)}　言葉 {len(W)}　改定 {stats['changes']}　語のページ {len(token_pages)}　研究ノート {len(notes)}")
