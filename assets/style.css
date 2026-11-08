@@ -320,3 +320,19 @@ mark { background: linear-gradient(transparent 60%, var(--base-yellow) 60%); col
 .rise { animation: rise .6s ease-out; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .rise, .bar i { animation: none; } }
+
+/* 統計：呼び名の字の種類（層ごとの割合） */
+.kind-row { margin-bottom: var(--space-6); }
+.kind-row h3 { font-size: 16px; margin: 0 0 var(--space-2); }
+.stack { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--line); }
+.stack i, .legend i { display: block; }
+.k0 { background: var(--sky); }
+.k1 { background: var(--dot); opacity: .55; }
+.k2 { background: var(--text-sub); opacity: .45; }
+.legend { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-2); font-size: 13px; color: var(--text-sub); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; }
+.legend b { font-weight: 400; color: var(--ink); font-variant-numeric: tabular-nums; }
+.kind-names { margin-top: var(--space-2); font-size: 13px; line-height: 1.7; }
+.kind-names p { margin: 0; }
+.kind-names b { font-weight: 400; color: var(--text-sub); margin-right: var(--space-2); }

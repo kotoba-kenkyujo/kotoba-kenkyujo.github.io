@@ -29,6 +29,19 @@ LAYER_LABEL = {"いちばん上": "北極星", "目指す姿": "理想像", "価
 LAYER_DESC = {"いちばん上": "ミッション、パーパス、経営理念、綱領など、会社の言葉の頂点にあるもの",
               "目指す姿": "ビジョン",
               "価値観": "バリュー、行動指針、社是・社訓など、短い項目が並ぶもの"}
+# 統計「誰が語っているか」「誰に向けた言葉か」：いま使っている言葉に、どれかの語がある会社を数える（2026-11-08）
+VOICE = [("私たち", ["私たち", "わたしたち", "私達", "わたくしたち", "私ども"]),
+         ("われわれ", ["われわれ", "我々", "我等", "われら", "我ら"]),
+         ("わが社", ["わが社", "我が社"]),
+         ("当社", ["当社", "弊社"])]
+AUDIENCE = [("お客様", ["お客様", "お客さま", "顧客", "ユーザー", "生活者", "消費者"]),
+            ("社会", ["社会"]),
+            ("社員", ["社員", "従業員", "仲間", "働く人"]),
+            ("株主", ["株主", "投資家"]),
+            ("取引先", ["取引先", "パートナー", "協力会社"]),
+            ("地域", ["地域"]),
+            ("世界", ["世界", "グローバル"]),
+            ("地球・環境", ["地球", "環境", "自然"])]
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
@@ -666,6 +679,25 @@ def build_topics(C, W, stats, token_pages):
   <div class="sorter" role="group" aria-label="並べ替え"><button type="button" data-sort="asc" aria-pressed="true">短い順</button><button type="button" data-sort="desc" aria-pressed="false">長い順</button></div>
   <ol class="len-list">{''.join(rows)}</ol>
 </section>"""
+    n_cos = stats["n_cos"] or 1
+
+    def share_bars(rows):
+        out = ""
+        for name, terms, n in sorted((r for r in rows if r[2]), key=lambda r: -r[2]):
+            inner = f'<span>{esc(name)}</span><i style="width:{round(n / n_cos * 100)}%"></i><b>{n}</b>'
+            out += f'<a class="bar" href="../words/?q={q(terms[0])}">{inner}</a>' if n else f'<div class="bar">{inner}</div>'
+        return out
+    voice_bars = share_bars(stats["voice"]) + f'<div class="bar"><span>主語なし</span><i style="width:{round(stats["no_voice"] / n_cos * 100)}%"></i><b>{stats["no_voice"]}</b></div>'
+    aud_bars = share_bars(stats["audience"])
+    kind_rows = ""
+    for l, ks in stats["name_kinds"].items():
+        total = sum(len(v) for v in ks.values())
+        if not total:
+            continue
+        segs = "".join(f'<i class="k{i}" style="flex:{len(v)}"></i>' for i, v in enumerate(ks.values()) if v)
+        legend = "".join(f'<span><i class="k{i}"></i>{k}<b>{len(v)}</b></span>' for i, (k, v) in enumerate(ks.items()))
+        names_html = "".join(f'<p><b>{k}</b>{"、".join(esc(n) for n in sorted(Counter(v), key=lambda n: (-Counter(v)[n], n)))}</p>' for k, v in ks.items() if v)
+        kind_rows += f'<div class="kind-row"><h3>{label(l)}</h3><div class="stack">{segs}</div><div class="legend">{legend}</div><div class="kind-names">{names_html}</div></div>'
     body = f"""<div class="page-head"><h1>統計</h1></div>
 <div class="study">
 <section id="names"><h2>{label('いちばん上')}の呼び名</h2>
@@ -674,8 +706,14 @@ def build_topics(C, W, stats, token_pages):
   <div class="bars">{tok_bars}</div>
   <div class="cloud">{cloud}</div></section>
 {length_sec}
+<section id="voice"><h2>誰が語っているか</h2>
+  <div class="bars">{voice_bars}</div></section>
+<section id="audience"><h2>誰に向けた言葉か</h2>
+  <div class="bars">{aud_bars}</div></section>
+<section id="name-kinds"><h2>呼び名の漢字とカタカナ</h2>
+  {kind_rows}</section>
 </div>"""
-    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。呼び名、よく使われることば、言葉の長さ。"))
+    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。呼び名、よく使われることば、言葉の長さ、誰が語り誰に向けた言葉か。"))
 
 
 # ---------- 言語史 ----------
@@ -870,7 +908,26 @@ def compute_stats(C, W):
         first_top.setdefault(w["co"]["ID"], w)
     length_words = [w for w in first_top.values() if not w["latin"]]
     latin_tops = [w for w in first_top.values() if w["latin"]]
-    return {"tops": tops, "names": names, "tokens": ranked, "token_map": token_map, "token_df": token_df,
+    cos = [c for c in C.values() if any(not w["old"] for w in c["words"])]
+    text_of = {c["ID"]: " ".join(w["言葉"] for w in c["words"] if not w["old"]) for c in cos}
+
+    def hits(groups):
+        out = []
+        for name, terms in groups:
+            ids = [cid for cid, t in text_of.items() if any(x in t for x in terms)]
+            out.append((name, terms, len(ids)))
+        return out
+    voice = hits(VOICE)
+    no_voice = sum(1 for t in text_of.values() if not any(x in t for _, terms in VOICE for x in terms))
+    # 呼び名の字の種類：層ごとに、会社と呼び名の組を1つと数える
+    kinds = OrderedDict((l, OrderedDict((k, []) for k in ("漢字", "カタカナ", "英字"))) for l in LAYERS)
+    for c in cos:
+        for l in LAYERS:
+            for n in sorted({w["会社での呼び名"] for w in c["words"] if w["層"] == l and not w["old"] and w["会社での呼び名"]}):
+                k = "英字" if re.search(r"[A-Za-zＡ-Ｚａ-ｚ]", n) else "カタカナ" if re.search(r"[ァ-ヺ]", n) else "漢字"
+                kinds[l][k].append(n)
+    return {"tops": tops, "names": names, "tokens": ranked, "n_cos": len(cos),
+            "voice": voice, "no_voice": no_voice, "audience": hits(AUDIENCE), "name_kinds": kinds, "token_map": token_map, "token_df": token_df,
             "length_words": length_words, "latin_tops": latin_tops,
             "changes": sum(1 for w in W if w["前の言葉のID"])}
 
