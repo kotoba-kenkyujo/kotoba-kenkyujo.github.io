@@ -1,20 +1,62 @@
 {
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W6VM": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W7UN": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9CI": {
-"date": "2026-11-08",
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9O5": {
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YETX": {
-"date": "2026-11-08",
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YF1P": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGR6": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI1Y": {
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIME": {
-"date": "2026-11-08",
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
@@ -27,22 +69,99 @@
 "final_url": "",
 "note": ""
 },
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJIB": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJPU": {
-"date": "2026-11-08",
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYN": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKKP": {
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKSP": {
-"date": "2026-11-08",
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKV3": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKX5": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKY3": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5Z": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLBY": {
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLCK": {
-"date": "2026-11-08",
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLDV": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLHM": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLK6": {
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
@@ -55,8 +174,15 @@
 "final_url": "",
 "note": ""
 },
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLRB": {
+"date": "2026-11-09",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
 "https://www.papy.co.jp/recruit/sc/index/top_message.html": {
-"date": "2026-11-08",
+"date": "2026-11-09",
 "status": "正常",
 "http_status": 200,
 "final_url": "",

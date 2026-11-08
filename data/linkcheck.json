@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-08T21:11:09+09:00",
-  "words": 40,
-  "urls": 10,
+  "checked_at": "2026-11-09T07:19:16+09:00",
+  "words": 80,
+  "urls": 28,
   "summary": {
-    "正常": 10,
+    "正常": 28,
     "移転": 0,
     "拒否": 0,
     "要確認": 0
   },
   "this_run": {
-    "checked": 10,
-    "planned": 10,
-    "minutes": 0.2
+    "checked": 25,
+    "planned": 25,
+    "minutes": 0.8
   },
   "unchecked": 0,
   "items": []
