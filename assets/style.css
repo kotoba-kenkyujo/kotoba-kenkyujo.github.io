@@ -265,7 +265,26 @@ mark { background: linear-gradient(transparent 60%, var(--base-yellow) 60%); col
 .study section h2 { font-size: 22px; border-bottom: 1px solid var(--ink); padding-bottom: var(--space-2); margin: 0 0 var(--space-4); display: flex; align-items: baseline; gap: var(--space-3); }
 .study section h2 small { font-family: var(--font-sans); font-size: 13px; font-weight: 400; color: var(--text-sub); letter-spacing: .02em; }
 .study .bars { font-size: 14px; }
-.study .bar { grid-template-columns: 10em 1fr 2.5em; }
+.study .bar { grid-template-columns: 10em 1fr 3.5em; }
+/* 統計（2026-11-09）：章の入口、章の頭の大きな数字、全社を敷いた棒、押せる合図 */
+.toc { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); max-width: 820px; margin: 0 auto var(--space-12); }
+.toc a { font-size: 13px; color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--card); border-radius: var(--radius-pill); padding: 4px 14px; }
+.toc a:hover { border-color: var(--sky); color: var(--sky); }
+.study section { scroll-margin-top: 80px; }
+.lead-num { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-2); margin: 0 0 var(--space-6); font-family: var(--font-mincho); color: var(--text-sub); }
+.lead-num .of { font-family: var(--font-sans); font-size: 13px; }
+.lead-num b { font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.lead-num small { font-size: 14px; margin-left: -4px; }
+.lead-num .what { font-size: 18px; font-weight: 700; color: var(--ink); }
+.bar.full i { height: 8px; background: var(--line); animation: none; overflow: hidden; }
+.bar.full i s { display: block; height: 100%; background: var(--sky); border-radius: 4px; transform-origin: left; animation: grow .8s ease-out; }
+.bar.full b small { font-size: 11px; margin-left: 1px; }
+a.bar.full { position: relative; padding-right: 1.2em; margin-right: -1.2em; border-radius: 4px; transition: background .15s; }
+a.bar.full::after { content: "→"; position: absolute; right: 0; font-size: 12px; color: var(--sky); opacity: 0; transition: opacity .15s; }
+a.bar.full:hover { background: var(--chip-bg); }
+a.bar.full:hover span { color: var(--sky); }
+a.bar.full:hover::after { opacity: 1; }
+@media (hover: none) { a.bar.full::after { opacity: .45; } }
 .study .len-bins { justify-content: flex-start; }
 
 /* 言語史 */

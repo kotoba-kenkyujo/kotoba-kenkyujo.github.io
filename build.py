@@ -728,11 +728,31 @@ def build_topics(C, W, stats, token_pages):
   <div class="sorter" role="group" aria-label="並べ替え"><button type="button" data-sort="asc" aria-pressed="true">短い順</button><button type="button" data-sort="desc" aria-pressed="false">長い順</button></div>
   <ol class="len-list">{''.join(rows)}</ol>
 </section>"""
-    voice_bars = share_bars(stats, "voice", "../")
-    aud_bars = share_bars(stats, "audience", "../")
-    promise_bars = share_bars(stats, "promise", "../")
-    action_bars = share_bars(stats, "action", "../")
+    n_cos = stats["n_cos"] or 1
+    top10 = [(t, v) for t, v in stats["tokens"] if t in token_pages][:10]
+    rest = [(t, v) for t, v in stats["tokens"] if t in token_pages][10:]
+    tok_full = "".join(study_bar(t, v, n_cos, f"../{token_pages[t]}") for t, v in top10)
+    rmax = rest[0][1] if rest else 1
+    tok_cloud = "".join(f'<a href="../{token_pages[t]}" style="font-size:{14 + round(v / rmax * 6)}px">{esc(t)}<small>{v}</small></a>' for t, v in rest)
+
+    def rows_of(key):
+        return sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
+
+    def bars_of(key):
+        return "".join(study_bar(name, n, n_cos, f"../words/?q={q(terms[0])}") for name, terms, n in rows_of(key))
+    voice_bars, aud_bars, promise_bars, action_bars = (bars_of(k) for k in ("voice", "audience", "promise", "action"))
     time_bars = share_bars(stats, "time", "../")
+
+    def top_of(key):
+        r = rows_of(key)
+        return r[0] if r else ("", [], 0)
+    leads = {
+        "tokens": lead_num(top10[0][1], f"が「{esc(top10[0][0])}」を使う", n_cos) if top10 else "",
+        "voice": lead_num(stats["no_voice"], "は主語を書いていない", n_cos),
+        "audience": lead_num(top_of("audience")[2], f"が「{esc(top_of('audience')[0])}」に向けている", n_cos),
+        "promise": lead_num(top_of("promise")[2], f"が「{esc(top_of('promise')[0])}」を約束する", n_cos),
+        "action": lead_num(top_of("action")[2], f"が「{esc(top_of('action')[0])}」", n_cos),
+    }
     kind_rows = ""
     for l, ks in stats["name_kinds"].items():
         total = sum(len(v) for v in ks.values())
@@ -746,23 +766,33 @@ def build_topics(C, W, stats, token_pages):
         "names": f"""<section id="names"><h2>{label('いちばん上')}の呼び名</h2>
   <div class="bars">{name_bars}</div></section>""",
         "tokens": f"""<section id="tokens"><h2>よく使われることば</h2>
-  <div class="bars">{tok_bars}</div>
-  <div class="cloud">{cloud}</div></section>""",
+  {leads["tokens"]}
+  <div class="bars">{tok_full}</div>
+  <div class="cloud">{tok_cloud}</div></section>""",
         "length": length_sec,
         "voice": f"""<section id="voice"><h2>誰が語っているか</h2>
+  {leads["voice"]}
   <div class="bars">{voice_bars}</div></section>""",
         "audience": f"""<section id="audience"><h2>誰に向けた言葉か</h2>
+  {leads["audience"]}
   <div class="bars">{aud_bars}</div></section>""",
         "promise": f"""<section id="promise"><h2>何を約束するか</h2>
+  {leads["promise"]}
   <div class="bars">{promise_bars}</div></section>""",
         "action": f"""<section id="action"><h2>どう関わるか</h2>
+  {leads["action"]}
   <div class="bars">{action_bars}</div></section>""",
         "time": f"""<section id="time"><h2>時間の向き</h2>
   <div class="bars">{time_bars}</div></section>""",
         "name-kinds": f"""<section id="name-kinds"><h2>呼び名の漢字とカタカナ</h2>
   {kind_rows}</section>""",
     }
+    toc_names = {"names": f"{label('いちばん上')}の呼び名", "tokens": "よく使われることば", "length": f"{label('いちばん上')}の長さ",
+                 "voice": "誰が語っているか", "audience": "誰に向けた言葉か", "promise": "何を約束するか", "action": "どう関わるか",
+                 "time": "時間の向き", "name-kinds": "呼び名の漢字とカタカナ"}
+    toc = "".join(f'<a href="#{k}">{toc_names[k]}</a>' for k in TOPICS_SHOWN if secs.get(k))
     body = f"""<div class="page-head"><h1>統計</h1></div>
+<nav class="toc" aria-label="このページの章">{toc}</nav>
 <div class="study">
 {chr(10).join(secs[k] for k in TOPICS_SHOWN if secs.get(k))}
 </div>"""
@@ -784,6 +814,17 @@ def share_bars(stats, key, rel, limit=None):
         inner = f'<span>{esc(name)}</span><i style="width:{round(n / n_cos * 100)}%"></i><b>{n}</b>'
         out += f'<a class="bar" href="{rel}words/?q={q(terms[0])}">{inner}</a>' if terms and n and rel is not None else f'<div class="bar">{inner}</div>'
     return out
+
+
+def study_bar(name, n, n_cos, href=None):
+    """統計のページの棒（2026-11-09）：全社を薄い線で敷き、その上に何社かを青で重ねる。押すと探せる"""
+    inner = f'<span>{esc(name)}</span><i><s style="width:{round(n / (n_cos or 1) * 100)}%"></s></i><b>{n}<small>社</small></b>'
+    return f'<a class="bar full" href="{href}">{inner}</a>' if href else f'<div class="bar full">{inner}</div>'
+
+
+def lead_num(n, what, n_cos):
+    """章の頭の大きな数字：全○社のうち、○社が〜"""
+    return f'<p class="lead-num"><span class="of">全{n_cos}社のうち</span><b>{n}</b><small>社</small><span class="what">{what}</span></p>'
 
 
 # ---------- 言語史 ----------
