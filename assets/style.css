@@ -135,7 +135,6 @@ a.bar:hover span { color: var(--sky); }
 .bar i { display: block; height: 8px; background: var(--sky); border-radius: 4px; transform-origin: left; animation: grow .8s ease-out; }
 .bar b { font-family: var(--font-sans); font-size: 12px; color: var(--text-sub); text-align: right; font-weight: 400; font-variant-numeric: tabular-nums; }
 @keyframes grow { from { transform: scaleX(0); } }
-@media (min-width: 640px) { .notes-fn ol { columns: 2; } }
 
 /* 言葉の長さ：1社を1つの点にして字数の線に並べる */
 .len-sum { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: 12px; color: var(--text-sub); margin-bottom: var(--space-3); }
@@ -420,3 +419,13 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 .co-list .chip { grid-row: 1; grid-column: 2; align-self: center; }
 .co-list .w { grid-column: 1 / -1; font-family: var(--font-mincho); font-size: 14px; color: var(--text-sub); line-height: 1.6; }
 .co-list a:hover .nm { color: var(--sky); }
+/* 統計：誰が語っているか〜どう関わるかを、広い画面で2つずつ並べる */
+.study-pair { display: grid; gap: var(--space-12) var(--space-8); }
+@media (min-width: 860px) {
+  .study { max-width: 1040px; }
+  .study > section { max-width: 820px; width: 100%; margin: 0 auto; }
+  .study-pair { grid-template-columns: 1fr 1fr; }
+  .study-pair .bar { grid-template-columns: 6.5em 1fr 3.2em; }
+  .study-pair .lead-num b { font-size: 36px; }
+  .study-pair .lead-num .what { font-size: 16px; }
+}

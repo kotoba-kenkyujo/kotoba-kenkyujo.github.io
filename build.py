@@ -902,10 +902,26 @@ def build_topics(C, W, stats, token_pages):
                  "voice": "誰が語っているか", "audience": "誰に向けた言葉か", "promise": "何を約束するか", "action": "どう関わるか",
                  "time": "時間の向き", "name-kinds": "呼び名の漢字とカタカナ"}
     toc = "".join(f'<a href="#{k}">{toc_names[k]}</a>' for k in TOPICS_SHOWN if secs.get(k))
+    # 誰が語っているか〜どう関わるかは、広い画面で横に2つずつ並べる（2026-11-09）
+    PAIRED = {"voice", "audience", "promise", "action", "time"}
+    chunks, pair = [], []
+    for k in TOPICS_SHOWN:
+        if not secs.get(k):
+            continue
+        if k in PAIRED:
+            pair.append(secs[k])
+            continue
+        if pair:
+            chunks.append('<div class="study-pair">' + "".join(pair) + "</div>")
+            pair = []
+        chunks.append(secs[k])
+    if pair:
+        chunks.append('<div class="study-pair">' + "".join(pair) + "</div>")
+    study_body = "\n".join(chunks)
     body = f"""<div class="page-head"><h1>統計</h1></div>
 <nav class="toc" aria-label="このページの章">{toc}</nav>
 <div class="study">
-{chr(10).join(secs[k] for k in TOPICS_SHOWN if secs.get(k))}
+{study_body}
 </div>"""
     write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語り誰に向けた言葉か、何を約束しどう関わるか。"))
 
