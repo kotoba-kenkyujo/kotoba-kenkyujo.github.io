@@ -467,24 +467,14 @@ def build_top(C, W, stats):
     current_top = [w for w in W if w["層"] == "いちばん上" and not w["old"]]
     pool = current_top or [w for w in W if not w["old"]]
     today = pool[TODAY.toordinal() % len(pool)]
-    fns = []
-
-    def fn(w):
-        u = w["出典URL"]
-        if u not in fns:
-            fns.append(u)
-        return fns.index(u) + 1
-
-    tn = fn(today)
     # 新収蔵：1社を1行に。いちばん新しく収蔵した言葉の順（2026-11-09）
     newest = sorted(C.values(), key=lambda c: max(w["no"] for w in c["words"]), reverse=True)[:6]
     rows = []
     for c in newest:
         w = lead_word(c)
-        n = fn(w)
         more = sum(1 for x in c["words"] if not x["old"]) - 1
         more_html = f'<small>ほか{more}語</small>' if more > 0 else ""
-        rows.append(f'<li><a href="{c["url"]}"><span><span class="w">{esc(w["言葉"])}<sup class="fn">{n}</sup></span><span class="who">{esc(c["short"])}{more_html}</span></span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>')
+        rows.append(f'<li><a href="{c["url"]}"><span><span class="w">{esc(w["言葉"])}</span><span class="who">{esc(c["short"])}{more_html}</span></span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>')
     # 最近の改定：いま使っている言葉のうち、前の言葉があるもの（新しい順に2件）
     kais = sorted((w for w in W if w["前の言葉のID"] and not w["old"]), key=lambda w: (w["使い始め"], w["no"]), reverse=True)[:2]
     byid = {w["ID"]: w for w in W}
@@ -524,7 +514,6 @@ def build_top(C, W, stats):
         "audience": f'<a class="topic" href="topics/#audience"><h2>誰に向けた言葉か</h2><div class="bars">{share_bars(stats, "audience", None, 4)}</div></a>',
     }
     top_cards = "\n  ".join(cards[k] for k in TOP_TOPICS if cards.get(k))
-    notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
     n_cur = sum(1 for w in W if not w["old"])
     body = f"""
@@ -541,7 +530,7 @@ def build_top(C, W, stats):
   <div class="today-wrap">
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
-    {word_block(today, f'<span class="fn">{tn}</span>')}
+    {word_block(today, '')}
     <span class="foot">{seal(today['会社での呼び名'])}<span class="who">{esc(today_co)}</span></span>
   </a>
   <button class="dice today-dice" type="button" data-goatcounter-click="today-pick">🎲 ほかのことば</button>
@@ -559,7 +548,6 @@ def build_top(C, W, stats):
 <div class="topics">
   {top_cards}
 </div>
-<div class="notes-fn"><ol>{notes}</ol></div>
 """
     jsonld = {"@context": "https://schema.org", "@type": "WebSite", "name": CFG["name"], "url": BASE, "description": CFG["description"],
               "publisher": {"@type": "Person", "name": CFG["operator"], "url": CFG["operator_url"]},
