@@ -42,6 +42,9 @@ AUDIENCE = [("お客様", ["お客様", "お客さま", "顧客", "ユーザー"
             ("地域", ["地域"]),
             ("世界", ["世界", "グローバル"]),
             ("地球・環境", ["地球", "環境", "自然"])]
+# 統計のページとトップに出す項目と順番（2026-11-08 黒田さん：この3つだけ）。
+# 隠している項目：names（北極星の呼び名）、length（北極星の長さ）、name-kinds（呼び名の漢字とカタカナ）。ここに足せばまた出る
+TOPICS_SHOWN = ["tokens", "voice", "audience"]
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
@@ -464,6 +467,14 @@ def build_top(C, W, stats):
     <h2>{label('いちばん上')}の長さ</h2>
     <div class="len-sum"><span>最短<b>{ld['min']}</b>字</span><span>平均<b>{round(ld['avg'])}</b>字</span><span>最長<b>{ld['max']}</b>字</span></div>
   </a>"""
+    cards = {
+        "names": f'<a class="topic" href="topics/#names"><h2>{label("いちばん上")}の呼び名</h2><div class="bars">{name_bars}</div></a>',
+        "tokens": f'<a class="topic" href="topics/#tokens"><h2>よく使われることば</h2><div class="bars">{tok_bars}</div></a>',
+        "length": length_html,
+        "voice": f'<a class="topic" href="topics/#voice"><h2>誰が語っているか</h2><div class="bars">{share_bars(stats, "voice", None, 4)}</div></a>',
+        "audience": f'<a class="topic" href="topics/#audience"><h2>誰に向けた言葉か</h2><div class="bars">{share_bars(stats, "audience", None, 4)}</div></a>',
+    }
+    top_cards = "\n  ".join(cards[k] for k in TOPICS_SHOWN if cards.get(k))
     notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
     body = f"""
@@ -489,9 +500,7 @@ def build_top(C, W, stats):
   </section>
 </div>
 <div class="topics">
-  <a class="topic" href="topics/#names"><h2>{label('いちばん上')}の呼び名</h2><div class="bars">{name_bars}</div></a>
-  <a class="topic" href="topics/#tokens"><h2>よく使われることば</h2><div class="bars">{tok_bars}</div></a>
-  {length_html}
+  {top_cards}
 </div>
 <div class="notes-fn"><ol>{notes}</ol></div>
 """
@@ -685,16 +694,8 @@ def build_topics(C, W, stats, token_pages):
   <div class="sorter" role="group" aria-label="並べ替え"><button type="button" data-sort="asc" aria-pressed="true">短い順</button><button type="button" data-sort="desc" aria-pressed="false">長い順</button></div>
   <ol class="len-list">{''.join(rows)}</ol>
 </section>"""
-    n_cos = stats["n_cos"] or 1
-
-    def share_bars(rows):
-        out = ""
-        for name, terms, n in sorted((r for r in rows if r[2]), key=lambda r: -r[2]):
-            inner = f'<span>{esc(name)}</span><i style="width:{round(n / n_cos * 100)}%"></i><b>{n}</b>'
-            out += f'<a class="bar" href="../words/?q={q(terms[0])}">{inner}</a>' if n else f'<div class="bar">{inner}</div>'
-        return out
-    voice_bars = share_bars(stats["voice"]) + f'<div class="bar"><span>主語なし</span><i style="width:{round(stats["no_voice"] / n_cos * 100)}%"></i><b>{stats["no_voice"]}</b></div>'
-    aud_bars = share_bars(stats["audience"])
+    voice_bars = share_bars(stats, "voice", "../")
+    aud_bars = share_bars(stats, "audience", "../")
     kind_rows = ""
     for l, ks in stats["name_kinds"].items():
         total = sum(len(v) for v in ks.values())
@@ -704,22 +705,39 @@ def build_topics(C, W, stats, token_pages):
         legend = "".join(f'<span><i class="k{i}"></i>{k}<b>{len(v)}</b></span>' for i, (k, v) in enumerate(ks.items()))
         names_html = "".join(f'<p><b>{k}</b>{"、".join(esc(n) for n in sorted(Counter(v), key=lambda n: (-Counter(v)[n], n)))}</p>' for k, v in ks.items() if v)
         kind_rows += f'<div class="kind-row"><h3>{label(l)}</h3><div class="stack">{segs}</div><div class="legend">{legend}</div><div class="kind-names">{names_html}</div></div>'
+    secs = {
+        "names": f"""<section id="names"><h2>{label('いちばん上')}の呼び名</h2>
+  <div class="bars">{name_bars}</div></section>""",
+        "tokens": f"""<section id="tokens"><h2>よく使われることば</h2>
+  <div class="bars">{tok_bars}</div>
+  <div class="cloud">{cloud}</div></section>""",
+        "length": length_sec,
+        "voice": f"""<section id="voice"><h2>誰が語っているか</h2>
+  <div class="bars">{voice_bars}</div></section>""",
+        "audience": f"""<section id="audience"><h2>誰に向けた言葉か</h2>
+  <div class="bars">{aud_bars}</div></section>""",
+        "name-kinds": f"""<section id="name-kinds"><h2>呼び名の漢字とカタカナ</h2>
+  {kind_rows}</section>""",
+    }
     body = f"""<div class="page-head"><h1>統計</h1></div>
 <div class="study">
-<section id="names"><h2>{label('いちばん上')}の呼び名</h2>
-  <div class="bars">{name_bars}</div></section>
-<section id="tokens"><h2>よく使われることば</h2>
-  <div class="bars">{tok_bars}</div>
-  <div class="cloud">{cloud}</div></section>
-{length_sec}
-<section id="voice"><h2>誰が語っているか</h2>
-  <div class="bars">{voice_bars}</div></section>
-<section id="audience"><h2>誰に向けた言葉か</h2>
-  <div class="bars">{aud_bars}</div></section>
-<section id="name-kinds"><h2>呼び名の漢字とカタカナ</h2>
-  {kind_rows}</section>
+{chr(10).join(secs[k] for k in TOPICS_SHOWN if secs.get(k))}
 </div>"""
-    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。呼び名、よく使われることば、言葉の長さ、誰が語り誰に向けた言葉か。"))
+    write("topics/", page("topics/", "統計", body, current="topics/", desc="会社が掲げる言葉を数えて見えた傾向。よく使われることば、誰が語っているか、誰に向けた言葉か。"))
+
+
+def share_bars(stats, key, rel, limit=None):
+    """会社の数の棒。長さは公開中の会社全体に対する割合。押すと、その語で「ことばを探す」を開く"""
+    n_cos = stats["n_cos"] or 1
+    rows = sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
+    if key == "voice":
+        rows.append(("主語なし", [], stats["no_voice"]))
+        rows.sort(key=lambda r: -r[2])
+    out = ""
+    for name, terms, n in rows[:limit]:
+        inner = f'<span>{esc(name)}</span><i style="width:{round(n / n_cos * 100)}%"></i><b>{n}</b>'
+        out += f'<a class="bar" href="{rel}words/?q={q(terms[0])}">{inner}</a>' if terms and rel is not None else f'<div class="bar">{inner}</div>'
+    return out
 
 
 # ---------- 言語史 ----------
