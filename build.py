@@ -636,7 +636,7 @@ def build_words(C, W, stats, token_pages):
     ex_json = esc(json.dumps({"tokens": examples, "searched": searched}, ensure_ascii=False))
     body = f"""<div class="page-head"><h1>ことばを探す</h1></div>
 <div class="finder">
-  <form class="searchbox" role="search" onsubmit="return false"><input id="q" type="search" placeholder="挑戦、社会、誠実…" aria-label="言葉の中の語や社名で探す" autocomplete="off"></form>
+  <form class="searchbox" role="search" onsubmit="return false"><input id="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉の中の語や社名で探す" autocomplete="off"></form>
   <p class="examples-row" id="ex" data-ex="{ex_json}" hidden></p>
   <div class="filters" id="layers">{btns}</div>
   <dl class="layers" aria-label="ことばの層">{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
