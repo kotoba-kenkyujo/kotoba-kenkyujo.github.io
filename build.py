@@ -571,9 +571,8 @@ def build_company(c, C, ids, token_df, og_jobs):
     i = ids.index(c["ID"])
     prev_c, next_c = C[ids[i - 1]], C[ids[(i + 1) % len(ids)]]
     parts.append(f"""<nav class="pager" aria-label="前後の会社"><a href="../../{prev_c['url']}">← {esc(prev_c['short'])}</a><button class="dice" type="button" data-goatcounter-click="pick/{c['ID']}">🎲 ほかの会社</button><a href="../../{next_c['url']}">{esc(next_c['short'])} →</a></nav>""")
-    chips = [c.get("証券コード") or "", f"{len(cur)}語"]
     head = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../words/">ことば</a> › {esc(c['会社名'])}</nav>
-<div class="co-head"><h1>{esc(c['会社名'])}</h1><div class="chips">{''.join(f'<span class="chip line">{esc(x)}</span>' for x in chips if x)}</div></div>"""
+<div class="co-head"><h1>{esc(c['会社名'])}</h1></div>"""
     desc = f"{c['会社名']}が掲げる言葉。{lead_w['言葉'][:80]}"
     jsonld = {"@context": "https://schema.org", "@type": "ItemList", "name": f"{c['会社名']}が掲げる言葉", "url": BASE + c["url"],
               "itemListElement": [{"@type": "ListItem", "position": k + 1, "item": {
