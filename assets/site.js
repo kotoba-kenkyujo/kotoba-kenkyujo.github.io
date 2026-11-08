@@ -98,4 +98,29 @@
       items.slice().sort((a, c) => dir * ((+a.dataset.len || 0) - (+c.dataset.len || 0))).forEach(li => list.appendChild(li));
     }));
   }
+  // トップの収蔵の数：読み込みが終わってから0から数え上げる（コミュニティ図鑑と同じ作り。2026-11-09）
+  // 待っているあいだは数字を隠し、桁が増えても横にずれないよう幅を先に取っておく。動きを減らす設定では何もしない
+  const counters = [...document.querySelectorAll('[data-count]')].filter(el => parseInt(el.dataset.count, 10) > 0);
+  if (counters.length && window.requestAnimationFrame && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    counters.forEach(el => { el.style.display = 'inline-block'; el.style.minWidth = el.dataset.count.length + 'ch'; el.style.opacity = '0'; });
+    let started = false;
+    const startCount = () => {
+      if (started) return;
+      started = true;
+      let t0 = null;
+      const step = t => {
+        if (t0 === null) t0 = t;
+        const p = Math.min(1, (t - t0) / 1000);
+        const e = 1 - Math.pow(1 - p, 3);
+        counters.forEach(el => { el.textContent = String(Math.round(parseInt(el.dataset.count, 10) * e)); });
+        if (p < 1) requestAnimationFrame(step);
+      };
+      counters.forEach(el => { el.textContent = '0'; el.style.opacity = ''; });
+      requestAnimationFrame(step);
+    };
+    const whenLoaded = new Promise(ok => { if (document.readyState === 'complete') ok(); else addEventListener('load', ok); });
+    const whenFonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    Promise.all([whenLoaded, whenFonts]).then(() => requestAnimationFrame(() => requestAnimationFrame(startCount)));
+    setTimeout(startCount, 2500);  // 読み込みに時間がかかっても、2.5秒たったら始める
+  }
 })();

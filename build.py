@@ -498,13 +498,14 @@ def build_top(C, W, stats):
     top_cards = "\n  ".join(cards[k] for k in TOP_TOPICS if cards.get(k))
     notes = "".join(f'<li>{ext(u, esc(src_label(next(w for w in W if w["出典URL"] == u))), "source/top")}</li>' for u in fns)
     today_url, today_id, today_co = today["co"]["url"], today["ID"], today["co"]["会社名"]
+    n_cur = sum(1 for w in W if not w["old"])
     body = f"""
 <div class="masthead rise">
   <h1>{esc(CFG['name'])}</h1>
 </div>
 <ul class="ledger" aria-label="収蔵の数">
-  <li><a href="words/"><b>{len(C)}</b><small>社</small></a></li>
-  <li><a href="words/"><b>{sum(1 for w in W if not w['old'])}</b><small>語</small></a></li>
+  <li><a href="words/"><b data-count="{len(C)}">{len(C)}</b><small>社</small></a></li>
+  <li><a href="words/"><b data-count="{n_cur}">{n_cur}</b><small>語</small></a></li>
 </ul>
 <div class="cols">
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
