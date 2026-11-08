@@ -506,9 +506,6 @@ def build_top(C, W, stats):
   <li><a href="words/"><b>{len(C)}</b><small>社</small></a></li>
   <li><a href="words/"><b>{sum(1 for w in W if not w['old'])}</b><small>語</small></a></li>
 </ul>
-<section class="layers" aria-label="ことばの層">
-  <dl>{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
-</section>
 <div class="cols">
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
@@ -642,6 +639,7 @@ def build_words(C, W, stats, token_pages):
   <form class="searchbox" role="search" onsubmit="return false"><input id="q" type="search" placeholder="挑戦、社会、誠実…" aria-label="言葉の中の語や社名で探す" autocomplete="off"></form>
   <p class="examples-row" id="ex" data-ex="{ex_json}" hidden></p>
   <div class="filters" id="layers">{btns}</div>
+  <dl class="layers" aria-label="ことばの層">{''.join(f'<div><dt>{label(l)}</dt><dd>{LAYER_DESC[l]}</dd></div>' for l in LAYERS)}</dl>
   <p class="hits" aria-live="polite"><b id="n">{len(cur)}</b>語</p>
   <ul class="wordlist" id="list">{''.join(items)}</ul>
   <p class="empty" id="empty" hidden>見つかりません</p>

@@ -122,10 +122,10 @@ sup .fn { font-size: 12px; margin-left: 2px; }
 .index .no { font-family: var(--font-mincho); color: var(--text-sub); font-variant-numeric: tabular-nums; }
 .index .w { font-family: var(--font-mincho); font-weight: 700; font-size: 17px; line-height: 1.6; }
 .index .who { display: block; font-size: 12px; color: var(--text-sub); }
-.layers { margin: var(--space-6) 0 0; }
-.layers dl { display: grid; gap: var(--space-2) var(--space-6); margin: 0; }
-@media (min-width: 760px) { .layers dl { grid-template-columns: repeat(3, 1fr); } }
-.layers dl div { display: flex; gap: var(--space-3); align-items: baseline; }
+.layers { margin: var(--space-4) 0 0; }
+.layers { display: grid; gap: var(--space-2) var(--space-6); }
+@media (min-width: 760px) { .layers { grid-template-columns: repeat(3, 1fr); } }
+.layers div { display: flex; gap: var(--space-3); align-items: baseline; }
 .layers dt { font-family: var(--font-mincho); font-weight: 700; white-space: nowrap; }
 .layers dd { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text-sub); }
 .topics { display: grid; gap: var(--space-6); margin-top: var(--space-12); }
