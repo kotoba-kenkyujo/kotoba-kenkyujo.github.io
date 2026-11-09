@@ -433,3 +433,9 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 /* 長い言葉：PCは掛け軸が横に伸び、入りきらないとき（スマホなど）は言葉の部分だけ横にスクロールする */
 .tate-wrap { writing-mode: vertical-rl; max-width: 100%; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
 .today .tate-wrap { justify-self: center; }
+
+/* 横書きの言葉（英字が主）：文節と英単語の切れ目でだけ改行し、行の長さをそろえる。掛け軸は広がりすぎない（2026-11-09） */
+.yoko { word-break: keep-all; overflow-wrap: anywhere; text-wrap: balance; }
+.scroll.latin { width: auto; max-width: min(640px, 100%); }
+/* 両端の矢印の社名は1列に収め、長いときは「…」 */
+.side .nm { white-space: nowrap; text-overflow: ellipsis; }
