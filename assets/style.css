@@ -444,3 +444,6 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 .scrolls { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: var(--space-8) var(--space-12); margin: var(--space-8) auto; }
 .scrolls .scroll { margin: 0; flex: 0 1 auto; min-width: min(300px, 100%); align-content: space-between; }
 .scrolls .scroll + .scroll { margin-top: 0; }
+
+/* 今日のことばは、2列のときスクロールしても画面に残す（右の列が長い日に左下が空かないように。2026-11-09） */
+@media (min-width: 900px) and (min-height: 800px) { .today-wrap { position: sticky; top: 84px; align-self: start; } }
