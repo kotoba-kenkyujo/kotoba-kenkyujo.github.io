@@ -388,7 +388,8 @@ def word_block(w, fn_html):
     if w["latin"]:
         return f'<p class="yoko">{esc(w["言葉"])}{fn_html}</p>'
     cls = "tate long" if w["len"] > 36 else "tate"
-    return f'<p class="{cls}">{phrases(w["言葉"])}{fn_html}</p>'
+    # とても長い言葉で枠からはみ出さないよう、縦書きの横スクロールの入れ物で包む（右＝書き出しから見える。2026-11-09）
+    return f'<div class="tate-wrap"><p class="{cls}">{phrases(w["言葉"])}{fn_html}</p></div>'
 
 
 SHARE_ICONS = {

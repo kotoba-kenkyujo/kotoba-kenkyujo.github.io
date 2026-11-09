@@ -169,7 +169,7 @@ a.bar:hover span { color: var(--sky); }
 .co-head { text-align: center; padding: var(--space-6) 0 0; }
 .co-head h1 { font-size: clamp(26px, 4vw, 36px); letter-spacing: .12em; margin: 0; }
 .chips { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
-.scroll { position: relative; margin: var(--space-8) auto; max-width: 440px; background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6) var(--space-6); box-shadow: var(--shadow-lift); display: grid; justify-items: center; gap: var(--space-4); }
+.scroll { position: relative; margin: var(--space-8) auto; width: max-content; min-width: min(440px, 100%); max-width: 100%; box-sizing: border-box; background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-8) var(--space-6) var(--space-6); box-shadow: var(--shadow-lift); display: grid; justify-items: center; gap: var(--space-4); }
 .scroll::before, .scroll::after { content: ""; position: absolute; left: -10px; right: -10px; height: 12px; background: var(--rod); border-radius: 6px; }
 .scroll::before { top: -6px; } .scroll::after { bottom: -6px; }
 .scroll .tate { font-size: clamp(22px, 6vw, 30px); line-height: 1.75; letter-spacing: .12em; max-height: 13em; }
@@ -429,3 +429,7 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
   .study-pair .lead-num b { font-size: 36px; }
   .study-pair .lead-num .what { font-size: 16px; }
 }
+
+/* 長い言葉：PCは掛け軸が横に伸び、入りきらないとき（スマホなど）は言葉の部分だけ横にスクロールする */
+.tate-wrap { writing-mode: vertical-rl; max-width: 100%; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+.today .tate-wrap { justify-self: center; }
