@@ -740,7 +740,7 @@ def build_companies(C):
 # ---------- ことばを探す ----------
 def build_words(C, W, stats, token_pages):
     """ことばを探す（2026-11-09 見直し）：検索窓と検索の例 → 層の札と並べ替え → 件数と選んだ層の説明 → 一覧。
-    並べ替えは新しい順（最初）・会社順・短い順。改定された言葉には朱の「改定」札を付け、会社のページの言語史へ"""
+    並べ替えは新しい順（最初）・古い順・短い順・長い順（2026-11-09 会社順を外した）。改定された言葉には朱の「改定」札を付け、会社のページの言語史へ"""
     cur = [w for w in W if not w["old"]]
     layer_n = Counter(w["層"] for w in cur)
     co_order = {cid: i for i, cid in enumerate(C)}
@@ -763,7 +763,7 @@ def build_words(C, W, stats, token_pages):
   <p class="examples-row" id="ex" data-ex="{ex_json}" hidden></p>
   <div class="finder-bar">
     <div class="filters" id="layers" role="group" aria-label="ことばの層">{btns}</div>
-    <div class="sorter" id="sort" role="group" aria-label="並べ替え"><button type="button" data-sort="new" aria-pressed="true">新しい順</button><button type="button" data-sort="co" aria-pressed="false">会社順</button><button type="button" data-sort="len" aria-pressed="false">短い順</button></div>
+    <div class="sorter" id="sort" role="group" aria-label="並べ替え"><button type="button" data-sort="new" aria-pressed="true">新しい順</button><button type="button" data-sort="old" aria-pressed="false">古い順</button><button type="button" data-sort="short" aria-pressed="false">短い順</button><button type="button" data-sort="long" aria-pressed="false">長い順</button></div>
   </div>
   <p class="hits" aria-live="polite"><span><b id="n">{len(cur)}</b>語</span><span class="layer-desc" id="layer-desc" hidden></span></p>
   <ul class="wordlist" id="list">{''.join(items)}</ul>

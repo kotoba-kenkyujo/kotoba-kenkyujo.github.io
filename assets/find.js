@@ -62,8 +62,8 @@
     run();
   }));
 
-  // 並べ替え：新しい順（収蔵した順の逆）・会社順・短い順
-  const keys = { new: li => -li.dataset.no, co: li => +li.dataset.co, len: li => +li.dataset.len };
+  // 並べ替え：新しい順・古い順（収蔵した順）・短い順・長い順（字数）
+  const keys = { new: li => -li.dataset.no, old: li => +li.dataset.no, short: li => +li.dataset.len, long: li => -li.dataset.len };
   sorts.forEach(b => b.addEventListener('click', () => {
     sorts.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     const k = keys[b.dataset.sort];
