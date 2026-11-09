@@ -25,6 +25,12 @@ try:  # 文節の途中で列を変えない（サイトと同じ BudouX）
 except Exception:
     BUDOUX = None
 HANG = "︑︒︐﹂﹄︶"
+sys.path.insert(0, ROOT)
+try:  # 改行の決まり（禁則）はサイトと同じものを使う
+    from build import kinsoku
+except Exception:
+    def kinsoku(parts):
+        return parts
 SMALL = set("ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ")
 
 
@@ -82,7 +88,7 @@ def wrap_words(d, text, f, width):
 
 def columns(text, per_col):
     """縦書きの列に分ける。文節の途中では列を変えず、句読点・閉じ括弧は前の列の下にぶら下げる"""
-    parts = BUDOUX.parse(text) if BUDOUX else list(text)
+    parts = kinsoku(BUDOUX.parse(text)) if BUDOUX else list(text)
     cols, cur = [], []
     for part in parts:
         chars = [VERT.get(ch, ch) for ch in part]

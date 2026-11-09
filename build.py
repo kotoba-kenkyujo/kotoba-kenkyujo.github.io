@@ -381,7 +381,36 @@ def phrases(text):
     """文節の切れ目に <wbr> を入れる。CSS の word-break: keep-all と組で、文節の途中では改行しない（2026-11-08 黒田さん：改行位置をうまく）"""
     if not BUDOUX:
         return esc(text)
-    return "<wbr>".join(esc(p) for p in BUDOUX.parse(text))
+    return "<wbr>".join(esc(p) for p in kinsoku(BUDOUX.parse(text)))
+
+
+OPENERS = "「『（(［[【〈《〔“‘"
+CLOSERS = "」』）)］]】〉》〕”’、。，．,.・：；:;！？!?ーゝゞヽヾ々ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ…‥"
+
+
+def kinsoku(parts):
+    """改行の決まり（禁則）：行末に始め括弧を残さず、行頭に終わり括弧・句読点・小さい字を置かない。
+    BudouX の文節の区切りを、始め括弧は次の文節へ、終わり括弧などは前の文節へ寄せて直す（2026-11-09）"""
+    out = [p for p in parts if p]
+    changed = True
+    while changed:
+        changed = False
+        for i in range(len(out) - 1):
+            a, b = out[i], out[i + 1]
+            k = len(a) - len(a.rstrip(OPENERS))
+            if k and len(a) > k:
+                out[i], out[i + 1] = a[:-k], a[-k:] + b
+                changed = True
+            elif k and len(a) == k:
+                out[i], out[i + 1] = "", a + b
+                changed = True
+            a, b = out[i], out[i + 1]
+            m = len(b) - len(b.lstrip(CLOSERS))
+            if m and a:
+                out[i], out[i + 1] = a + b[:m], b[m:]
+                changed = True
+        out = [p for p in out if p]
+    return out
 
 
 def word_block(w, fn_html):
@@ -584,13 +613,13 @@ def build_company(c, C, ids, stats, og_jobs):
         parts.extend(scrolls)
     for w in visions:
         n = fn[w["出典URL"]]
-        parts.append(f'<section class="sec" id="{w["ID"]}"><p class="label">{esc(w["会社での呼び名"])}</p><p class="vision">{esc(w["言葉"])}<sup>{fn_link(n)}</sup></p></section>')
+        parts.append(f'<section class="sec" id="{w["ID"]}"><p class="label">{esc(w["会社での呼び名"])}</p><p class="vision">{esc(w["言葉"])}</p></section>')
     if vals:
         gl = []
         for name, g in vals.items():
             n = fn[g[0]["出典URL"]]
             lis = "".join('<li id="%s">%s</li>' % (w["ID"], esc(w["言葉"])) for w in g)
-            gl.append(f'<div class="valgroup"><h2>{esc(name)}<sup>{fn_link(n)}</sup></h2><ol>{lis}</ol></div>')
+            gl.append(f'<div class="valgroup"><h2>{esc(name)}</h2><ol>{lis}</ol></div>')
         parts.append(f'<section class="sec"><div class="vals{" two" if len(vals) == 2 else ""}">{"".join(gl)}</div></section>')
     # 統計用の分類：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
     text = " ".join(w["言葉"] for w in cur)
@@ -637,7 +666,7 @@ def build_company(c, C, ids, stats, og_jobs):
                 start, end = ym(w["使い始め"]), ym(w["使い終わり"])
                 when = f"{start}〜{end}" if (start or end) else ""
                 wid = f' id="{w["ID"]}"' if w["old"] else ""
-                items.append(f'<li class="{"old" if w["old"] else "now"}"{wid}><div class="when">{esc(when)}　{esc(w["会社での呼び名"])}<sup>{fn_link(fn[w["出典URL"]])}</sup></div><div class="w">{esc(w["言葉"])}</div></li>')
+                items.append(f'<li class="{"old" if w["old"] else "now"}"{wid}><div class="when">{esc(when)}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
         for w in ended:
             items.append(f'<li class="old" id="{w["ID"]}"><div class="when">〜{esc(ym(w["使い終わり"]))}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
         parts.append(f'<section class="sec" id="history"><p class="label">言語史</p><ol class="timeline">{"".join(items)}</ol></section>')

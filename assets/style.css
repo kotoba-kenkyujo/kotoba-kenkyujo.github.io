@@ -37,7 +37,7 @@ body {
   margin: 0; color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.8;
   background-color: var(--base);
   background-image: linear-gradient(180deg, var(--bg-top) 0, var(--base) 420px, var(--bg-bottom) 100%);
-  font-feature-settings: "palt" 1; letter-spacing: .02em; overflow-wrap: anywhere; line-break: strict;
+  font-feature-settings: "palt" 1; letter-spacing: .02em; overflow-wrap: break-word; line-break: strict;
 }
 a { color: var(--sky); text-underline-offset: .2em; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; border-radius: var(--radius-sm); }
@@ -450,3 +450,9 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 /* 「ほかのことば」は掛け軸の下の中央。2列のときは掛け軸の高さを固定して、押す位置が動かないようにする（2026-11-09） */
 .today-wrap .today-dice { justify-self: center; }
 @media (min-width: 900px) { .today-wrap .today.scroll { height: 640px; min-height: 0; overflow: hidden; } }
+
+/* 今日のことば：右上の「今日のことば／ことばくじ」の文字に言葉が重ならないよう、右に場所を空ける（2026-11-09） */
+.today.scroll { padding-right: calc(var(--space-6) + 22px); }
+.today .foot { gap: var(--space-3); }
+.today .foot .who { text-align: right; text-wrap: balance; }
+@media (max-width: 600px) { .today .who { font-size: 13px; } }
