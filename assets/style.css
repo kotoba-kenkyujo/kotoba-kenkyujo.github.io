@@ -446,3 +446,7 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 .scrolls .scroll { margin: 0; flex: 0 1 auto; min-width: min(300px, 100%); align-content: space-between; }
 .scrolls .scroll + .scroll { margin-top: 0; }
 
+
+/* 「ほかのことば」は掛け軸の上の右に置き、言葉の長さで位置が動かないようにする。2列のときは掛け軸の高さも固定（2026-11-09） */
+.today-wrap .today-dice { justify-self: end; margin-right: 10px; }
+@media (min-width: 900px) { .today-wrap .today.scroll { height: 640px; min-height: 0; overflow: hidden; } }

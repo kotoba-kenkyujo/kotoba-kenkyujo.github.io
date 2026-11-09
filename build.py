@@ -530,12 +530,12 @@ def build_top(C, W, stats):
 <form class="searchbox top-search" role="search" action="words/" method="get"><input name="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉や会社名で探す" autocomplete="off"><button type="submit">探す</button></form>
 <div class="cols">
   <div class="today-wrap">
+  <button class="dice today-dice" type="button" data-goatcounter-click="today-pick">🎲 ほかのことば</button>
   <a class="today scroll{' latin' if today['latin'] else ''} rise" href="{today_url}#{today_id}" aria-label="今日のことば　{esc(today_co)}">
     <span class="day">今日のことば</span>
     {word_block(today, '')}
     <span class="foot">{seal(today['会社での呼び名'])}<span class="who">{esc(today_co)}</span></span>
   </a>
-  <button class="dice today-dice" type="button" data-goatcounter-click="today-pick">🎲 ほかのことば</button>
   <script type="application/json" id="today-pool">{pool_json}</script>
   </div>
   <div class="side-col">
