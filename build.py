@@ -611,7 +611,7 @@ def build_company(c, C, ids, stats, og_jobs):
         sh = "".join(f'<a class="tok" href="../../w/{q(t, safe="")}/">{esc(t)}<small>ほか{token_df[t] - 1}社</small></a>' for t in shared)
         on = "".join(f'<span class="tok only">{esc(t)}</span>' for t in only)
         rows = (f'<div><dt>ほかの会社も</dt><dd>{sh}</dd></div>' if sh else "") + (f'<div><dt>この会社だけ</dt><dd>{on}</dd></div>' if on else "")
-        parts.append(f'<section class="sec"><p class="label">語</p><dl class="facts toks">{rows}</dl></section>')
+        parts.append(f'<section class="sec"><p class="label">ことば</p><dl class="facts toks">{rows}</dl></section>')
     # 言語史
     byid = {w["ID"]: w for w in ws}
     chains = []
@@ -656,7 +656,7 @@ def build_company(c, C, ids, stats, og_jobs):
             snip = ("…" if a else "") + txt[a:a + 30] + ("…" if len(txt) > a + 30 else "")
             return '<span class="q">' + esc(snip).replace(esc(t), f"<mark>{esc(t)}</mark>") + '</span>'
         cards = "".join(f'<a href="../../{o["url"]}">{quote(o, t)}<span class="who">{esc(o["short"])}</span></a>' for _, _, o, t in near[:4])
-        parts.append(f'<section class="sec"><p class="label">近い言葉</p><div class="related">{cards}</div></section>')
+        parts.append(f'<section class="sec"><p class="label">近いことば</p><div class="related">{cards}</div></section>')
     # 出典と訂正
     srcs = []
     for u, n in fn.items():
