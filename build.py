@@ -585,28 +585,24 @@ def build_company(c, C, ids, stats, og_jobs):
             lis = "".join('<li id="%s">%s</li>' % (w["ID"], esc(w["言葉"])) for w in g)
             gl.append(f'<div class="valgroup"><h2>{esc(name)}<sup>{fn_link(n)}</sup></h2><ol>{lis}</ol></div>')
         parts.append(f'<section class="sec"><div class="vals{" two" if len(vals) == 2 else ""}">{"".join(gl)}</div></section>')
-    # 数えると：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
+    # 統計用の分類：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
     text = " ".join(w["言葉"] for w in cur)
-    lw = next((w for w in stats["length_words"] if w["co"]["ID"] == c["ID"]), None)
     facts = []
-    if lw:
-        lens = sorted(x["len"] for x in stats["length_words"])
-        rank = 1 + sum(1 for x in lens if x < lw["len"])
-        facts.append(("長さ", f'<span class="fact">{label("いちばん上")} <b>{lw["len"]}</b>字<small>{len(lens)}社中 短いほうから{rank}番目</small></span>'))
 
     def fact_links(groups, none_label=None, none_href=None):
         hit = [(name, terms) for name, terms in groups if any(x in text for x in terms)]
         if not hit:
             return f'<a class="fact" href="{none_href}">{none_label}</a>' if none_label else ""
         return "".join(f'<a class="fact" href="../../words/?q={q(terms[0])}">{esc(name)}</a>' for name, terms in hit)
-    for lab, groups, extra in (("主語", VOICE, ("主語なし", "../../topics/#voice")), ("向けた相手", AUDIENCE, None),
-                               ("約束", PROMISE, None), ("関わり方", ACTION, None)):
+    # 統計のページの章と同じ名前・同じ数え方（2026-11-09 黒田さん：長さは外す）
+    for lab, groups, extra in (("誰が語っているか", VOICE, ("主語なし", "../../topics/#voice")), ("誰に向けた言葉か", AUDIENCE, None),
+                               ("何を約束するか", PROMISE, None), ("どう関わるか", ACTION, None)):
         h = fact_links(groups, *(extra or ()))
         if h:
             facts.append((lab, h))
     if facts:
         rows = "".join(f'<div><dt>{lab}</dt><dd>{h}</dd></div>' for lab, h in facts)
-        parts.append(f'<section class="sec"><p class="label">数えると</p><dl class="facts">{rows}</dl></section>')
+        parts.append(f'<section class="sec"><p class="label">統計用の分類</p><dl class="facts">{rows}</dl></section>')
     # 語：ほかの会社も使う語（語のページへ）と、この会社だけの語
     toks = sorted(c["tokens"], key=lambda t: (-token_df.get(t, 1), t))
     shared = [t for t in toks if token_df.get(t, 1) >= 2][:10]
