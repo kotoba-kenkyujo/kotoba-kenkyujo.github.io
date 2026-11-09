@@ -78,6 +78,7 @@ h1, h2, h3 { font-family: var(--font-mincho); font-weight: 800; line-height: 1.4
 /* 落款：4字以内の漢字の呼び名。2字ずつの縦書き2列 */
 .seal { display: inline-block; writing-mode: vertical-rl; text-orientation: upright; height: calc(2.4em + 14px); min-width: 40px; padding: 4px 5px; border: 2px solid var(--shu); color: var(--shu); border-radius: 3px; font-family: var(--font-mincho); font-weight: 800; font-size: 13px; line-height: 1.15; letter-spacing: 0; text-align: center; flex: none; }
 /* 長い呼び名・カタカナの呼び名：枠のない朱色の縦書き1列 */
+.seal.s { min-width: 0; padding: 4px 6px; }
 .seal-line { display: inline-block; writing-mode: vertical-rl; text-orientation: mixed; color: var(--shu); font-family: var(--font-mincho); font-weight: 800; font-size: 13px; letter-spacing: .12em; line-height: 1; flex: none; }
 .seal-line.latin { writing-mode: horizontal-tb; letter-spacing: .04em; }
 .fn { font-family: var(--font-sans); font-size: .55em; color: var(--sky); text-decoration: none; font-weight: 400; }

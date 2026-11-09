@@ -370,7 +370,8 @@ def seal(text):
     """落款：4字以内の漢字の呼び名だけ。それ以外（長い呼び名・カタカナ・英字）は、枠のない朱色の縦書き1列"""
     t = re.sub(r"[（(].*?[）)]", "", text).strip()
     if re.fullmatch(r"[一-龥々]{1,4}", t):
-        return f'<span class="seal">{esc(t)}</span>'
+        # 2字までは1列の落款（4字用の幅のままだと左に余白が出る。2026-11-09）
+        return f'<span class="seal{" s" if len(t) <= 2 else ""}">{esc(t)}</span>'
     if re.fullmatch(r"[\x00-\x7f]+", t):
         return f'<span class="seal-line latin">{esc(t)}</span>'
     return f'<span class="seal-line">{esc(t)}</span>'

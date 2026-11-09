@@ -28,7 +28,8 @@
 
   // ことばくじ：ほかの会社のページへ
   const root = document.querySelector('.logo')?.getAttribute('href') || './';
-  document.querySelectorAll('.dice').forEach(b => b.addEventListener('click', async () => {
+  // トップの「ほかのことば」（.today-dice）は、その場で入れ替えるだけなので除く
+  document.querySelectorAll('.dice:not(.today-dice)').forEach(b => b.addEventListener('click', async () => {
     try {
       const list = await (await fetch(root + 'pick.json')).json();
       const pool = list.filter(u => !location.pathname.endsWith(u));
