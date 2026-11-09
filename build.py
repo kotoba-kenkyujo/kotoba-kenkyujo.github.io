@@ -569,12 +569,18 @@ def build_company(c, C, ids, stats, og_jobs):
         if w["層"] == "価値観":
             vals.setdefault(w["会社での呼び名"], []).append(w)
     parts = []
+    scrolls = []
     for w in tops:
         n = fn[w["出典URL"]]
         ok = f'<a class="ok" href="#src{n}" title="出典で原文どおりと確かめた日">✓ {dot(w["checked"])}</a>' if w["checked"] else ""
-        block = word_block(w, fn_link(n))
+        block = word_block(w, "")  # 掛け軸では注番号を出さない。右下の✓の日付が出典へのリンク（2026-11-09）
         latin_cls = " latin" if w["latin"] else ""
-        parts.append(f'<figure class="scroll{latin_cls} rise" id="{w["ID"]}">{block}<div class="foot">{seal(w["会社での呼び名"])}{ok}</div></figure>')
+        scrolls.append(f'<figure class="scroll{latin_cls} rise" id="{w["ID"]}">{block}<div class="foot">{seal(w["会社での呼び名"])}{ok}</div></figure>')
+    # 北極星が複数あるときは、掛け軸を横に並べる（入りきらなければ折り返す。2026-11-09）
+    if len(scrolls) > 1:
+        parts.append(f'<div class="scrolls">{"".join(scrolls)}</div>')
+    else:
+        parts.extend(scrolls)
     for w in visions:
         n = fn[w["出典URL"]]
         parts.append(f'<section class="sec" id="{w["ID"]}"><p class="label">{esc(w["会社での呼び名"])}</p><p class="vision">{esc(w["言葉"])}<sup>{fn_link(n)}</sup></p></section>')
@@ -610,7 +616,7 @@ def build_company(c, C, ids, stats, og_jobs):
     if shared or only:
         sh = "".join(f'<a class="tok" href="../../w/{q(t, safe="")}/">{esc(t)}<small>ほか{token_df[t] - 1}社</small></a>' for t in shared)
         on = "".join(f'<span class="tok only">{esc(t)}</span>' for t in only)
-        rows = (f'<div><dt>ほかの会社も</dt><dd>{sh}</dd></div>' if sh else "") + (f'<div><dt>この会社だけ</dt><dd>{on}</dd></div>' if on else "")
+        rows = (f'<div><dt>他社と共通</dt><dd>{sh}</dd></div>' if sh else "") + (f'<div><dt>この会社だけ</dt><dd>{on}</dd></div>' if on else "")
         parts.append(f'<section class="sec"><p class="label">ことば</p><dl class="facts toks">{rows}</dl></section>')
     # 言語史
     byid = {w["ID"]: w for w in ws}

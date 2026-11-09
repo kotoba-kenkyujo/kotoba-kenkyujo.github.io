@@ -439,3 +439,8 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 .scroll.latin { width: auto; max-width: min(640px, 100%); }
 /* 両端の矢印の社名は1列に収め、長いときは「…」 */
 .side .nm { white-space: nowrap; text-overflow: ellipsis; }
+
+/* 北極星が複数あるとき：掛け軸を横に並べる */
+.scrolls { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: var(--space-8) var(--space-12); margin: var(--space-8) auto; }
+.scrolls .scroll { margin: 0; flex: 0 1 auto; min-width: min(300px, 100%); align-content: space-between; }
+.scrolls .scroll + .scroll { margin-top: 0; }
