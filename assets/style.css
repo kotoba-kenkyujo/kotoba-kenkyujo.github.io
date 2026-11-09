@@ -456,3 +456,26 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
 .today .foot { gap: var(--space-3); }
 .today .foot .who { text-align: right; text-wrap: balance; }
 @media (max-width: 600px) { .today .who { font-size: 13px; } }
+
+/* 近いことば：横にスクロールする小さな掛け軸のカード（2026-11-09） */
+.sec.near { max-width: 1040px; }
+.near-rail-wrap { position: relative; }
+.near-rail { display: flex; gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--space-4); padding: var(--space-3) var(--space-4) var(--space-6); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%); }
+.near-rail::-webkit-scrollbar { display: none; }
+.near-card { position: relative; flex: 0 0 232px; scroll-snap-align: start; display: grid; grid-template-rows: auto 1fr auto; gap: var(--space-3); min-height: 230px; padding: var(--space-6) var(--space-4) var(--space-4); background: var(--paper); border: 1px solid var(--paper-line); box-shadow: 0 2px 10px rgba(0,0,0,.06); text-decoration: none; color: var(--ink); transition: transform .2s, box-shadow .2s; }
+.near-card::before, .near-card::after { content: ""; position: absolute; left: -6px; right: -6px; height: 7px; background: var(--rod); border-radius: 4px; }
+.near-card::before { top: -3px; } .near-card::after { bottom: -3px; }
+.near-card:hover, .near-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.near-card .tag { justify-self: start; font-size: 12px; color: var(--sky-on-tint); background: var(--chip-bg); border-radius: var(--radius-pill); padding: 1px 10px; }
+.near-card .q { font-family: var(--font-mincho); font-weight: 700; font-size: 16px; line-height: 1.8; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.near-card mark { background: none; color: var(--sky); }
+.near-card .who { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); font-size: 13px; color: var(--text-sub); border-top: 1px dotted var(--line); padding-top: var(--space-2); }
+.near-card .who small { font-family: var(--font-mincho); color: var(--shu); font-size: 12px; white-space: nowrap; }
+.near-card:hover .who { color: var(--sky); }
+.rail-btn { display: none; }
+@media (min-width: 760px) {
+  .rail-btn { display: grid; place-items: center; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; box-shadow: var(--shadow-lift); font-size: 16px; }
+  .rail-btn.prev { left: -8px; } .rail-btn.next { right: -8px; }
+  .rail-btn:hover { color: var(--sky); border-color: var(--sky); }
+  .rail-btn[disabled] { opacity: 0; pointer-events: none; }
+}

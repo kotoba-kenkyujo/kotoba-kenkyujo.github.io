@@ -681,18 +681,28 @@ def build_company(c, C, ids, stats, og_jobs):
             near.append((len(shared), -token_df[best], o, best))
     near.sort(key=lambda x: (-x[0], x[1], x[2]["ID"]))
     if near:
-        def quote(o, t):
+        def pick_word(o, t):
             ows = [w for w in o["words"] if not w["old"] and t in w["tokens"]]
-            w = sorted(ows, key=lambda w: (LAYERS.index(w["層"]) if w["層"] in LAYERS else 9, w["order"]))[0] if ows else None
-            if not w:
-                return ""
+            # 共通の語だけの短い言葉より、その語を含む文の言葉を選ぶ（北極星→理想像→価値観の順）
+            return sorted(ows, key=lambda w: (len(w["言葉"]) <= len(t) + 3, LAYERS.index(w["層"]) if w["層"] in LAYERS else 9, w["order"]))[0] if ows else None
+
+        def quote(w, t):
             txt = w["言葉"]
             i = txt.find(t)
-            a = max(0, i - 12)
-            snip = ("…" if a else "") + txt[a:a + 30] + ("…" if len(txt) > a + 30 else "")
-            return '<span class="q">' + esc(snip).replace(esc(t), f"<mark>{esc(t)}</mark>") + '</span>'
-        cards = "".join(f'<a href="../../{o["url"]}">{quote(o, t)}<span class="who">{esc(o["short"])}</span></a>' for _, _, o, t in near[:4])
-        parts.append(f'<section class="sec"><p class="label">近いことば</p><div class="related">{cards}</div></section>')
+            a = max(0, i - 14)
+            snip = ("…" if a else "") + txt[a:a + 44] + ("…" if len(txt) > a + 44 else "")
+            return esc(snip).replace(esc(t), f"<mark>{esc(t)}</mark>")
+        # 近いことば（2026-11-09）：12社まで、横にスクロールする小さな掛け軸のカード。共通の語を札にし、相手の言葉を引用する
+        cards = ""
+        picked = [(o, t, pick_word(o, t)) for _, _, o, t in near[:12]]
+        picked = sorted((x for x in picked if x[2]), key=lambda x: len(x[2]["言葉"]) <= len(x[1]) + 3)  # 語だけの短い言葉は後ろへ
+        for o, t, w in picked:
+            cards += (f'<a class="near-card" href="../../{o["url"]}#{w["ID"]}" data-goatcounter-click="near/{c["ID"]}">'
+                      f'<span class="tag">{esc(t)}</span><span class="q">{quote(w, t)}</span>'
+                      f'<span class="who">{esc(o["short"])}<small>{esc(w["会社での呼び名"])}</small></span></a>')
+        parts.append(f"""<section class="sec near"><p class="label">近いことば</p>
+  <div class="near-rail-wrap"><button class="rail-btn prev" type="button" aria-label="前へ">←</button><div class="near-rail" tabindex="0">{cards}</div><button class="rail-btn next" type="button" aria-label="次へ">→</button></div>
+</section>""")
     # 出典と訂正
     srcs = []
     for u, n in fn.items():

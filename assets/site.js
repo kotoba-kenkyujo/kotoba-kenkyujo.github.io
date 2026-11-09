@@ -160,4 +160,17 @@
       todayEl.querySelector('.day').textContent = 'ことばくじ';
     });
   }
+  // 近いことば：横のレールを矢印で1枚ずつ送る。端では矢印を消す（2026-11-09）
+  document.querySelectorAll('.near-rail-wrap').forEach(wrap => {
+    const rail = wrap.querySelector('.near-rail');
+    const prev = wrap.querySelector('.rail-btn.prev');
+    const next = wrap.querySelector('.rail-btn.next');
+    const step = () => { const card = rail.querySelector('.near-card'); return card ? card.getBoundingClientRect().width + 16 : 240; };
+    const sync = () => { prev.disabled = rail.scrollLeft < 4; next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4; };
+    prev.addEventListener('click', () => rail.scrollBy({ left: -step() * 2, behavior: 'smooth' }));
+    next.addEventListener('click', () => rail.scrollBy({ left: step() * 2, behavior: 'smooth' }));
+    rail.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    sync();
+  });
 })();
