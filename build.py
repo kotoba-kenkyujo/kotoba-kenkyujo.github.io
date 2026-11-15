@@ -733,7 +733,8 @@ def build_company(c, C, ids, stats, og_jobs):
         gl = []
         for name, g in vals.items():
             n = fn[g[0]["出典URL"]]
-            lis = "".join('<li id="%s">%s</li>' % (w["ID"], yoko(w["言葉"])) for w in g)
+            # li は番号と言葉の2列の grid なので、言葉を1つの span に入れる（約物の詰めの span が別の列に分かれないように）
+            lis = "".join('<li id="%s"><span>%s</span></li>' % (w["ID"], yoko(w["言葉"])) for w in g)
             gl.append(f'<div class="valgroup"><h2>{esc(name)}</h2><ol>{lis}</ol></div>')
         parts.append(f'<section class="sec"><div class="vals{" two" if len(vals) == 2 else ""}">{"".join(gl)}</div></section>')
     # 統計用の分類：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
