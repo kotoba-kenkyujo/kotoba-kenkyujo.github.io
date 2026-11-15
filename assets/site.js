@@ -134,7 +134,22 @@
     new IntersectionObserver(es => { es.forEach(e => { pastTop = !e.isIntersecting && e.boundingClientRect.top < 0; }); sync(); }).observe(firstScroll);
     new IntersectionObserver(es => { es.forEach(e => { endSeen = e.isIntersecting; }); sync(); }).observe(pagerEnd);
   }
-  // トップ：今日のことばのくじ（その場で、ほかの会社の北極星に入れ替える。2026-11-09）
+  const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 会社のページ：掛け軸を上の軸から下へひらく（2026-11-15 見本の案1）。高さを測って --scroll-h に入れ、.rise を .unroll に替える
+  const unroll = el => {
+    const h = el.clientHeight;
+    if (!h) return false;
+    el.style.setProperty('--scroll-h', h + 'px');
+    el.classList.remove('rise', 'unroll');
+    void el.offsetWidth;
+    el.classList.add('unroll');
+    return true;
+  };
+  // 先読み（案12）で裏で開いたページは、表示されたときにひらく。ページをまたぐ動き（案9）で移ってきたときは、つながった掛け軸をひらかない
+  const openScrolls = () => { if (!calm()) document.querySelectorAll('figure.scroll.rise').forEach(unroll); };
+  if (document.prerendering) document.addEventListener('prerenderingchange', openScrolls, { once: true }); else openScrolls();
+  // トップ：今日のことばのくじ（その場で、ほかの会社の北極星に入れ替える。2026-11-09）。
+  // 2026-11-15 見本の案14：掛け軸を巻き上げてから、新しい言葉でひらく。英字が主の言葉は縦書きの入れ物ごと横書きに入れ替える（前は縦書きの中に入って横倒しになっていた）
   const todayBtn = document.querySelector('.today-dice');
   const poolEl = document.getElementById('today-pool');
   const todayEl = document.querySelector('.today');
@@ -142,22 +157,52 @@
     let pool = [];
     try { pool = JSON.parse(poolEl.textContent); } catch (e) { /* くじが使えなくても今日のことばは出ている */ }
     let last = todayEl.getAttribute('href');
+    let busy = null, pending = null;
+    const render = p => {
+      todayEl.setAttribute('href', p.url);
+      todayEl.setAttribute('aria-label', '今日のことば　' + p.co);
+      todayEl.classList.toggle('latin', p.latin);
+      const old = todayEl.querySelector('.tate-wrap, .yoko');
+      let block;
+      if (p.latin) {
+        block = document.createElement('p');
+        block.className = 'yoko';
+        block.innerHTML = p.html;
+      } else {
+        block = document.createElement('div');
+        block.className = 'tate-wrap';
+        const t = document.createElement('p');
+        t.className = p.long ? 'tate long' : 'tate';
+        t.innerHTML = p.html;
+        block.appendChild(t);
+      }
+      old.replaceWith(block);
+      todayEl.querySelector('.foot').innerHTML = p.seal + '<span class="who"></span>';
+      todayEl.querySelector('.foot .who').textContent = p.co;
+      todayEl.querySelector('.day').textContent = 'ことばくじ';
+    };
     todayBtn.addEventListener('click', () => {
       const cands = pool.filter(p => p.url !== last);
       if (!cands.length) return;
       const p = cands[Math.floor(Math.random() * cands.length)];
       last = p.url;
-      todayEl.setAttribute('href', p.url);
-      todayEl.setAttribute('aria-label', '今日のことば　' + p.co);
-      todayEl.classList.toggle('latin', p.latin);
-      const word = todayEl.querySelector('.tate, .yoko');
-      const neo = document.createElement('p');
-      neo.className = p.latin ? 'yoko' : (p.long ? 'tate long' : 'tate');
-      neo.innerHTML = p.html;
-      word.replaceWith(neo);
-      todayEl.querySelector('.foot').innerHTML = p.seal + '<span class="who"></span>';
-      todayEl.querySelector('.foot .who').textContent = p.co;
-      todayEl.querySelector('.day').textContent = 'ことばくじ';
+      if (calm() || !todayEl.animate) { render(p); return; }
+      pending = p;
+      if (busy) return;  // 巻き上げの途中に押されたら、最後に引いた言葉でひらく
+      const h = todayEl.clientHeight;
+      const ease = 'cubic-bezier(.45, .05, .25, 1)';
+      todayEl.classList.remove('rise', 'unroll');
+      const opts = { duration: 520, easing: ease, fill: 'forwards' };
+      busy = todayEl.animate([{ clipPath: 'inset(-40px -40px -40px -40px)' }, { clipPath: 'inset(-40px -40px calc(100% - 7px) -40px)' }], opts);
+      let rod = null;
+      try { rod = todayEl.animate([{ transform: 'none' }, { transform: 'translateY(' + (-h) + 'px)' }], Object.assign({ pseudoElement: '::after' }, opts)); } catch (e) { /* 軸だけ動かせないときは紙だけ巻き上げる */ }
+      busy.finished.then(() => {
+        render(pending);
+        busy.cancel();
+        if (rod) rod.cancel();
+        busy = null;
+        unroll(todayEl);
+      });
     });
   }
   // 近いことば：横のレールを矢印で1枚ずつ送る。端では矢印を消す（2026-11-09）
@@ -172,5 +217,96 @@
     rail.addEventListener('scroll', sync, { passive: true });
     addEventListener('resize', sync);
     sync();
+    // 位置の点（2026-11-15 見本の案11）：カードが6割以上見えていたら、その点を塗る。押すとそのカードへ
+    const cards = [...rail.querySelectorAll('.near-card')];
+    if (cards.length < 2 || !('IntersectionObserver' in window)) return;
+    const box = document.createElement('div');
+    box.className = 'rail-dots';
+    box.setAttribute('role', 'group');
+    box.setAttribute('aria-label', '近いことばの位置');
+    const dots = cards.map((c, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.setAttribute('aria-label', (i + 1) + '枚目（' + (c.querySelector('.who .nm') || c).textContent.trim() + '）へ');
+      d.addEventListener('click', () => rail.scrollTo({ left: c.offsetLeft - 16, behavior: calm() ? 'auto' : 'smooth' }));
+      box.appendChild(d);
+      return d;
+    });
+    wrap.after(box);
+    const io = new IntersectionObserver(es => es.forEach(e => dots[cards.indexOf(e.target)].classList.toggle('on', e.intersectionRatio >= 0.6)), { root: rail, threshold: [0, 0.6, 1] });
+    cards.forEach(c => io.observe(c));
+  });
+
+  // 会社の一覧の五十音の札・統計の章の札（2026-11-15 見本の案10・案15）：ヘッダーの下に留めた札のうち、いま読んでいる区画の札を塗る。
+  // 留めた札の下から画面の3割の線より上に頭が来ている区画のうち、いちばん下のもの。同じ高さに並ぶ章（統計の2列）はまとめて塗る
+  ['.kana-jump', '.toc'].forEach(barSel => {
+    const bar = document.querySelector(barSel);
+    if (!bar) return;
+    const links = [...bar.querySelectorAll('a[href^="#"]')];
+    const secs = links.map(a => document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))));
+    if (!secs.length || secs.some(x => !x)) return;
+    let last = '';
+    const paint = () => {
+      const edge = bar.getBoundingClientRect().bottom;
+      const line = edge + (innerHeight - edge) * 0.3;
+      const tops = secs.map(x => x.getBoundingClientRect().top);
+      const above = tops.filter(t => t <= line);
+      const cur = above.length ? Math.max(...above) : null;
+      const on = links.map((a, i) => cur !== null && Math.abs(tops[i] - cur) < 4);
+      const key = on.join();
+      if (key === last) return;
+      last = key;
+      let first = null;
+      links.forEach((a, i) => { if (on[i]) { a.setAttribute('aria-current', 'true'); if (!first) first = a; } else a.removeAttribute('aria-current'); });
+      if (first && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: Math.max(0, first.offsetLeft - (bar.clientWidth - first.offsetWidth) / 2), behavior: calm() ? 'auto' : 'smooth' });
+    };
+    let ticking = false;
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
+    addEventListener('resize', paint);
+    paint();
+  });
+
+  // ページをまたぐ動き（2026-11-15 見本の案9）：トップの新収蔵の行・近いことばのカードを押すと、押した言葉が次のページの掛け軸へつながる。
+  // 前後の会社へは左右に滑る。押した言葉の行き先は、次のページで照らし合わせるため sessionStorage に一時的に覚える
+  const KEY = 'kotoba-vt';
+  let swapEl = null;
+  const remember = v => { try { sessionStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* 覚えられなくても移動はできる */ } };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    if (a.matches('.index a, .near-card')) {
+      swapEl = a.querySelector('.w, .q');
+      remember({ word: (a.getAttribute('href').split('#')[1] || '') });
+    } else if (a.matches('.pager a, .side, .mini-nav a')) {
+      swapEl = null;
+      remember({ dir: a.matches('.pager a:first-child, .side.prev, .mini-nav a:first-child') ? 'backwards' : 'forwards' });
+    } else {
+      swapEl = null;
+      try { sessionStorage.removeItem(KEY); } catch (err) { /* なにもしない */ }
+    }
+  });
+  addEventListener('pageswap', e => {
+    if (!e.viewTransition) return;
+    let v = {};
+    try { v = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (err) { /* なにもしない */ }
+    if (v.dir) e.viewTransition.types.add(v.dir);
+    if (swapEl) {
+      swapEl.style.viewTransitionName = 'word';
+      e.viewTransition.finished.finally(() => { swapEl.style.viewTransitionName = ''; });
+    }
+  });
+  addEventListener('pagereveal', e => {
+    let v = null;
+    try { v = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (err) { /* なにもしない */ }
+    if (!e.viewTransition || !v) return;
+    if (v.dir) e.viewTransition.types.add(v.dir);
+    document.querySelectorAll('figure.scroll').forEach(f => f.classList.remove('rise', 'unroll'));  // 動きを二重にしない
+    if (!v.hasOwnProperty('word')) return;
+    const byId = v.word && document.getElementById(v.word);
+    const target = byId && byId.matches('.scroll') ? byId : document.querySelector('figure.scroll');
+    if (!target) return;
+    target.classList.remove('rise', 'unroll');
+    target.style.viewTransitionName = 'word';
+    e.viewTransition.finished.finally(() => { target.style.viewTransitionName = ''; });
   });
 })();

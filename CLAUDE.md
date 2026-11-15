@@ -27,6 +27,15 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 - 言語史は公開中の改定が HISTORY_MIN（5）件になるまで、メニュー・フッター・サイトマップに出さない（ページはある）。
 - 明るい／暗い表示：最初は明るい表示（2026/11/08 黒田さん）、フッターのボタンで切り替え、localStorage の kotoba-theme に覚える。色は :root[data-theme="dark"] で上書き。
 - robots.txt で AI の学習用クローラー（AI_TRAINING）を断る。検索エンジンは通す。
+- 2026-11-15 改善の見本（https://claude.ai/artifact/SAbqASgKngtL6R3qyCWrri 、db の choices）で黒田さんが採用した15件を入れた。不採用：今日のことばが文節ごとに書かれる・トップの統計の枠の大きな数字。採用：
+  - 掛け軸：会社のページの掛け軸は上の軸から下へひらく（site.js が高さを --scroll-h に入れて .rise を .unroll に替える。先読みで開いたページは表示されてから）。落款は掛け軸が出たあとに押される。ことばくじは巻き上げてから新しい言葉でひらく（文節ごとに出す動きは不採用に合わせて入れない）
+  - 組版：phrases(text, mode)。縦書き（tate）は半角数字の2桁までを縦中横（.tcy）、3桁以上を正立（.upr）。横書きの明朝の言葉は yoko()（文節の <wbr> と約物の詰め .yk-s/.yk-e/.yk-n）。Google Fonts の Shippori Mincho B1 は横書きの palt・halt・text-spacing-trim が効かない（縦書きの vpal は効く）ので、約物は余白で詰め、その言葉では palt を切る。両端の矢印の英字の社名は半角にして横に寝かせる（side_name()）
+  - 言語史：改定は字の差分（diff_html()。消えた字は <del>、足した字は <ins> の黄色のマーカー。朱は使わない）と「−2字 ＋3字」の札。そろった字が短いほうの3割未満か、変わった所が3か所以上なら差分にせず古い→新しいで並べる。言語史の矢印の朱はやめた
+  - 探す：層の札の数を今の検索に合わせ、0件の札は押せなくする。0件のときは条件を1つ外したときの数をボタンで出す。社名や読みに当たる会社の札を一覧の先頭に3社まで（略した社名と読みだけを見る。データは words/ の #co-data）。find.js は元の HTML を覚えて、<wbr> をまたいで印を付ける
+  - 行き来：ページをまたぐ View Transitions（新収蔵の行・近いことばのカードの言葉が次のページの掛け軸へつながる。前後の会社は左右に滑る。行き先は sessionStorage の kotoba-vt）。会社の一覧の五十音の札と統計の章の札はヘッダーの下に留め、読んでいる区画の札を塗る。近いことばの引用は文節で切り（40字まで）、社名と呼び名を1行ずつ、下に位置の点。前後の会社と近いことばは speculation rules で先読み（Chrome・Edge のみ。count.js は表示されてから数えるので数え方は変わらない）
+  - 統計：棒は画面に入ったときに伸び、章の頭の数字は 0 から数え上がる（animation-timeline: view() と @property。.bar.full i は overflow: clip でないと view() が効かない）
+  - 動きはすべて prefers-reduced-motion: no-preference の中、スクロール連動は @supports (animation-timeline: view()) の中。止まった姿で完成している
+  - Chrome の不具合：縦書き（vertical-rl・keep-all）の中で文節の span を inline-block にするとタブが落ちる。文節に動きを付けるときは inline のまま opacity と filter だけにする
 
 ## ファイル
 

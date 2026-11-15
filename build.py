@@ -6,7 +6,7 @@
 出力は _site/。手元のCSVで試したときは data/ を書き換えない。
 共有画像は、このあと tools/make_og.py が _site/og/jobs.json を読んで作る。
 """
-import csv, datetime, html, io, json, os, re, shutil, sys, unicodedata, urllib.parse, urllib.request
+import csv, datetime, difflib, html, io, json, os, re, shutil, sys, unicodedata, urllib.parse, urllib.request
 from collections import Counter, defaultdict, OrderedDict
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -310,6 +310,9 @@ def page(path, title, body, desc=None, current=None, og=None, jsonld=None, noind
         head_extra += '<script type="application/ld+json">' + json.dumps(jsonld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     if noindex:
         head_extra += '<meta name="robots" content="noindex">\n'
+    # 前後の会社と近いことばを、押しそうになったら先に読み込む（2026-11-15 見本の案12。Chrome・Edge 121+。ほかのブラウザは無視する）
+    head_extra += ('<script type="speculationrules">{"prerender":[{"where":{"or":[{"selector_matches":".side"},{"selector_matches":".pager a"},'
+                   '{"selector_matches":".mini-nav a"},{"selector_matches":".near-card"}]},"eagerness":"moderate"}]}</script>\n')
     return f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -377,11 +380,123 @@ def seal(text):
     return f'<span class="seal-line">{esc(t)}</span>'
 
 
-def phrases(text):
-    """文節の切れ目に <wbr> を入れる。CSS の word-break: keep-all と組で、文節の途中では改行しない（2026-11-08 黒田さん：改行位置をうまく）"""
-    if not BUDOUX:
-        return esc(text)
-    return "<wbr>".join(esc(p) for p in kinsoku(BUDOUX.parse(text)))
+def phrases(text, mode="tate"):
+    """文節の切れ目に <wbr> を入れる。CSS の word-break: keep-all と組で、文節の途中では改行しない（2026-11-08 黒田さん：改行位置をうまく）。
+    mode="tate"（縦書き）は半角の数字を縦中横・正立にし（2026-11-15 見本の案4）、mode="yoko"（横書きの明朝）は括弧・句読点を半角分詰める（案5）。
+    横書きの言葉にも文節の <wbr> を入れる（案6）"""
+    parts = kinsoku(BUDOUX.parse(text)) if BUDOUX else [text]
+    out, pos = [], 0
+    for p in parts:
+        if mode == "yoko":
+            out.append(yakumono(text, pos, len(p)))
+        elif mode == "tate":
+            out.append(tcy(esc(p)))
+        else:
+            out.append(esc(p))
+        pos += len(p)
+    return "<wbr>".join(out)
+
+
+def tcy(h):
+    """縦書きの半角数字：2桁まで（と 1.5 のような小数）は縦中横、3桁以上は1字ずつ立てる。文字参照（&#39;）や英字に続く数字は包まない（2026-11-15）"""
+    def rep(m):
+        d = m.group(0)
+        if len(d) <= 2 or ("." in d and len(d) <= 3):
+            return f'<span class="tcy">{d}</span>'
+        return f'<span class="upr">{d}</span>'
+    return re.sub(r"(?<![0-9A-Za-z.#&])[0-9]+(?:\.[0-9]+)?(?![0-9.;])", rep, h)
+
+
+YK_OPEN = "「『（【〈《〔［"
+YK_CLOSE = "」』）】〉》〕］"
+YK_STOP = "、。，．"
+YK_MID = "・"
+YK_ALL = YK_OPEN + YK_CLOSE + YK_STOP + YK_MID
+
+
+def yakumono(text, start, n):
+    """横書きの明朝の約物を詰める（2026-11-15 見本の案5）。Google Fonts の Shippori Mincho B1 は横書きの palt が効かないため、
+    書き出しの始め括弧と、始め括弧・中黒に続く始め括弧は左を、約物が続く終わり括弧・句読点は右を半字、中黒は前後を四分詰める（CSS の .yk-s/.yk-e/.yk-n）"""
+    out = []
+    for i in range(start, start + n):
+        ch, prev = text[i], text[i - 1] if i else ""
+        nxt = text[i + 1] if i + 1 < len(text) else ""
+        cls = ""
+        if ch in YK_OPEN and (i == 0 or prev in YK_OPEN or prev in YK_MID):
+            cls = "yk-s"
+        elif (ch in YK_CLOSE or ch in YK_STOP) and nxt and nxt in YK_ALL:
+            cls = "yk-e"
+        elif ch in YK_MID:
+            cls = "yk-n"
+        out.append(f'<span class="{cls}">{esc(ch)}</span>' if cls else esc(ch))
+    return "".join(out)
+
+
+def mark(h, t):
+    """文節の <wbr> をまたいでも語に印（mark）を付ける"""
+    if not t:
+        return h
+    pat = "(?:<wbr>)?".join(re.escape(esc(c)) for c in t)
+    return re.sub(pat, lambda m: f"<mark>{m.group(0)}</mark>", h)
+
+
+def diff_html(a, b):
+    """改定の字の差分（2026-11-15 見本の案17）。新しい言葉の中で、消えた字を <del>、足した字を <ins> で示す。
+    1字だけ偶然そろった所は差分に含める。そろった字が新旧の短いほうの3割未満か、変わった所が3か所以上なら、
+    差分にすると読みにくいので差分にしない（ok=False。言語史では古い→新しいで並べる）。
+    返り値：(ok, 消えた字数, 足した字数, HTML)。新しい言葉の文節の切れ目に <wbr> を入れる"""
+    sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
+    segs = [(t, a[i1:i2], b[j1:j2]) for t, i1, i2, j1, j2 in sm.get_opcodes()]
+    cleaned = [("replace", o, n) if t == "equal" and len(o) < 2 and 0 < k < len(segs) - 1 else (t, o, n) for k, (t, o, n) in enumerate(segs)]
+    merged = []
+    for t, o, n in cleaned:
+        if t != "equal" and merged and merged[-1][0] != "equal":
+            merged[-1] = ("replace", merged[-1][1] + o, merged[-1][2] + n)
+        else:
+            merged.append((t, o, n))
+    same = sum(len(o) for t, o, n in merged if t == "equal")
+    minus = sum(char_len(o) for t, o, n in merged if t != "equal")
+    plus = sum(char_len(n) for t, o, n in merged if t != "equal")
+    cuts, pos = set(), 0
+    for p in (kinsoku(BUDOUX.parse(b)) if BUDOUX else [b]):
+        pos += len(p)
+        cuts.add(pos)
+
+    def part(text, start):
+        out = ""
+        for k, ch in enumerate(text):
+            if k and start + k in cuts:
+                out += "<wbr>"
+            out += esc(ch)
+        return out
+    h, j = "", 0
+    for t, o, n in merged:
+        if j and j in cuts and (t == "equal" or n):
+            h += "<wbr>"
+        if t == "equal":
+            h += part(o, j)
+        else:
+            if o:
+                h += f"<del>{esc(o)}</del>"
+            if n:
+                h += f"<ins>{part(n, j)}</ins>"
+        j += len(n)
+    changes = sum(1 for t, o, n in merged if t != "equal")
+    return same >= 0.3 * min(len(a), len(b)) and changes <= 2, minus, plus, h
+
+
+def diff_count(minus, plus):
+    """差分の字数の札（−2字 ＋3字）"""
+    m = f'<span class="m">−{minus}字</span>' if minus else ""
+    p = f'<span class="p">＋{plus}字</span>' if plus else ""
+    if not m and not p:
+        m = '<span class="m">±0字</span>'   # 空白だけが変わった改定
+    return f'<span class="dn">{m}{p}</span>'
+
+
+def yoko(text):
+    """横書きの明朝の言葉（一覧・言語史・理想像・新収蔵）：文節の <wbr> と約物の詰め"""
+    return phrases(text, "yoko")
 
 
 OPENERS = "「『（(［[【〈《〔“‘"
@@ -416,7 +531,7 @@ def kinsoku(parts):
 def word_block(w, fn_html):
     """掛け軸・今日のことばの言葉。英字が主の言葉は横書き（2026-11-08）"""
     if w["latin"]:
-        return f'<p class="yoko">{phrases(w["言葉"])}{fn_html}</p>'
+        return f'<p class="yoko">{phrases(w["言葉"], "plain")}{fn_html}</p>'
     cls = "tate long" if w["len"] > 36 else "tate"
     # とても長い言葉で枠からはみ出さないよう、縦書きの横スクロールの入れ物で包む（右＝書き出しから見える。2026-11-09）
     return f'<div class="tate-wrap"><p class="{cls}">{phrases(w["言葉"])}{fn_html}</p></div>'
@@ -505,7 +620,7 @@ def build_top(C, W, stats):
         w = lead_word(c)
         more = sum(1 for x in c["words"] if not x["old"]) - 1
         more_html = f'<small>ほか{more}語</small>' if more > 0 else ""
-        rows.append(f'<li><a href="{c["url"]}"><span><span class="w">{esc(w["言葉"])}</span><span class="who">{esc(c["short"])}{more_html}</span></span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>')
+        rows.append(f'<li><a href="{c["url"]}"><span><span class="w">{yoko(w["言葉"])}</span><span class="who">{esc(c["short"])}{more_html}</span></span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>')
     # 最近の改定：いま使っている言葉のうち、前の言葉があるもの（新しい順に2件）
     kais = sorted((w for w in W if w["前の言葉のID"] and not w["old"]), key=lambda w: (w["使い始め"], w["no"]), reverse=True)[:2]
     byid = {w["ID"]: w for w in W}
@@ -613,12 +728,12 @@ def build_company(c, C, ids, stats, og_jobs):
         parts.extend(scrolls)
     for w in visions:
         n = fn[w["出典URL"]]
-        parts.append(f'<section class="sec" id="{w["ID"]}"><p class="label">{esc(w["会社での呼び名"])}</p><p class="vision">{esc(w["言葉"])}</p></section>')
+        parts.append(f'<section class="sec" id="{w["ID"]}"><p class="label">{esc(w["会社での呼び名"])}</p><p class="vision">{yoko(w["言葉"])}</p></section>')
     if vals:
         gl = []
         for name, g in vals.items():
             n = fn[g[0]["出典URL"]]
-            lis = "".join('<li id="%s">%s</li>' % (w["ID"], esc(w["言葉"])) for w in g)
+            lis = "".join('<li id="%s">%s</li>' % (w["ID"], yoko(w["言葉"])) for w in g)
             gl.append(f'<div class="valgroup"><h2>{esc(name)}</h2><ol>{lis}</ol></div>')
         parts.append(f'<section class="sec"><div class="vals{" two" if len(vals) == 2 else ""}">{"".join(gl)}</div></section>')
     # 統計用の分類：統計と同じ数え方で、この会社の言葉を見る（2026-11-09）
@@ -662,13 +777,20 @@ def build_company(c, C, ids, stats, og_jobs):
     if chains or ended:
         items = []
         for ch in chains:
-            for w in ch:
+            for k, w in enumerate(ch):
                 start, end = ym(w["使い始め"]), ym(w["使い終わり"])
                 when = f"{start}〜{end}" if (start or end) else ""
                 wid = f' id="{w["ID"]}"' if w["old"] else ""
-                items.append(f'<li class="{"old" if w["old"] else "now"}"{wid}><div class="when">{esc(when)}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
+                # 改定のあとの言葉は、前の言葉との字の差分で見せる（2026-11-15 見本の案17）。ほとんど書き換えたときは今までどおり
+                body, cnt, cls = yoko(w["言葉"]), "", "old" if w["old"] else "now"
+                if k:
+                    ok, minus, plus, dh = diff_html(ch[k - 1]["言葉"], w["言葉"])
+                    cnt = diff_count(minus, plus)
+                    if ok:
+                        body, cls = dh, cls + " diff"
+                items.append(f'<li class="{cls}"{wid}><div class="when">{esc(when)}　{esc(w["会社での呼び名"])}{cnt}</div><div class="w">{body}</div></li>')
         for w in ended:
-            items.append(f'<li class="old" id="{w["ID"]}"><div class="when">〜{esc(ym(w["使い終わり"]))}　{esc(w["会社での呼び名"])}</div><div class="w">{esc(w["言葉"])}</div></li>')
+            items.append(f'<li class="old" id="{w["ID"]}"><div class="when">〜{esc(ym(w["使い終わり"]))}　{esc(w["会社での呼び名"])}</div><div class="w">{yoko(w["言葉"])}</div></li>')
         parts.append(f'<section class="sec" id="history"><p class="label">言語史</p><ol class="timeline">{"".join(items)}</ol></section>')
     # 近い言葉：共通する語のうち、使っている会社が少ない（＝特徴的な）語で結ぶ
     near = []
@@ -687,11 +809,24 @@ def build_company(c, C, ids, stats, og_jobs):
             return sorted(ows, key=lambda w: (len(w["言葉"]) <= len(t) + 3, LAYERS.index(w["層"]) if w["層"] in LAYERS else 9, w["order"]))[0] if ows else None
 
         def quote(w, t):
+            """引用は文節の切れ目で切る（2026-11-15 見本の案11）。共通の語がある文節から前後に1文節ずつ足し、40字を超える手前で止める"""
             txt = w["言葉"]
-            i = txt.find(t)
-            a = max(0, i - 14)
-            snip = ("…" if a else "") + txt[a:a + 44] + ("…" if len(txt) > a + 44 else "")
-            return esc(snip).replace(esc(t), f"<mark>{esc(t)}</mark>")
+            parts = kinsoku(BUDOUX.parse(txt)) if BUDOUX else [txt]
+            starts, pos = [], 0
+            for p in parts:
+                starts.append(pos)
+                pos += len(p)
+            i = max(0, txt.find(t))
+            k = max(j for j, st in enumerate(starts) if st <= i)
+            lo = hi = k
+            while hi + 1 < len(parts) and sum(len(x) for x in parts[lo:hi + 2]) <= 40:
+                hi += 1
+                if lo > 0 and sum(len(x) for x in parts[lo - 1:hi + 1]) <= 40:
+                    lo -= 1
+            while lo > 0 and sum(len(x) for x in parts[lo - 1:hi + 1]) <= 40:
+                lo -= 1
+            h = "<wbr>".join(yakumono(txt, starts[j], len(parts[j])) for j in range(lo, hi + 1))
+            return ("…" if lo else "") + mark(h, t) + ("…" if hi < len(parts) - 1 else "")
         # 近いことば（2026-11-09）：12社まで、横にスクロールする小さな掛け軸のカード。共通の語を札にし、相手の言葉を引用する
         cards = ""
         picked = [(o, t, pick_word(o, t)) for _, _, o, t in near[:12]]
@@ -699,7 +834,7 @@ def build_company(c, C, ids, stats, og_jobs):
         for o, t, w in picked:
             cards += (f'<a class="near-card" href="../../{o["url"]}#{w["ID"]}" data-goatcounter-click="near/{c["ID"]}">'
                       f'<span class="tag">{esc(t)}</span><span class="q">{quote(w, t)}</span>'
-                      f'<span class="who">{esc(o["short"])}<small>{esc(w["会社での呼び名"])}</small></span></a>')
+                      f'<span class="who"><span class="nm">{esc(o["short"])}</span><small>{esc(w["会社での呼び名"])}</small></span></a>')
         parts.append(f"""<section class="sec near"><p class="label">近いことば</p>
   <div class="near-rail-wrap"><button class="rail-btn prev" type="button" aria-label="前へ">←</button><div class="near-rail" tabindex="0">{cards}</div><button class="rail-btn next" type="button" aria-label="次へ">→</button></div>
 </section>""")
@@ -718,7 +853,7 @@ def build_company(c, C, ids, stats, og_jobs):
     prev_c, next_c = C[ids[i - 1]], C[ids[(i + 1) % len(ids)]]
     parts.append(f"""<nav class="pager" aria-label="前後の会社"><a href="../../{prev_c['url']}" data-goatcounter-click="pager/prev">← {esc(prev_c['short'])}</a><button class="dice" type="button" data-goatcounter-click="pick/{c['ID']}">🎲 ほかの会社</button><a href="../../{next_c['url']}" data-goatcounter-click="pager/next">{esc(next_c['short'])} →</a></nav>""")
     # 回遊（2026-11-09）：PCは画面の両端に縦書きの社名つきの矢印、スマホは読み進めると下に小さな帯が出る（ページ下の前後の帯が見えたら隠す）
-    parts.append(f"""<nav class="side-nav" aria-label="前後の会社（画面の両端）"><a class="side prev" href="../../{prev_c['url']}" data-goatcounter-click="side/prev"><span class="arr">←</span><span class="nm">{esc(prev_c['short'])}</span></a><a class="side next" href="../../{next_c['url']}" data-goatcounter-click="side/next"><span class="arr">→</span><span class="nm">{esc(next_c['short'])}</span></a></nav>
+    parts.append(f"""<nav class="side-nav" aria-label="前後の会社（画面の両端）"><a class="side prev" href="../../{prev_c['url']}" data-goatcounter-click="side/prev"><span class="arr">←</span><span class="nm">{side_name(prev_c['short'])}</span></a><a class="side next" href="../../{next_c['url']}" data-goatcounter-click="side/next"><span class="arr">→</span><span class="nm">{side_name(next_c['short'])}</span></a></nav>
 <nav class="mini-nav" aria-label="前後の会社（下の帯）" hidden><a href="../../{prev_c['url']}" data-goatcounter-click="mini/prev">← <span>{esc(prev_c['short'])}</span></a><button class="dice" type="button" data-goatcounter-click="mini/pick">🎲</button><a href="../../{next_c['url']}" data-goatcounter-click="mini/next"><span>{esc(next_c['short'])}</span> →</a></nav>""")
     head = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../c/">会社</a> › {esc(c['会社名'])}</nav>
 <div class="co-head"><h1>{esc(c['会社名'])}</h1></div>"""
@@ -731,6 +866,19 @@ def build_company(c, C, ids, stats, og_jobs):
     og = f"og/c/{c['ID']}.png"
     og_jobs.append({"out": og, "kind": "company", "word": lead_w["言葉"], "latin": lead_w["latin"], "company": c["会社名"], "name": lead_w["会社での呼び名"]})
     write(c["url"], page(c["url"], c["会社名"], head + "\n".join(parts), desc=desc, og=og, jsonld=jsonld))
+
+
+def side_name(name):
+    """両端の縦書きの矢印の社名。全角の英字が1字ずつ立って拾い読みにならないよう、英字の並びは半角にして横に寝かせる（2026-11-15 見本の案4）。
+    3字までの略称（NEC など）は立てたまま"""
+    def rep(m):
+        t = unicodedata.normalize("NFKC", m.group(0))
+        return esc(m.group(0)) if len(t) <= 3 else f'<span class="lat">{esc(t)}</span>'
+    out, last = "", 0
+    for m in re.finditer(r"[A-Za-zＡ-Ｚａ-ｚ][A-Za-zＡ-Ｚａ-ｚ0-9０-９&＆.．' ’　]*[A-Za-zＡ-Ｚａ-ｚ0-9０-９]|[A-Za-zＡ-Ｚａ-ｚ]", name):
+        out += esc(name[last:m.start()]) + rep(m)
+        last = m.end()
+    return out + esc(name[last:])
 
 
 def fn_link(n):
@@ -769,7 +917,7 @@ def build_companies(C):
         for c in g:
             w = lead_word(c)
             snip = w["言葉"] if len(w["言葉"]) <= 44 else w["言葉"][:44] + "…"
-            lis += f'<li><a href="../{c["url"]}"><span class="nm">{esc(c["会社名"])}</span><span class="w">{esc(snip)}</span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>'
+            lis += f'<li><a href="../{c["url"]}"><span class="nm">{esc(c["会社名"])}</span><span class="w">{yoko(snip)}</span><span class="chip">{esc(w["会社での呼び名"])}</span></a></li>'
         secs.append(f'<section class="co-group" id="g-{r}"><h2>{r}</h2><ul class="co-list">{lis}</ul></section>')
     body = f"""<div class="page-head"><h1>会社</h1><div class="count"><b>{len(C)}</b>社</div></div>
 <nav class="kana-jump" aria-label="五十音">{jump}</nav>
@@ -792,11 +940,15 @@ def build_words(C, W, stats, token_pages):
         chip = '<span class="chip kai">改定</span>' if kai else f'<span class="chip">{esc(w["会社での呼び名"])}</span>'
         co_key = co_order.get(w["co"]["ID"], 0) * 1000 + LAYERS.index(w["層"]) * 100 + (w["order"] if isinstance(w["order"], int) else 0)
         items.append(f'<li data-layer="{esc(w["層"])}" data-s="{esc(hay)}" data-no="{w["no"]}" data-co="{co_key}" data-len="{w["len"]}">'
-                     f'<a href="{href}"><span class="w">{esc(w["言葉"])}</span>{chip}<span class="who">{esc(w["co"]["会社名"])}</span></a></li>')
+                     f'<a href="{href}"><span class="w">{yoko(w["言葉"])}</span>{chip}<span class="who">{esc(w["co"]["会社名"])}</span></a></li>')
     btns = "".join(f'<button type="button" data-layer="{esc(l)}" data-desc="{esc(LAYER_DESC[l])}" aria-pressed="false">{esc(label(l))}<small>{layer_n[l]}</small></button>' for l in LAYERS if layer_n[l])
     examples = [t for t, n in stats["tokens"] if t in token_pages][:12]
     searched = [s for s in CFG.get("searched_words", []) if s]
     ex_json = esc(json.dumps({"tokens": examples, "searched": searched}, ensure_ascii=False))
+    # 社名で探したときの会社の札（2026-11-15 見本の案8）：略した社名・読み・北極星・呼び名・言葉の数
+    co_data = json.dumps([{"id": c["ID"], "name": c["会社名"], "short": c["short"], "r": c["reading"], "n": sum(1 for x in c["words"] if not x["old"]),
+                           "wh": yoko(lead_word(c)["言葉"]), "seal": seal(lead_word(c)["会社での呼び名"])} for c in C.values()],
+                         ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     body = f"""<div class="page-head"><h1>ことばを探す</h1></div>
 <div class="finder">
   <form class="searchbox" role="search" onsubmit="return false"><input id="q" type="search" placeholder="言葉や会社名で探す" aria-label="言葉の中の語や社名で探す" autocomplete="off"></form>
@@ -806,13 +958,16 @@ def build_words(C, W, stats, token_pages):
     <div class="sorter" id="sort" role="group" aria-label="並べ替え"><button type="button" data-sort="new" aria-pressed="true">新しい順</button><button type="button" data-sort="old" aria-pressed="false">古い順</button><button type="button" data-sort="short" aria-pressed="false">短い順</button><button type="button" data-sort="long" aria-pressed="false">長い順</button></div>
   </div>
   <p class="hits" aria-live="polite"><span><b id="n">{len(cur)}</b>語</span><span class="layer-desc" id="layer-desc" hidden></span></p>
+  <div class="co-cards" id="co-cards" hidden></div>
   <ul class="wordlist" id="list">{''.join(items)}</ul>
   <div class="empty" id="empty" hidden>
     <p>見つかりません</p>
+    <p class="relax" id="relax" hidden></p>
     <p class="empty-ex" id="empty-ex"></p>
     <p>{ext(contact_url(), 'この言葉を研究所に知らせる', 'contact/words-empty')}</p>
   </div>
 </div>
+<script type="application/json" id="co-data">{co_data}</script>
 <script>window.KOTOBA_SYN = {json.dumps(SYN, ensure_ascii=False)};</script>
 <script src="../assets/find.js?v={VER}" defer></script>"""
     write("words/", page("words/", "ことばを探す", body, current="words/", desc="会社が掲げる言葉を、言葉の中の語や社名で探せます。"))
@@ -828,9 +983,7 @@ def build_token_pages(C, W, token_map):
         made[t] = f"w/{q(t, safe='')}/"
         rows = []
         for w in sorted(ws, key=lambda w: (w["co"]["ID"], w["no"])):
-            hl = esc(w["言葉"])
-            if t in w["言葉"]:
-                hl = hl.replace(esc(t), f"<mark>{esc(t)}</mark>")
+            hl = mark(yoko(w["言葉"]), t)
             rows.append(f'<li><a href="../../{w["co"]["url"]}#{w["ID"]}"><span class="w">{hl}</span><span class="chip">{esc(w["会社での呼び名"])}</span><span class="who">{esc(w["co"]["会社名"])}</span></a></li>')
         body = f"""<nav class="crumbs" aria-label="現在地"><a href="../../">{esc(CFG['name'])}</a> › <a href="../../topics/#tokens">統計</a></nav>
 <div class="page-head"><h1>「{esc(t)}」</h1><div class="count"><b>{len(cos)}</b>社　<b>{len(ws)}</b>語</div></div>
@@ -885,7 +1038,7 @@ def build_topics(C, W, stats, token_pages):
     n_cos = stats["n_cos"] or 1
     top10 = [(t, v) for t, v in stats["tokens"] if t in token_pages][:10]
     rest = [(t, v) for t, v in stats["tokens"] if t in token_pages][10:]
-    tok_full = "".join(study_bar(t, v, n_cos, f"../{token_pages[t]}") for t, v in top10)
+    tok_full = "".join(study_bar(t, v, n_cos, f"../{token_pages[t]}", k) for k, (t, v) in enumerate(top10))
     rmax = rest[0][1] if rest else 1
     tok_cloud = "".join(f'<a href="../{token_pages[t]}" style="font-size:{14 + round(v / rmax * 6)}px">{esc(t)}<small>{v}</small></a>' for t, v in rest)
 
@@ -893,7 +1046,7 @@ def build_topics(C, W, stats, token_pages):
         return sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
 
     def bars_of(key):
-        return "".join(study_bar(name, n, n_cos, f"../words/?q={q(terms[0])}") for name, terms, n in rows_of(key))
+        return "".join(study_bar(name, n, n_cos, f"../words/?q={q(terms[0])}", k) for k, (name, terms, n) in enumerate(rows_of(key)))
     voice_bars, aud_bars, promise_bars, action_bars = (bars_of(k) for k in ("voice", "audience", "promise", "action"))
     time_bars = share_bars(stats, "time", "../")
 
@@ -986,15 +1139,17 @@ def share_bars(stats, key, rel, limit=None):
     return out
 
 
-def study_bar(name, n, n_cos, href=None):
+def study_bar(name, n, n_cos, href=None, i=0):
     """統計のページの棒（2026-11-09）：全社を薄い線で敷き、その上に何社かを青で重ねる。押すと探せる"""
     inner = f'<span>{esc(name)}</span><i><s style="width:{round(n / (n_cos or 1) * 100)}%"></s></i><b>{n}<small>社</small></b>'
-    return f'<a class="bar full" href="{href}">{inner}</a>' if href else f'<div class="bar full">{inner}</div>'
+    st = f' style="--i:{i}"' if i else ""   # 上から何本目か。画面に入ったときに少しずつずらして伸ばす（2026-11-15 見本の案13）
+    return f'<a class="bar full" href="{href}"{st}>{inner}</a>' if href else f'<div class="bar full"{st}>{inner}</div>'
 
 
 def lead_num(n, what, n_cos):
     """章の頭の大きな数字：全○社のうち、○社が〜"""
-    return f'<p class="lead-num"><span class="of">全{n_cos}社のうち</span><b>{n}</b><small>社</small><span class="what">{what}</span></p>'
+    # 画面に入ったら 0 から数え上がる（2026-11-15 見本の案13）。--n が元の数、.v は読み上げ用（CSS の counter() で見せるとき隠す）
+    return f'<p class="lead-num"><span class="of">全{n_cos}社のうち</span><b style="--n:{n};min-width:{len(str(n))}ch"><span class="v">{n}</span></b><small>社</small><span class="what">{what}</span></p>'
 
 
 # ---------- 言語史 ----------
@@ -1002,12 +1157,22 @@ def build_history(C, W):
     byid = {w["ID"]: w for w in W}
     pairs = [(byid[w["前の言葉のID"]], w) for w in W if w["前の言葉のID"] in byid]
     pairs.sort(key=lambda p: (p[1]["使い始め"] or "", p[1]["no"]), reverse=True)
-    items = "".join(f"""<li class="change rise">
-  <div class="co"><a href="../{n['co']['url']}">{esc(n['co']['会社名'])}</a><span class="chip kai">{esc(ym(n['使い始め']) or '改定')}</span></div>
-  <div class="old">{esc(o['言葉'])}<span class="when">{esc(o['会社での呼び名'])}</span></div>
+    items = []
+    for o, n in pairs:
+        # 字の差分（2026-11-15 見本の案17）：新しい言葉を1行で見せ、消えた字と足した字に印。ほとんど書き換えたときは古い→新しいで並べる
+        ok, minus, plus, dh = diff_html(o["言葉"], n["言葉"])
+        head = f"""<div class="co"><a href="../{n['co']['url']}">{esc(n['co']['会社名'])}</a><span class="chip kai">{esc(ym(n['使い始め']) or '改定')}</span></div>"""
+        names = f"{esc(o['会社での呼び名'])} → {esc(n['会社での呼び名'])}" if o["会社での呼び名"] != n["会社での呼び名"] else esc(n["会社での呼び名"])
+        meta = f'<div class="meta">{diff_count(minus, plus)}<span class="names">{names}</span></div>'
+        if ok:
+            items.append(f'<li class="change diff rise">{head}<p class="dl">{dh}</p>{meta}</li>')
+        else:
+            items.append(f"""<li class="change rise">{head}
+  <div class="old">{yoko(o['言葉'])}<span class="when">{esc(o['会社での呼び名'])}</span></div>
   <div class="arrow" aria-label="改めた">→</div>
-  <div class="new">{esc(n['言葉'])}<span class="when">{esc(n['会社での呼び名'])}</span></div>
-</li>""" for o, n in pairs)
+  <div class="new">{yoko(n['言葉'])}<span class="when">{esc(n['会社での呼び名'])}</span></div>
+  <div class="meta">{diff_count(minus, plus)}</div></li>""")
+    items = "".join(items)
     body = f"""<div class="page-head"><h1>言語史</h1><div class="count"><b>{len(pairs)}</b>件</div></div>
 <ol class="hist-list">{items}</ol>"""
     write("history/", page("history/", "言語史", body, current="history/", noindex=not SITE["show_history"], desc="会社が掲げる言葉を改めた記録。古い言葉と新しい言葉を並べています。"))
@@ -1022,7 +1187,7 @@ def word_card(w, comment, rel):
     c = w["co"]
     note = f'<p class="wc-note">{esc(comment)}</p>' if comment else ""
     return (f'<figure class="wordcard"><a class="wc-body" href="{rel}{c["url"]}#{w["ID"]}">'
-            f'<span class="wc-w">{esc(w["言葉"])}</span>'
+            f'<span class="wc-w">{yoko(w["言葉"])}</span>'
             f'<span class="wc-who">{esc(c["会社名"])}<span class="chip">{esc(w["会社での呼び名"])}</span></span></a>'
             f'{note}</figure>')
 

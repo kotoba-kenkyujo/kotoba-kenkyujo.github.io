@@ -479,3 +479,171 @@ a.fact:hover, a.tok:hover { border-color: var(--sky); color: var(--sky); }
   .rail-btn:hover { color: var(--sky); border-color: var(--sky); }
   .rail-btn[disabled] { opacity: 0; pointer-events: none; }
 }
+
+/* ===== 2026-11-15 改善の見本で黒田さんが採用した案 ===== */
+/* 不具合の直し：長い呼び名の札が狭い画面で枠からはみ出さないよう「…」で切る。言語史の矢印は朱をやめる（朱は落款と改定の札だけ） */
+.wordlist .chip, .index .chip, .co-list .chip { max-width: min(12em, 38vw); overflow: hidden; text-overflow: ellipsis; }
+.change .arrow { color: var(--text-sub); }
+
+/* 案4：縦書きの半角数字は、2桁までを縦中横、3桁以上を1字ずつ立てる（build.py の tcy()）。両端の矢印の英字の社名は横に寝かせる */
+.tate .tcy { text-combine-upright: all; -webkit-text-combine: horizontal; }
+.tate .upr { text-orientation: upright; }
+.side .nm .lat { letter-spacing: .04em; }
+
+/* 案5・案6：横書きの明朝の言葉。文節の切れ目でだけ改行し（<wbr> と keep-all）、括弧と句読点を半角分詰める（build.py の yakumono()）。
+   Google Fonts の Shippori Mincho B1 は横書きの palt が効かないので約物を余白で詰め、読み込み前のヒラギノ明朝などで二重に詰まらないよう palt を切る */
+.wordlist .w, .index .w, .vision, .valgroup li, .timeline .w, .change .old, .change .new, .change .dl, .co-list .w, .wc-w, .near-card .q {
+  font-feature-settings: normal; word-break: keep-all; overflow-wrap: anywhere; text-wrap: pretty;
+}
+.vision { text-wrap: balance; }
+.yk-s { margin-inline-start: -.5em; }
+.yk-e { margin-inline-end: -.5em; }
+.yk-n { margin-inline: -.25em; }
+
+/* 案17：改定を字の差分で見せる（build.py の diff_html()）。消えた字は薄い墨と取り消し線、足した字は黄色のマーカーと下端の線。朱は使わない */
+del, ins { text-decoration: none; background-repeat: no-repeat; }
+del { color: var(--text-sub); font-weight: 500; background-image: linear-gradient(currentColor, currentColor); background-position: 0 56%; background-size: 100% 1px; }
+ins { color: inherit; background-image: linear-gradient(var(--yellow), var(--yellow)), linear-gradient(var(--base-yellow), var(--base-yellow)); background-position: 0 100%, 0 100%; background-size: 100% 2px, 100% 45%; }
+@media (forced-colors: active) { del { text-decoration: line-through; } ins { text-decoration: underline; } }
+.change.diff { grid-template-columns: minmax(0, 1fr); }
+.change .dl { margin: 0; font-family: var(--font-mincho); font-weight: 800; font-size: 22px; line-height: 1.75; }
+.change .meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.change .names { font-size: 12px; color: var(--text-sub); }
+.dn { display: inline-flex; gap: 6px; font-size: 12px; line-height: 1.7; white-space: nowrap; font-variant-numeric: tabular-nums; font-family: var(--font-sans); font-weight: 400; }
+.dn span { padding: 0 8px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--card); }
+.dn .m { color: var(--text-sub); }
+.dn .p { color: var(--ink); border-color: transparent; background: var(--base-yellow); box-shadow: inset 0 -2px 0 var(--yellow); }
+.timeline .when .dn { margin-left: var(--space-2); vertical-align: baseline; }
+.timeline .old:has(+ .diff) .w { text-decoration: none; }
+/* 画面に入ったら、取り消し線を左から引き、マーカーを左から塗る（スクロール連動。対応しないブラウザと動きを減らす設定では最初から引いてある） */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .diff del { animation: strike linear both; animation-timeline: view(); animation-range: entry 30% cover 35%; }
+    .diff ins { animation: marker linear both; animation-timeline: view(); animation-range: entry 60% cover 45%; }
+  }
+}
+@keyframes strike { from { background-size: 0% 1px; } }
+@keyframes marker { from { background-size: 0% 2px, 0% 45%; } }
+
+/* 案7：層の札の数を今の検索に合わせる。0件の札は薄くして押せなくし、0件のときは条件を1つ外すボタン（find.js） */
+.filters button[aria-disabled="true"] { opacity: .4; cursor: default; }
+.filters button small { display: inline-block; }
+.relax { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
+.relax[hidden], .empty-ex[hidden] { display: none; }
+.relax button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: var(--radius-pill); padding: 4px 14px; cursor: pointer; white-space: nowrap; }
+.relax button b { font-family: var(--font-mincho); font-size: 16px; font-weight: 800; margin: 0 1px 0 4px; font-variant-numeric: tabular-nums; }
+.relax button:hover { border-color: var(--sky); color: var(--sky); }
+/* 案8：社名や読みで探したとき、一覧の先頭に会社の札（紙の地・明朝・落款） */
+.co-cards { display: grid; gap: var(--space-3); padding: var(--space-4) 0 var(--space-3); }
+.co-cards[hidden] { display: none; }
+.co-card { display: grid; gap: var(--space-2); background: var(--paper); border: 1px solid var(--paper-line); padding: var(--space-4) var(--space-4) var(--space-3) var(--space-6); text-decoration: none; color: var(--ink); transition: box-shadow .2s; }
+.co-card:hover, .co-card:focus-visible { box-shadow: var(--shadow-lift); }
+.cc-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
+.cc-nm { font-family: var(--font-mincho); font-weight: 800; font-size: 19px; line-height: 1.5; letter-spacing: .08em; }
+.co-card:hover .cc-nm { color: var(--sky); }
+.cc-n { font-family: var(--font-mincho); font-size: 13px; color: var(--text-sub); white-space: nowrap; }
+.cc-n b { font-size: 20px; color: var(--ink); margin-right: 2px; font-variant-numeric: tabular-nums; }
+.cc-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); align-items: start; }
+.cc-w { font-family: var(--font-mincho); font-weight: 700; font-size: 16px; line-height: 1.8; font-feature-settings: normal; word-break: keep-all; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.cc-go { justify-self: end; font-size: 13px; color: var(--sky); white-space: nowrap; }
+.cc-more { margin: 0; text-align: right; font-family: var(--font-mincho); font-size: 13px; color: var(--text-sub); }
+.cc-more b { font-size: 16px; color: var(--ink); margin: 0 2px; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: no-preference) {
+  .filters button small.tick { animation: tick .3s cubic-bezier(.2, .7, .2, 1) both; }
+  .filters button { transition: opacity .2s ease-out; }
+  .co-cards.in > * { animation: card-in .32s cubic-bezier(.2, .7, .2, 1) both; }
+  .co-cards.in > :nth-child(2) { animation-delay: 50ms; }
+  .co-cards.in > :nth-child(3) { animation-delay: 100ms; }
+  .co-cards.in > :nth-child(4) { animation-delay: 150ms; }
+}
+@keyframes tick { from { opacity: .15; transform: translateY(-4px); } }
+@keyframes card-in { from { opacity: 0; transform: translateY(6px); } }
+
+/* 案1：会社のページの掛け軸を、上の軸から下へひらく。site.js が掛け軸の高さを --scroll-h に入れて .unroll を付ける（JS が動かないときは今までの .rise）。
+   紙を clip-path で上から見せ、下の軸（::after）を紙の下端と同じ速さで下ろす。ひらき終わってから落款と確認日が出る */
+/* 案3：落款が押される。掛け軸が出たあと、少し大きく薄い状態から押されて定位置に収まり、押した瞬間だけ朱がにじむ */
+/* 案14：ことばくじは、掛け軸を巻き上げてから新しい言葉でひらく（site.js。巻き上げは Web Animations） */
+.scroll .seal { position: relative; }
+.scroll .seal::after { content: ""; position: absolute; inset: -3px; border-radius: 5px; pointer-events: none; opacity: 0; box-shadow: 0 0 6px 1px color-mix(in srgb, var(--shu) 45%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll.unroll { animation: hang .24s ease-out both, unroll .78s .2s cubic-bezier(.45, .05, .25, 1) backwards; }
+  .scroll.unroll::after { animation: drop .78s .2s cubic-bezier(.45, .05, .25, 1) backwards; }
+  .scroll.unroll .foot { animation: foot .26s .9s ease-out backwards; }
+  figure.scroll.rise .seal { animation: stamp .5s .6s backwards; }
+  figure.scroll.rise .seal::after { animation: bleed .7s .95s ease-out; }
+  figure.scroll.unroll .seal { animation: stamp .5s 1.05s backwards; }
+  figure.scroll.unroll .seal::after { animation: bleed .7s 1.4s ease-out; }
+}
+@keyframes hang { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes unroll { 0% { clip-path: inset(-40px -40px calc(100% - 7px) -40px); } 100% { clip-path: inset(-40px -40px -40px -40px); } }
+@keyframes drop { 0% { transform: translateY(calc(-1 * var(--scroll-h, 0px))); } }
+@keyframes foot { from { opacity: 0; transform: translateY(4px); } }
+@keyframes stamp {
+  0% { opacity: 0; transform: scale(1.4) rotate(-5deg); filter: blur(1px); animation-timing-function: cubic-bezier(.55, 0, .85, .35); }
+  70% { opacity: 1; transform: scale(.97) rotate(0deg); filter: blur(0); animation-timing-function: ease-out; }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+@keyframes bleed { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; transform: scale(1.06); } }
+
+/* 案9：ページを移るとき、押した言葉が次のページの掛け軸につながる（ページをまたぐ View Transitions。Chrome 126+・Safari 18.2+）。
+   押した言葉と行き先の掛け軸にだけ site.js が名前（word）を付ける。前後の会社へは左右に滑る（types: forwards / backwards）。ヘッダーは動かさない */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .site-header { view-transition-name: site-header; }
+  ::view-transition-group(word) { animation-duration: .55s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+  ::view-transition-old(word), ::view-transition-new(word) { height: 100%; object-fit: contain; }
+  ::view-transition-old(word) { animation: vt-out .25s ease-out both; }
+  ::view-transition-new(word) { animation: vt-in .35s .15s ease-out both; }
+  html:active-view-transition-type(forwards)::view-transition-old(root) { animation: vt-to-left .42s cubic-bezier(.2, .7, .2, 1) both; }
+  html:active-view-transition-type(forwards)::view-transition-new(root) { animation: vt-from-right .42s cubic-bezier(.2, .7, .2, 1) both; }
+  html:active-view-transition-type(backwards)::view-transition-old(root) { animation: vt-to-right .42s cubic-bezier(.2, .7, .2, 1) both; }
+  html:active-view-transition-type(backwards)::view-transition-new(root) { animation: vt-from-left .42s cubic-bezier(.2, .7, .2, 1) both; }
+}
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+@keyframes vt-to-left { to { opacity: 0; transform: translateX(-12%); } }
+@keyframes vt-from-right { from { opacity: 0; transform: translateX(12%); } }
+@keyframes vt-to-right { to { opacity: 0; transform: translateX(12%); } }
+@keyframes vt-from-left { from { opacity: 0; transform: translateX(-12%); } }
+
+/* 案10：会社の一覧の五十音の札をヘッダーのすぐ下に留め、いま読んでいる行の札を塗る（site.js）。狭い画面では札の列を横にスクロール */
+/* 案15：統計の章の札も同じく留め、読んでいる章の札を塗る */
+.kana-jump, .toc {
+  position: sticky; top: 65px; z-index: 20; max-width: none; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none;
+  margin-left: calc(-1 * var(--space-4)); margin-right: calc(-1 * var(--space-4)); padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--bg-top) 90%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 768px) { .kana-jump, .toc { margin-left: calc(-1 * var(--space-8)); margin-right: calc(-1 * var(--space-8)); padding-left: var(--space-8); padding-right: var(--space-8); } }
+.kana-jump::-webkit-scrollbar, .toc::-webkit-scrollbar { display: none; }
+.kana-jump > :first-child, .toc > :first-child { margin-left: auto; }
+.kana-jump > :last-child, .toc > :last-child { margin-right: auto; }
+.kana-jump a, .kana-jump span, .toc a { flex: none; white-space: nowrap; }
+.kana-jump a[aria-current="true"], .toc a[aria-current="true"] { background: var(--ink); color: var(--base); border-color: var(--ink); }
+.co-group, .study section { scroll-margin-top: 130px; }
+@media (prefers-reduced-motion: no-preference) { .kana-jump a, .toc a { transition: background-color .2s ease-out, color .2s ease-out, border-color .2s ease-out; } }
+
+/* 案11：近いことばの社名と呼び名を1行ずつに分け、長いときは「…」。レールの下に位置の点（site.js が作る） */
+.near-card .who { display: grid; gap: 2px; min-width: 0; }
+.near-card .who > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.6; }
+.near-card .who small { letter-spacing: .04em; }
+.rail-dots { display: flex; justify-content: center; flex-wrap: wrap; margin: var(--space-1) 0 0; }
+.rail-dots button { appearance: none; width: 22px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.rail-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--text-sub); opacity: .28; transform: scale(.8); }
+.rail-dots button:hover::before { opacity: .55; }
+.rail-dots button.on::before { background: var(--sky); opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) { .rail-dots button::before { transition: opacity .2s ease-out, transform .2s ease-out, background-color .2s ease-out; } }
+
+/* 案13：統計の棒は、画面に入ったときに上から少しずつずれて伸び、章の頭の数字は 0 から数え上がる（スクロール連動。対応しないブラウザでは今までどおり） */
+@property --cnt { syntax: "<integer>"; inherits: true; initial-value: 0; }
+@keyframes count-up { from { --cnt: 0; } to { --cnt: var(--n); } }
+.bar.full i { overflow: clip; }
+.lead-num b { display: inline-block; text-align: right; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .study .bar.full i s { animation: grow both cubic-bezier(.2, .7, .2, 1); animation-timeline: view(); animation-range: cover calc(var(--i, 0) * 1.5%) cover calc(20% + var(--i, 0) * 1.5%); }
+    .lead-num b { animation: count-up both cubic-bezier(.2, .7, .2, 1); animation-timeline: view(); animation-range: cover 0% cover 30%; }
+    .lead-num b::after { content: counter(cnt); content: counter(cnt) / ""; counter-reset: cnt var(--cnt); }
+    .lead-num b .v { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  }
+}
