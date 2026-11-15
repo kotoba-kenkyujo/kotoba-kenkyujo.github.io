@@ -1,18 +1,159 @@
 {
-  "checked_at": "2026-11-09T07:19:16+09:00",
-  "words": 80,
-  "urls": 28,
+  "checked_at": "2026-11-16T07:39:55+09:00",
+  "words": 1699,
+  "urls": 500,
   "summary": {
-    "正常": 28,
-    "移転": 0,
-    "拒否": 0,
-    "要確認": 0
+    "正常": 490,
+    "移転": 1,
+    "拒否": 3,
+    "要確認": 6
   },
   "this_run": {
-    "checked": 25,
-    "planned": 25,
-    "minutes": 0.8
+    "checked": 500,
+    "planned": 500,
+    "minutes": 19.0
   },
   "unchecked": 0,
-  "items": []
+  "items": [
+    {
+      "url": "https://www.saibo.co.jp/",
+      "company_ids": [
+        "C0118"
+      ],
+      "companies": [
+        "サイボー株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.nozawa-kobe.co.jp/corporate/corporate_01.html",
+      "company_ids": [
+        "C0240"
+      ],
+      "companies": [
+        "株式会社ノザワ"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.olc.co.jp/ja/company/philosophy.html",
+      "company_ids": [
+        "C0386"
+      ],
+      "companies": [
+        "株式会社オリエンタルランド"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.olc.co.jp/ja/ir/management/olc-way.html",
+      "company_ids": [
+        "C0386"
+      ],
+      "companies": [
+        "株式会社オリエンタルランド"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.nacoo.com/corporate/philosophy/",
+      "company_ids": [
+        "C0422"
+      ],
+      "companies": [
+        "株式会社ナック"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.airman.co.jp/company/rinen.html",
+      "company_ids": [
+        "C0439"
+      ],
+      "companies": [
+        "株式会社ＡＩＲＭＡＮ"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.shinko-wire.co.jp/company/philosophy.html",
+      "company_ids": [
+        "C0410"
+      ],
+      "companies": [
+        "神鋼鋼線工業株式会社"
+      ],
+      "status": "移転",
+      "http_status": 200,
+      "final_url": "https://www.kobelco-wire.com/company/philosophy.html",
+      "note": "開き先のドメインが変わっています",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.ksk.co.jp/company/aisatu/",
+      "company_ids": [
+        "C0354"
+      ],
+      "companies": [
+        "株式会社ＫＳＫ"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.ksk.co.jp/sustainability/credo/",
+      "company_ids": [
+        "C0354"
+      ],
+      "companies": [
+        "株式会社ＫＳＫ"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-16"
+    },
+    {
+      "url": "https://www.keikyu.co.jp/company/outline.html",
+      "company_ids": [
+        "C0397"
+      ],
+      "companies": [
+        "京浜急行電鉄株式会社"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-16"
+    }
+  ]
 }

@@ -1,195 +1,3499 @@
 {
+"http://www.m-sekisan.co.jp/company/sustainability.php": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"http://www.toami.co.jp/corporate/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://auto-wave.co.jp/company/idea/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://chuokatan.co.jp/corporate/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://crooz.co.jp/about/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W6VM": {
-"date": "2026-11-09",
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W7UN": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y7SI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8BD": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9CI": {
-"date": "2026-11-09",
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9O5": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9QZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YCLQ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDV4": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YE7Y": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YETX": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YEYH": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YF1P": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YF9Q": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFHW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFJK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFP2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFXP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YG4D": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YG9D": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGB2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGD2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGDM": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGDN": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGEA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGML": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGNI": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGR6": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGTK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGW1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGZ1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH9O": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHD3": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHI2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHI9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHJP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHJS": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHLP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHNC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHNL": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHUD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHUP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHVT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHX8": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHXJ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHXU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHYH": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHYW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YHZN": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI1Y": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI30": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI3F": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI3M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI3O": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI4Q": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI5G": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI5P": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI5T": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YI6P": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIBJ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIC1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIE8": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIET": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIEY": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIGW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIJ4": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIKA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIKS": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIM7": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIME": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YINV": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIQP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YITM": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIVR": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIWE": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIWH": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIWV": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIX3": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIXO": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIYE": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIZP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ0L": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ1O": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ1S": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ25": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ2U": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ3C": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ3G": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ3Q": {
-"date": "2026-11-08",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ3W": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ44": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ4F": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ4G": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ5K": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ5N": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ7V": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ86": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ8A": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ8C": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJ8P": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJAK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJBU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJBX": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJCG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJCU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJCX": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJDA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJDP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJDZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJEK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJEU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJF9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJFT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJG0": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJH1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJHF": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJHG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJI4": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJIB": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJJP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJK1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJKO": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJKR": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJL5": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJLB": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJLD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJLT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJMA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJMF": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJMI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJMM": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJNT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJNX": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJO9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJP6": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJPG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJPR": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJPU": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJQ2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJQ7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJQM": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJQT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJQU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJRS": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJT1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJTH": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJU2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJU6": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJUC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJUI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJV2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJVG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJVJ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJVQ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJWD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYE": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYN": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJYW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJZ0": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJZ1": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJZ2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJZ3": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YJZD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK07": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK09": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0D": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0F": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0J": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0N": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0W": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK0Y": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK16": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK1M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK1Z": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK22": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK25": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK2G": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK2Q": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK2R": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK39": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK3R": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK40": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK4A": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK4M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK4R": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK4U": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK5N": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK5W": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK5Y": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK61": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK6H": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK73": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK7L": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK7M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK7Q": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK7V": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK86": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK8I": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK99": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK9A": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK9N": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YK9X": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKAO": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKAR": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKAV": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKAW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKAZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKBD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKCI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKCP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKCU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKCW": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKD9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKDC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKDZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKE5": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKE7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKEL": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKEP": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKFC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKG2": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKGG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKGU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKH9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKHR": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKHZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKI6": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKIG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKJC": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKJL": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKK8": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKK9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKKE": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKKP": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKL4": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKM3": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKMH": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKNJ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKNO": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKOI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKOJ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKON": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKOR": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKP8": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKPS": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKPV": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKQ9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKQI": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKQN": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKQY": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKRJ": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKSP": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKT7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKTA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKU0": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKUO": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKV1": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKV3": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKVK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKW4": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKWG": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKWY": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKX5": {
-"date": "2026-11-09",
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKY3": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YKYA": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL02": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL24": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL2M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL46": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL4M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5B": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5Q": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5S": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5T": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5Y": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL5Z": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL65": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL7U": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL8G": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YL9S": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLBX": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLBY": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLCH": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLCK": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLDD": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLDV": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLF7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLGY": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLGZ": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLHM": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLHU": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLHV": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLI5": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLJD": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLK4": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLK6": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLLM": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLLZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLMG": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLN8": {
-"date": "2026-11-08",
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLRB": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLS8": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLSB": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLT6": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLT7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLTN": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLU7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLUK": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLV9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLVZ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLWX": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLXQ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLY9": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLZQ": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM1I": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM22": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM27": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM2W": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM3K": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM3U": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM56": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM7M": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM8I": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YMA3": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YMBT": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YMC0": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YMC7": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://hd.sanix.jp/company/about": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://inside.ai/brand/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://ir.airman.co.jp/management/process.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://izu-sr.co.jp/company#philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://kusurinomadoguchi.co.jp/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://nittoku.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://phoenixbio.co.jp/company/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://snbl.com/about/management-philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://snbl.com/about/management/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://thg-hd.com/company/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://valorholdings.co.jp/corporate/principle.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://vlcsecurity.com/company/mvv/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.aa-material.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ad-hzm.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ahresty.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.airman.co.jp/company/rinen.html": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "応答がありません（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.armg.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.asahi-rubber.co.jp/about/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.asahi-rubber.co.jp/sustainability/vision2030": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.aubex.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.awapaper.co.jp/company/policy/principle/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.celm.co.jp/company/purpose/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.chuetsu-pulp.co.jp/company/corporate-identity.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.comture.com/company/ourpolicy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.cuc-jpn.com/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.daikokuyajp.com/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.daisue.co.jp/sustainability/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.daj.jp/company/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.delica.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.dmw.co.jp/company/idea.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.eidaikako.co.jp/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.erex.co.jp/company/concept/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.fabrica-hd.co.jp/company/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.fjnext-hd.co.jp/corporate/corporate_idea.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.fonfun.co.jp/company/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.frutafruta.com/frutafruta/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.fujitacorp.co.jp/main/irinfotop/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.fumakilla.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.geechs.com/about/geechs-cycle/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.geomatec.co.jp/who-we-are/company-philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.gnext.co.jp/company/vision/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.hagoromofoods.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.hanshin-dw.co.jp/company/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.harima.co.jp/company/philosophy01.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.hewtech.co.jp/company/vision.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.hokuetsucorp.com/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.hyojito.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.infcurion.com/company/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.jp.nikon.com/company/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kajitech.com/corp/corp-pre/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kakoki.co.jp/company/philosophy/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kamigumi.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kc-s.co.jp/company/profile/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kc-s.co.jp/csr/guidelines/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kddi.com/vision/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kds.info/investors/management-policy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.keikyu.co.jp/company/outline.html": {
+"date": "2026-11-16",
+"status": "拒否",
+"http_status": 403,
+"final_url": "",
+"note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"https://www.keycoffee.co.jp/company/policy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kobayashiyoko.com/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kochi-bank.co.jp/about/about-2.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.koeichem.com/company/president.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kokusai-electric.com/company/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ksk.co.jp/company/aisatu/": {
+"date": "2026-11-16",
+"status": "拒否",
+"http_status": 403,
+"final_url": "",
+"note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"https://www.ksk.co.jp/sustainability/credo/": {
+"date": "2026-11-16",
+"status": "拒否",
+"http_status": 403,
+"final_url": "",
+"note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"https://www.kumagaigumi.co.jp/company/groupvision.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kumagaigumi.co.jp/company/vision.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kunimine.co.jp/company/message.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kuwazawa-hd.co.jp/company/concept/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kyoeitanker.co.jp/company/principles.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kyoritsu-hd.co.jp/company/future/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kyosha.co.jp/about/manage_policy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.kyowa-nissei.co.jp/corporate/vision/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.living-platform.com/about/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.living-platform.com/recruit/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.maruzenshowa.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.meeq.com/about-meeq/vision": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.meijidenki.co.jp/ja/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.menicon.co.jp/company/philosophy/slogan/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.mes.co.jp/company/concept/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.mks.jp/company/coporate/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.morinaga.co.jp/company/about/vision.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.mpm.co.jp/news/pdf/2026/20260529-1.pdf": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.n-ms.co.jp/group/brand-message.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.n-sharyo.co.jp/company/corporateidentity.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nacoo.com/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.nagahori.co.jp/corporate/message/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nagoya-chusui.co.jp/company": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.naikaizosen.co.jp/company/about_naikai/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nakanihonkogyo.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nanso.co.jp/about/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nanso.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ncc-matsuo.co.jp/company/vision/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.new-cosmos.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nichiasteel.co.jp/about/message/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nichu.co.jp/company/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nippi-inc.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nippon-grande.co.jp/corporate-philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nippon-soda.co.jp/sustainability/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nipponhume.co.jp/outline/profil/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nipponkinzoku.co.jp/corporate/company-profile": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nipponpapergroup.com/about/charter/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nipro.co.jp/corporate/mission-vision-value/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.niterragroup.com/corporate/goals/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nittan.co.jp/company/b_policy/b_policy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nittan.co.jp/purpose/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.nozawa-kobe.co.jp/corporate/corporate_01.html": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "応答がありません（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.nsg.co.jp/ja-jp/about-nsg/our-vision": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ntl.co.jp/information/company/about/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.oguraclutch.co.jp/corporatetinfo/corporate-basicpolicy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.olc.co.jp/ja/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "応答がありません（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.olc.co.jp/ja/ir/management/olc-way.html": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "応答がありません（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.opendoor.co.jp/company/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.osaki.co.jp/ja/profile/philosophy/purpose.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.otanikogyo.com/company/message.html": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://www.papy.co.jp/recruit/sc/index/top_message.html": {
-"date": "2026-11-09",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.parker.co.jp/ja/corporate/management.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.parker.co.jp/ja/ir/vision2030.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.plathome.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.qolhd.co.jp/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.rakus.co.jp/about/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.rengo.co.jp/company/policy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.s-renaissance.co.jp/about/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.saibo.co.jp/": {
+"date": "2026-11-16",
+"status": "要確認",
+"http_status": null,
+"final_url": "",
+"note": "応答がありません（時間をおいて2回取り直しても同じでした）"
+},
+"https://www.sankyu.co.jp/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.sanyeicorp.com/company/visiton.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.scinex.co.jp/ir/management/vision-purpose/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.semitec.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.shinko-wire.co.jp/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "移転",
+"http_status": 200,
+"final_url": "https://www.kobelco-wire.com/company/philosophy.html",
+"note": "開き先のドメインが変わっています"
+},
+"https://www.shiphd.co.jp/company/policy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.showashinku.co.jp/corporate/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.shuei-yobiko.co.jp/corporate/company/philosophy/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.sinfo-t.jp/company/sinfonia-way/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.smcworld.com/about/sdgs/ja-jp/message/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.starts.co.jp/company/philosophy/": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
 "note": ""
 },
 "https://www.sumitomoseika.co.jp/company/policy/": {
-"date": "2026-11-08",
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.sundrug.co.jp/company/principle": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.sunwa.co.jp/about/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.taihei-dengyo.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.taiheiyo.net/msg/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.teac.co.jp/jp/corporate/philosophy": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.terasaki.co.jp/about/policy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tfc.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.theatres.co.jp/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tktk.co.jp/company/vision/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.toho-zinc.co.jp/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tokai-senko.co.jp/company/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tokiomarinehd.com/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tokura.co.jp/company/message.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tokyotekko.co.jp/ja/company/policy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tsubakimoto.jp/company/tsubaki-spirit/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.tsukiji-uoichiba.co.jp/company/profile/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.unitika.co.jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ushio.co.jp/jp/jiro-ushio/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.ushio.co.jp/jp/philosophy/principles/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.uvc.co.jp/company/rinen.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.xebio.co.jp/ja/company/policy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.xnet.co.jp/if/ceomes4.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.yamaha.com/ja/vision/message/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.yamaha.com/ja/vision/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.yamatokogyo.co.jp/company/mission/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.yomeishu.co.jp/company/philosophy.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.yuken.co.jp/management": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.zensho.co.jp/jp/company/philosophy/": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://www.zeria.co.jp/corporate/philosophy/index.html": {
+"date": "2026-11-16",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"https://yamaura.co.jp/corporate/identity": {
+"date": "2026-11-16",
 "status": "正常",
 "http_status": 200,
 "final_url": "",
