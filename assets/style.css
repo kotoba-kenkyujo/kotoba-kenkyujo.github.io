@@ -647,3 +647,20 @@ ins { color: inherit; background-image: linear-gradient(var(--yellow), var(--yel
     .lead-num b .v { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   }
 }
+
+/* 統計の語の雲：上位40語のあとは「ほか○語をすべて見る」の欄にしまう（2026-11-15 黒田さん）。開閉はなめらかに（interpolate-size に対応するブラウザだけ） */
+.more-words { margin-top: var(--space-6); text-align: center; }
+.more-words summary { display: inline-flex; align-items: baseline; gap: 2px; list-style: none; cursor: pointer; font-size: 13px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 16px; white-space: nowrap; }
+.more-words summary::-webkit-details-marker { display: none; }
+.more-words summary b { font-family: var(--font-mincho); font-size: 16px; font-weight: 800; margin: 0 1px; font-variant-numeric: tabular-nums; }
+.more-words summary::after { content: "＋"; margin-left: 6px; color: var(--sky); }
+.more-words[open] summary::after { content: "－"; }
+.more-words summary:hover { border-color: var(--sky); color: var(--sky); }
+.more-words .cloud { margin-top: var(--space-6); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    .more-words { interpolate-size: allow-keywords; }
+    .more-words::details-content { height: 0; overflow: clip; transition: height .35s cubic-bezier(.2, .7, .2, 1), content-visibility .35s allow-discrete; }
+    .more-words[open]::details-content { height: auto; }
+  }
+}

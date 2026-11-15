@@ -65,6 +65,7 @@ ACTION = [("貢献する", ["貢献"]),
           ("発展させる", ["発展"])]
 TIME = [("未来を向く", ["未来", "将来", "次世代", "次の時代", "明日", "これから", "100年", "百年"]),
         ("受け継ぐ", ["伝統", "創業", "受け継", "継承", "歴史", "原点"])]
+CLOUD_SHOWN = 40   # 統計の「よく使われることば」で、棒の下にいつも見せる語の数。残りは「ほか○語をすべて見る」の欄にしまう（2026-11-15）
 HISTORY_MIN = 5   # 公開中の改定がこの数になるまで、言語史をメニューとサイトマップに出さない
 NOTES_SHOWN = False   # 研究ノートは停止（2026-11-08 黒田さん）。メニュー・サイトマップに出さない。書いたページは残す
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
@@ -176,16 +177,58 @@ def dot(d):
 STOP = {"当社", "弊社", "我等", "我々", "私達", "以下", "全て", "一人", "一人ひとり", "目指", "通じ", "提供", "実現"}
 
 
+KANJI = r"[一-龥々〆ヵヶ]"
+PARTICLES = "のをにがはとでへやもか"
+VOCAB = set()   # 語として単独で出てくる漢字の並び（2〜4字）。tokens() が長い並びや送り仮名つきの並びを切るときの手がかり（make_vocab() が作る）
+
+
+def make_vocab(texts):
+    """語の切り出しの手がかり（2026-11-15）：2〜4字の漢字の並びのうち、後ろが文の終わり・漢字かな以外・助詞のもの。
+    「規律正しい」の「規律正」のように送り仮名の前で切れた並びは入らない"""
+    VOCAB.clear()
+    for text in texts:
+        t = unicodedata.normalize("NFKC", text)
+        for m in re.finditer(KANJI + "{2,4}", t):
+            if m.start() and re.match(KANJI, t[m.start() - 1]):
+                continue
+            nxt = t[m.end():m.end() + 1]
+            if re.match(KANJI, nxt):
+                continue
+            if not nxt or not re.match(r"[ぁ-ゖ]", nxt) or nxt in PARTICLES:
+                VOCAB.add(m.group(0))
+
+
+def split_run(m):
+    """5字以上の漢字の並びを、VOCAB にある語で前から長い順に切る。当てはまらない字は飛ばす
+    （「社会的発展」→「社会」「発展」。前は2字ずつ切っていて「的発」のような語ができていた）"""
+    out, i = [], 0
+    while i < len(m) - 1:
+        for n in (4, 3, 2):
+            if m[i:i + n] in VOCAB and len(m[i:i + n]) == n:
+                out.append(m[i:i + n])
+                i += n
+                break
+        else:
+            i += 1
+    return out
+
+
 def tokens(text):
-    """言葉から数える語を取り出す。漢字の2〜4字の並び、カタカナの3字以上、英字の4字以上。"""
+    """言葉から数える語を取り出す。漢字の2〜4字の並び、カタカナの3字以上、英字の4字以上。
+    送り仮名の前で切れた並び（「活力溢れる」の「活力溢」）は、最後の字を除いた語が VOCAB にあればそちらにする（2026-11-15）"""
     t = unicodedata.normalize("NFKC", text)
     out = set()
-    for m in re.findall(r"[一-龥々〆ヵヶ]{2,}", t):
-        if len(m) <= 4:
-            out.add(m)
-        else:  # 長い漢字の並びは2字ずつに分ける（「人間生活産業」→「人間」「生活」「産業」）
-            for i in range(0, len(m) - 1, 2):
-                out.add(m[i:i + 2])
+    for mm in re.finditer(KANJI + "{2,}", t):
+        m = mm.group(0)
+        if len(m) > 4:
+            out.update(split_run(m))
+            continue
+        nxt = t[mm.end():mm.end() + 1]
+        if VOCAB and m not in VOCAB and re.match(r"[ぁ-ゖ]", nxt or "-") and nxt not in PARTICLES and m[:-1] in VOCAB and len(m) >= 3:
+            m = m[:-1]
+        if m == "客様" and t[mm.start() - 1:mm.start()] == "お":   # 「お客様」の「客様」だけが語になっていた
+            m = "お客様"
+        out.add(m)
     out.update(m for m in re.findall(r"[ァ-ヴー]{3,}", t) if not set(m) <= {"ー"})
     out.update(m.lower() for m in re.findall(r"[A-Za-z]{4,}", t))
     return {x for x in out if x not in STOP}
@@ -224,6 +267,7 @@ def model(words, comps):
             for k in COMPANY_COLS[2:]:
                 C[w["会社ID"]][k] = ""
     prev_ids = {w["前の言葉のID"] for w in words if w["前の言葉のID"]}
+    make_vocab(w["言葉"] for w in words)
     for w in words:
         w["old"] = bool(w["使い終わり"]) or w["ID"] in prev_ids
         w["no"] = int(re.sub(r"\D", "", w["ID"]) or 0)
@@ -1041,7 +1085,13 @@ def build_topics(C, W, stats, token_pages):
     rest = [(t, v) for t, v in stats["tokens"] if t in token_pages][10:]
     tok_full = "".join(study_bar(t, v, n_cos, f"../{token_pages[t]}", k) for k, (t, v) in enumerate(top10))
     rmax = rest[0][1] if rest else 1
-    tok_cloud = "".join(f'<a href="../{token_pages[t]}" style="font-size:{14 + round(v / rmax * 6)}px">{esc(t)}<small>{v}</small></a>' for t, v in rest)
+    cloud_a = lambda t, v: f'<a href="../{token_pages[t]}" style="font-size:{14 + round(v / rmax * 6)}px">{esc(t)}<small>{v}</small></a>'
+    # 棒の下の語は上位40語だけ見せ、残りは押すと開く欄にしまう（2026-11-15 黒田さん：608語は多すぎる）
+    tok_cloud = f'<div class="cloud">{"".join(cloud_a(t, v) for t, v in rest[:CLOUD_SHOWN])}</div>'
+    if len(rest) > CLOUD_SHOWN:
+        more = rest[CLOUD_SHOWN:]
+        tok_cloud += (f'<details class="more-words"><summary>ほか<b>{len(more)}</b>語をすべて見る</summary>'
+                      f'<div class="cloud">{"".join(cloud_a(t, v) for t, v in more)}</div></details>')
 
     def rows_of(key):
         return sorted((r for r in stats[key] if r[2]), key=lambda r: -r[2])
@@ -1076,7 +1126,7 @@ def build_topics(C, W, stats, token_pages):
         "tokens": f"""<section id="tokens"><h2>よく使われることば</h2>
   {leads["tokens"]}
   <div class="bars">{tok_full}</div>
-  <div class="cloud">{tok_cloud}</div></section>""",
+  {tok_cloud}</section>""",
         "length": length_sec,
         "voice": f"""<section id="voice"><h2>誰が語っているか</h2>
   {leads["voice"]}
