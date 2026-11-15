@@ -71,7 +71,8 @@ NOTES_SHOWN = False   # 研究ノートは停止（2026-11-08 黒田さん）。
 AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
 SISTERS = [("コミュニティ図鑑", "https://community-zukan.github.io/", "zukan"),
            ("あしたの転機観測所", "https://ashitano-tenki.github.io/", "kansoku"),
-           ("現代曖昧単語辞典", "https://gendai-aimai-tango-jiten.github.io/", "jiten")]
+           ("現代曖昧単語辞典", "https://gendai-aimai-tango-jiten.github.io/", "jiten"),
+           ("散歩対話「Walk, Talk, Fork.」", "https://walktalkfork.github.io/", "wtf")]
 
 try:
     import pykakasi
