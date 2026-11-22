@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-16T07:39:55+09:00",
-  "words": 1699,
-  "urls": 500,
+  "checked_at": "2026-11-23T07:44:58+09:00",
+  "words": 2618,
+  "urls": 743,
   "summary": {
-    "正常": 490,
-    "移転": 1,
-    "拒否": 3,
-    "要確認": 6
+    "正常": 715,
+    "移転": 2,
+    "拒否": 6,
+    "要確認": 20
   },
   "this_run": {
-    "checked": 500,
-    "planned": 500,
-    "minutes": 19.0
+    "checked": 439,
+    "planned": 439,
+    "minutes": 18.0
   },
   "unchecked": 0,
   "items": [
@@ -27,7 +27,7 @@
       "http_status": null,
       "final_url": "",
       "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.nozawa-kobe.co.jp/corporate/corporate_01.html",
@@ -41,7 +41,7 @@
       "http_status": null,
       "final_url": "",
       "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.olc.co.jp/ja/company/philosophy.html",
@@ -55,7 +55,7 @@
       "http_status": null,
       "final_url": "",
       "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.olc.co.jp/ja/ir/management/olc-way.html",
@@ -69,7 +69,7 @@
       "http_status": null,
       "final_url": "",
       "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.nacoo.com/corporate/philosophy/",
@@ -83,7 +83,7 @@
       "http_status": null,
       "final_url": "",
       "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.airman.co.jp/company/rinen.html",
@@ -97,7 +97,203 @@
       "http_status": null,
       "final_url": "",
       "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.jot.co.jp/company/",
+      "company_ids": [
+        "C0467"
+      ],
+      "companies": [
+        "日本石油輸送株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.sanoh.com/corporate/philosophy",
+      "company_ids": [
+        "C0475"
+      ],
+      "companies": [
+        "三櫻工業株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.daitochemix.co.jp/company/message.html",
+      "company_ids": [
+        "C0485"
+      ],
+      "companies": [
+        "ダイトーケミックス株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.jast.jp/corporate/jast-vision-2035/",
+      "company_ids": [
+        "C0488"
+      ],
+      "companies": [
+        "日本システム技術株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.ckk-chugoku.co.jp/kaisha/rinen/",
+      "company_ids": [
+        "C0494"
+      ],
+      "companies": [
+        "中国工業株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.nyk.co.jp/about/philosophy.html",
+      "company_ids": [
+        "C0503"
+      ],
+      "companies": [
+        "日本冶金工業株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.mars-ghd.co.jp/company-vision.html",
+      "company_ids": [
+        "C0514"
+      ],
+      "companies": [
+        "株式会社マースグループホールディングス"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.taiyokagaku.com/csr/management/",
+      "company_ids": [
+        "C0540"
+      ],
+      "companies": [
+        "太陽化学株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.soc.co.jp/company/idea/",
+      "company_ids": [
+        "C0549"
+      ],
+      "companies": [
+        "住友大阪セメント株式会社"
+      ],
+      "status": "要確認",
+      "http_status": 503,
+      "final_url": "",
+      "note": "サーバーの不具合（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.soc.co.jp/ir/socvision2035/",
+      "company_ids": [
+        "C0549"
+      ],
+      "companies": [
+        "住友大阪セメント株式会社"
+      ],
+      "status": "要確認",
+      "http_status": 503,
+      "final_url": "",
+      "note": "サーバーの不具合（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.tsubaki.co.jp/ja/company/mission/",
+      "company_ids": [
+        "C0554"
+      ],
+      "companies": [
+        "椿本興業株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.heiwa-net.co.jp/ir/management/vision.html",
+      "company_ids": [
+        "C0596"
+      ],
+      "companies": [
+        "平和不動産株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.mochida.co.jp/company/philosophy/",
+      "company_ids": [
+        "C0597"
+      ],
+      "companies": [
+        "持田製薬株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.mochida.co.jp/company/strategy/vision/index.html",
+      "company_ids": [
+        "C0597"
+      ],
+      "companies": [
+        "持田製薬株式会社"
+      ],
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "つながりません（[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)）（時間をおいて2回取り直しても同じでした）",
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.shinko-wire.co.jp/company/philosophy.html",
@@ -111,7 +307,35 @@
       "http_status": 200,
       "final_url": "https://www.kobelco-wire.com/company/philosophy.html",
       "note": "開き先のドメインが変わっています",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.furukawa.co.jp/purpose/",
+      "company_ids": [
+        "C0593"
+      ],
+      "companies": [
+        "古河電気工業株式会社"
+      ],
+      "status": "移転",
+      "http_status": 200,
+      "final_url": "https://www.furukawaelectric.com/purpose/",
+      "note": "開き先のドメインが変わっています",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://kusurinomadoguchi.co.jp/",
+      "company_ids": [
+        "C0084"
+      ],
+      "companies": [
+        "株式会社くすりの窓口"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.ksk.co.jp/company/aisatu/",
@@ -125,7 +349,7 @@
       "http_status": 403,
       "final_url": "",
       "note": "自動アクセスを断られました（壊れているとは限りません）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
       "url": "https://www.ksk.co.jp/sustainability/credo/",
@@ -139,21 +363,49 @@
       "http_status": 403,
       "final_url": "",
       "note": "自動アクセスを断られました（壊れているとは限りません）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
     },
     {
-      "url": "https://www.keikyu.co.jp/company/outline.html",
+      "url": "https://www.kepco.co.jp/corporate/policy/philosophy/index.html",
       "company_ids": [
-        "C0397"
+        "C0526"
       ],
       "companies": [
-        "京浜急行電鉄株式会社"
+        "関西電力株式会社"
       ],
       "status": "拒否",
       "http_status": 403,
       "final_url": "",
       "note": "自動アクセスを断られました（壊れているとは限りません）",
-      "checked": "2026-11-16"
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.kajima.co.jp/prof/vision/",
+      "company_ids": [
+        "C0553"
+      ],
+      "companies": [
+        "鹿島建設株式会社"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.tepco.co.jp/about/ir/library/annual_report/pdf/202510tougou10-j.pdf",
+      "company_ids": [
+        "C0595"
+      ],
+      "companies": [
+        "東京電力ホールディングス株式会社"
+      ],
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）",
+      "checked": "2026-11-23"
     }
   ]
 }
