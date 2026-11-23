@@ -46,7 +46,7 @@ Claude Code はシートの言葉を書き換えない。列を足すなどの�
 | config/site.json | サイト名、CSVのURL、運営者、GoatCounter、Search Console の確認タグ（トップだけに出す）、訂正フォーム（contact_url と、会社名を事前入力する contact_target_entry）、searched_words（検索の例に混ぜる語） |
 | assets/ | style.css、site.js（メニュー・表示の切り替え・リンクのコピー・ことばくじ・長さの図）、find.js（ことばを探す。言い換え表・検索の記録）、count.js（GoatCounter）、ファビコン（Noto Emoji の 📢。tools/emoji/） |
 | config/synonyms.json | 検索の言い換え表（同じ仲間の語を1行に） |
-| tools/make_og.py | 共有画像（1200×630）。build.py が書く _site/og/jobs.json を読む。Pillow と明朝体（tools/fonts/ に取ってくる）。手元では `.venv/bin/python tools/make_og.py`（.venv に pillow・pykakasi・budoux を入れてある。gitignore 済み） |
+| tools/make_og.py | 共有画像（1200×630）。サイト全体の画像は assets/ogp.png で、`--site` で手元で作ってリポジトリに入れる（Actions では作らない）。北極星の言葉（明朝）と会社名のカードを敷き詰め、まん中の白い箱に📢・サイト名・副題（Noto Sans CJK）。2026-11-23 に黒田さんが3案から案Bを選んだ（見本 https://claude.ai/artifact/FQqXgLxrqeVRxdFUt8N9np 。コミュニティ図鑑の共有画像と同じ形。件数は入れない。戻し先のタグ kotoba-before-site-ogp-2026-11-23）。og:image には build.py の SITE_OG が画像の中身から ?v= の版の印を付ける。`--note-cover 出力先.png` で同じ形の note の見出し画像（1280×670）。会社のページと研究ノートの画像は build.py が書く _site/og/jobs.json を読む。Pillow と明朝体（tools/fonts/ に取ってくる）。手元では `.venv/bin/python tools/make_og.py`（.venv に pillow・pykakasi・budoux を入れてある。gitignore 済み） |
 | tools/check_site.py・check_links.py・fetch_stats.py | 公開前の点検・出典URLの点検・GoatCounter の数字 |
 | notes/ | 研究ノートの原稿（<スラッグ>.md。先頭に `---` で 題・日付・説明・公開。本文に `:::word ID` で言葉の札）。書き方は notes/_guide.md、テーマは notes/_themes.md。2026/11/08 に停止（scheduled task `kotoba-kenkyujo-notes` は無効、build.py の NOTES_SHOWN=False でメニュー・サイトマップから外した。書いたページは残っている） |
 | data/ | 最後に読んだ公開データの写し（Actions が更新する） |

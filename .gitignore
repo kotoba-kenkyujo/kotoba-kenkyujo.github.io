@@ -8,3 +8,4 @@ og-items/
 tools/emoji/cache/
 .claude/
 tools/fonts/*.ttf
+tools/fonts/*.otf

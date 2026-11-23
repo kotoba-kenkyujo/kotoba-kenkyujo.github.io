@@ -1,7 +1,7 @@
 """SNSで共有したときの画像（1200×630）を作る。build.py が書いた _site/og/jobs.json を読み、_site/og/ に PNG を書く。
 
 使い方: python tools/make_og.py   （Pillow が必要。書体は Shippori Mincho B1 を tools/fonts/ に取ってくる）
-- サイト全体（og/site.png）：📢とサイト名と副題
+- サイト全体（assets/ogp.png）：`--site` で手元で作ってリポジトリに入れる。北極星の言葉のカードを敷き詰め、まん中に📢とサイト名と副題（2026-11-23）
 - 会社のページ（og/c/<ID>.png）：その会社の北極星を、紙の地に明朝で掲げる。日本語は縦書き、英字が主の言葉は横書き
 - 研究ノート（og/notes/<スラッグ>.png）：記事の題名と📢
 画像の見た目を変えたら、build.py の VER は毎回変わるので、ブラウザやSNSの古い画像は時間がたてば入れ替わる。
@@ -141,13 +141,84 @@ def wrap_mixed(d, text, f, width):
     return out
 
 
-def site(job):
-    im, d = base()
-    im.paste(emoji(150), (90, 120), emoji(150))
-    f = font("ExtraBold", 92)
-    d.text((90, 300), job["title"], font=f, fill=INK)
-    d.text((94, 430), job.get("subtitle", ""), font=font("Bold", 34), fill=SUB)
-    return im
+NOTO_URL = "https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF/Japanese/%s"
+SITE_OG = os.path.join(ROOT, "assets", "ogp.png")
+# サイト全体の共有画像に並べる会社（data/companies.csv にあり、北極星が短い言葉のものだけを使う）
+SHELF_SKIP = set()
+
+
+def noto(kind, size):
+    name = {"bold": "NotoSansCJKjp-Bold.otf", "medium": "NotoSansCJKjp-Medium.otf", "regular": "NotoSansCJKjp-Regular.otf"}[kind]
+    path = os.path.join(FONTS, name)
+    if not os.path.exists(path):
+        os.makedirs(FONTS, exist_ok=True)
+        print("書体を取ってくる:", name)
+        urllib.request.urlretrieve(NOTO_URL % name, path)
+    return ImageFont.truetype(path, int(size))
+
+
+def shelf_words():
+    """いま掲げている北極星のうち、4〜13字で英字・全角空白を含まないものを1社1つずつ"""
+    import csv, random, re, unicodedata
+    out, seen = [], set()
+    with open(os.path.join(ROOT, "data", "words.csv"), encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["層"] != "いちばん上" or r["使い終わり"]:
+                continue
+            co = unicodedata.normalize("NFKC", re.sub(r"株式会社", "", r["会社名"]).strip())
+            t = r["言葉"].strip()
+            if co in seen or not (4 <= len(t) <= 13) or re.search(r"[A-Za-z&]", t) or "\u3000" in t:
+                continue
+            seen.add(co)
+            out.append((t, co))
+    random.Random(5).shuffle(out)
+    return out
+
+
+def make_site(w=W, h=H, path=SITE_OG, name="会社のことば研究所", sub="会社が掲げる言葉と、その移り変わりの記録"):
+    """サイト全体の共有画像。北極星の言葉（明朝）と会社名のカードを敷き詰め、まん中の白い箱に📢・サイト名・副題を置く
+    （2026-11-23 黒田さんが3案から案Bを選んだ。コミュニティ図鑑の共有画像と同じ形。件数は入れない。戻し先のタグ kotoba-before-site-ogp-2026-11-23）。
+    w, h を 1280×670 にすると note の見出し画像になる。"""
+    from PIL import ImageFilter
+    s = w / 1200
+    items = shelf_words()
+    img = Image.new("RGBA", (w, h), (238, 242, 246, 255))
+    d = ImageDraw.Draw(img)
+    f = font("Bold", int(24 * s))
+    ch, gap = int(88 * s), 13
+    k = 0
+    for r in range(int(h // (ch + gap)) + 2):
+        x = -int(40 * s) - int(70 * s) * (r % 3)
+        y = r * (ch + gap) - int(22 * s)
+        while x < w:
+            t, co = items[k % len(items)]
+            k += 1
+            cw = int(max(d.textlength(t, font=f), d.textlength(co, font=noto("regular", 13 * s))) + 40 * s)  # 会社名が言葉より長いときは会社名に合わせる
+            d.rounded_rectangle((x, y, x + cw, y + ch), radius=int(12 * s), fill=(255, 255, 255), outline=(214, 222, 232), width=max(2, int(2 * s)))
+            d.text((x + 20 * s, y + 42 * s), t, font=f, fill=INK, anchor="ls")
+            cf = noto("regular", 14 * s)
+            while d.textlength(co, font=cf) > cw - 40 * s and cf.size > 10:
+                cf = noto("regular", cf.size - 1)
+            d.text((x + 20 * s, y + 70 * s), co, font=cf, fill=SUB, anchor="ls")
+            x += cw + gap
+    box = (int(188 * s), int(132 * s), w - int(188 * s), h - int(132 * s))
+    shadow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle((box[0] + 6 * s, box[1] + 12 * s, box[2] + 6 * s, box[3] + 12 * s), radius=int(30 * s), fill=(20, 40, 70, 60))
+    veil = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(veil).rounded_rectangle(box, radius=int(30 * s), fill=(255, 255, 255, 250))
+    img.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(18 * s)))
+    img.alpha_composite(veil)
+    d = ImageDraw.Draw(img)
+    u = (box[3] - box[1]) / 366
+    es = int(82 * u)
+    img.alpha_composite(emoji(es), (int(w / 2 - es / 2), int(box[1] + 38 * u)))
+    nf = noto("bold", 86 * u)
+    while d.textlength(name, font=nf) > (box[2] - box[0]) - 70 * u:
+        nf = noto("bold", nf.size - 2)
+    d.text((w / 2, box[1] + 224 * u), name, font=nf, fill=INK, anchor="ms")
+    d.text((w / 2, box[1] + 292 * u), sub, font=noto("medium", 32 * u), fill=(74, 79, 87), anchor="ms")
+    img.convert("RGB").save(path, optimize=True)
+    print("作りました:", os.path.relpath(path, ROOT) if path.startswith(ROOT) else path)
 
 
 def note(job):
@@ -201,11 +272,15 @@ def company(job):
 
 
 def main():
+    if "--site" in sys.argv:  # サイト全体の共有画像（assets/ogp.png）を手元で作る
+        return make_site()
+    if "--note-cover" in sys.argv:  # note の見出し画像（1280×670）: --note-cover 出力先.png
+        return make_site(1280, 670, sys.argv[sys.argv.index("--note-cover") + 1])
     jobs_path = os.path.join(OUT, "og", "jobs.json")
     if not os.path.exists(jobs_path):
         sys.exit("先に build.py を実行する（_site/og/jobs.json がない）")
     jobs = json.load(open(jobs_path, encoding="utf-8"))
-    makers = {"site": site, "note": note, "company": company}
+    makers = {"note": note, "company": company}
     made = 0
     for job in jobs:
         out = os.path.join(OUT, job["out"])

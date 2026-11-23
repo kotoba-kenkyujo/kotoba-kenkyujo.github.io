@@ -6,7 +6,7 @@
 出力は _site/。手元のCSVで試したときは data/ を書き換えない。
 共有画像は、このあと tools/make_og.py が _site/og/jobs.json を読んで作る。
 """
-import csv, datetime, difflib, html, io, json, os, re, shutil, sys, unicodedata, urllib.parse, urllib.request
+import csv, datetime, difflib, hashlib, html, io, json, os, re, shutil, sys, unicodedata, urllib.parse, urllib.request
 from collections import Counter, defaultdict, OrderedDict
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -334,6 +334,10 @@ def ext(url, text, click=""):
     return f'<a href="{esc(url)}" rel="noopener" target="_blank"{gc}>{text}</a>'
 
 
+# サイト全体の共有画像（tools/make_og.py --site で作ってリポジトリに入れる）。中身から版の印を付ける（2026-11-23）
+SITE_OG = "assets/ogp.png?v=" + hashlib.md5(open(os.path.join(ROOT, "assets", "ogp.png"), "rb").read()).hexdigest()[:8]
+
+
 def page(path, title, body, desc=None, current=None, og=None, jsonld=None, noindex=False):
     depth = path.count("/")
     rel = "../" * depth
@@ -343,7 +347,7 @@ def page(path, title, body, desc=None, current=None, og=None, jsonld=None, noind
     cur_attr = ' aria-current="page"'
     items = nav_items(SITE["show_history"], SITE["notes_exist"])
     nav = "".join(f'<a href="{rel}{u}"{cur_attr if current == u else ""}>{esc(t)}</a>' for u, t in items)
-    og_img = BASE + (og or "og/site.png")
+    og_img = BASE + (og or SITE_OG)
     head_extra = ""
     gc = CFG.get("goatcounter")
     if gc:
@@ -1451,7 +1455,6 @@ def build_misc(C, W, token_pages, notes, og_jobs):
         if os.path.exists(src):
             shutil.copy(src, os.path.join(OUT, name))
     write("404.html", page("404.html", "見つかりません", '<div class="page-head"><h1>見つかりません</h1></div><p class="center"><a href="/">トップへ</a>　<a href="/words/">ことばを探す</a></p>', noindex=True))
-    og_jobs.append({"out": "og/site.png", "kind": "site", "title": CFG["name"], "subtitle": CFG["subtitle"]})
     os.makedirs(os.path.join(OUT, "og"), exist_ok=True)
     json.dump(og_jobs, open(os.path.join(OUT, "og", "jobs.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     open(os.path.join(OUT, ".nojekyll"), "w").write("")
